@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SummerNoteController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
