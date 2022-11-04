@@ -60,6 +60,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/delete', [App\Http\Controllers\StaffController::class, 'destroy']);
     });
 
+    Route::prefix('payment-merchant')->group(function () {
+        [App\Http\Controllers\PaymentMerchantController::class, 'destroy'];
+        $cr = "PaymentMerchantController";
+        Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
 
 });
 

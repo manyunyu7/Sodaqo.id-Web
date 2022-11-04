@@ -13,6 +13,7 @@
                         <small class="text-end font-w400"></small>
                     </div>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-end">
                     <a href='{{url("$photoUrl")}}' class="dropdown-item ai-icon">
                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
@@ -34,8 +35,20 @@
                     <span class="nav-text">Payment Method</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ asset('/frontend') }}index.html">Payment Account</a></li>
-                    <li><a href="{{ asset('/frontend') }}index-2.html">Bank/Wallet</a></li>
+                    <li class=""><a class="has-arrow" href="javascript:void(0)" aria-expanded="false">Bank/Wallet</a>
+                        <ul aria-expanded="false" class="left mm-collapse" style="">
+                            <li><a href="{{url("payment-merchant/tambah")}}">Tambah Baru</a></li>
+                            <li><a href="{{url("payment-merchant/manage")}}">Manage</a></li>
+                        </ul>
+                    </li>
+
+                    <li class=""><a class="has-arrow" href="javascript:void(0)" aria-expanded="false">Payment Account</a>
+                        <ul aria-expanded="false" class="left mm-collapse" style="">
+                            <li><a href="email-compose.html">Compose</a></li>
+                            <li><a href="email-inbox.html">Inbox</a></li>
+                            <li><a href="email-read.html">Read</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 
