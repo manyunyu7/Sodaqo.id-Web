@@ -26,6 +26,12 @@
     <!-- Style css -->
     <link href="{{ asset('/168_res') }}/css/style.css" rel="stylesheet">
 
+    @stack('css')
+
+    <style>
+        @stack("css_content")
+    </style>
+
 </head>
 <body>
 
@@ -117,6 +123,8 @@
 <script src="{{ asset('/168_res') }}/js/dlabnav-init.js"></script>
 <script src="{{ asset('/168_res') }}/js/demo.js"></script>
 <script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>
+
+@stack('script')
 
 </body>
 </html>
