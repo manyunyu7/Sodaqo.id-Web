@@ -91,13 +91,18 @@ class RazkyFeb
         // remove photo first
         if (!Str::contains($file_path, 'razky_samples'))
             File::delete($file_path);
-        // if (file_exists($file_path)) {
-        //     try {
-        //         unlink($file_path);
-        //     } catch (Exception $e) {
-        //         // Do Nothing on Exception
-        //     }
-        // }
+
+        if (Str::contains($file_path, "http")) {
+            try {
+                if (file_exists($file_path)) {
+                    $path = parse_url($file_path, PHP_URL_PATH);
+                    $absolute_path = $_SERVER['DOCUMENT_ROOT'] . $path;
+                    unlink($absolute_path);
+                }
+            } catch (Exception $e) {
+
+            }
+        }
     }
 
     public static function logout()
@@ -107,7 +112,7 @@ class RazkyFeb
 
     public static function error($code, $message)
     {
-        return response()->json(["code"=>$code,'message' => "$message"], $code);
+        return response()->json(["code" => $code, 'message' => "$message"], $code);
 
     }
 
@@ -118,7 +123,7 @@ class RazkyFeb
 
     public static function success($code, $message)
     {
-        return response()->json(["code"=>$code,'message' => "$message"], $code);
+        return response()->json(["code" => $code, 'message' => "$message"], $code);
     }
 
     public static function checkApiKey($key)
