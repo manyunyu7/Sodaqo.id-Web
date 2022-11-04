@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/delete', [App\Http\Controllers\StaffController::class, 'destroy']);
     });
 
+
 });
 
 Route::get('logout', function () {
@@ -69,3 +70,5 @@ Route::get('logout', function () {
     return Redirect::to('/');
 })->name('logout');
 
+Route::post('summernote-image', [SummerNoteController::class, 'store']);
+Route::post('summernote-image-delete', [SummerNoteController::class, 'destroyImage']);
