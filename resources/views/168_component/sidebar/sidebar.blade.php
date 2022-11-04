@@ -24,6 +24,29 @@
                     </a>
                 </div>
             </li>
+
+            <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-025-dashboard"></i>
+                    <span class="nav-text">Payment Method</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ asset('/frontend') }}index.html">Payment Account</a></li>
+                    <li><a href="{{ asset('/frontend') }}index-2.html">Bank/Wallet</a></li>
+                </ul>
+            </li>
+
+
+            <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-025-dashboard"></i>
+                    <span class="nav-text">User</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ url("/admin/user/create")}}">Add User</a></li>
+                    <li><a href="{{ url("/admin/user/create") }}index.html">Manage User</a></li>
+                </ul>
+            </li>
+
+
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
                     <i class="flaticon-025-dashboard"></i>
                     <span class="nav-text">Dashboard</span>

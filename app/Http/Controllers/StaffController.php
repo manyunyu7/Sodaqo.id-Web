@@ -123,55 +123,42 @@ class StaffController extends Controller
         $user->role = $role;
 
         if ($request->hasFile('photo')) {
-
-            $file_path = public_path() . $user->photo;
-            RazkyFeb::removeFile($file_path);
-
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); // you can also use file name
-            $fileName = $user->id . '.' . time() . $extension;
+            $fileName = time() . '.' . $extension;
 
-            $savePath = "/web_files/user_profile/0/";
+            $savePath = "/web_files/user_profile/";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
-            $upload = $file->move($path, $fileName);
+            $file->move($path, $fileName);
 
             $user->photo = $savePathDB;
-
-            if ($user->save()) {
-                if ($request->is('api/*'))
-                    return RazkyFeb::responseSuccessWithData(
-                        200,
-                        1,
-                        200,
-                        "Berhasil Mengupdate Foto Profil",
-                        "Success",
-                        Auth::user(),
-                    );
-
-                return back()->with(["success" => "Berhasil Mengupdate Profil"]);
-//                return http_redirect("admin")->with(["success" => "Berhasil Mengupdate Profil"]);
-            } else {
-                if ($request->is('api/*'))
-                    return RazkyFeb::responseErrorWithData(
-                        400,
-                        3,
-                        400,
-                        "Gagal Mengupdate Foto Profil",
-                        "Error",
-                        ""
-                    );
-
-                return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
-            }
         }
 
-
         if ($user->save()) {
-            $url = url('/login');
-            return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200,
+                    1,
+                    200,
+                    "Berhasil Mengupdate Foto Profil",
+                    "Success",
+                    Auth::user(),
+                );
+
+            return back()->with(["success" => "Berhasil Mengupdate Profil"]);
         } else {
-            return back()->with(["failed" => "Gagal Menambahkan User Baru"]);
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400,
+                    3,
+                    400,
+                    "Gagal Mengupdate Foto Profil",
+                    "Error",
+                    ""
+                );
+
+            return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
         }
     }
 

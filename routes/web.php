@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin/user/manage', [App\Http\Controllers\StaffController::class, 'viewAdminManage']);
     Route::get('/admin/user/create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
+
     Route::prefix('user')->group(function () {
         Route::get('create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
         Route::get('{id}/edit', [App\Http\Controllers\StaffController::class, 'viewAdminEdit']);
