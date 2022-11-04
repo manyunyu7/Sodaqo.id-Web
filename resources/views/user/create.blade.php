@@ -44,7 +44,7 @@
                                             <input type="password" name="user_password" required class="form-control"
                                                    placeholder="Password">
                                         </div>
-                                        <div class="mb-3 col-md-6">
+                                        <div class="col-md-6">
                                             <label>Role Pengguna</label>
                                             <select class="default-select form-control wide mb-3"
                                                     style="display: none;">
@@ -53,6 +53,13 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="mb-3 col-md-12">
+                                        <label class="col-form-label">Nomor Telepon (Login)</label>
+                                        <input name="user_contact" type="number" class="form-control"
+                                               placeholder="Nomor Telepon">
+                                    </div>
+
                                     <div class="mb-3">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox">
@@ -61,6 +68,7 @@
                                             </label>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -74,26 +82,20 @@
                             <div class="card-body">
                                 <div class="basic-form">
 
-                                    <div class="mb-3 row">
-                                        <label class="col-sm-3 col-form-label">Nomor Telepon (Login)</label>
-                                        <div class="col-sm-9">
-                                            <input name="user_contact" type="number" class="form-control"
-                                                   placeholder="Nomor Telepon">
-                                        </div>
-                                    </div>
 
                                     <div class="mb-3 row">
-                                        <label class="col-sm-3 col-form-label">Foto</label>
+                                        <label class="col-form-label mt-4">Foto Baru</label>
                                         <div class="col-sm-9">
                                             <div class="input-group">
                                                 <div class="form-file">
-                                                    <input type="file" name="photo" class="form-file-input form-control">
+                                                    <input type="file" name="photo"
+                                                           class="form-file-input form-control">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" class="btn btn-primary mt-5">Tambah Pengguna</button>
 
                                 </div>
                             </div>

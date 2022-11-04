@@ -1,181 +1,137 @@
-@extends('main.app')
+@extends('168_template')
 
-@section('page-breadcrumb')
-    <div class="row">
-        <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage User</h4>
-            <div class="d-flex align-items-center">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-        <div class="col-5 align-self-center">
-            <div class="customize-input float-right">
 
-            </div>
-        </div>
-    </div>
+@section("header_name")
+    Pengguna
 @endsection
 
-@section('page-wrapper')
+@push('css')
+    <!-- Datatable -->
+    <link href="{{asset('/168_res')}}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+@endpush
 
+@push('css_content')
+        .buttons-columnVisibility {
+            font-family: Nunito, sans-serif;
+            font-size: medium;
+            font-style: normal;
+            border-radius: 20px;
+            padding-left: 3px;
+            padding-right: 3px;
+            font-size: larger;
+            font-weight: bold;
+        }
 
-    @include('main.components.message')
+        .buttons-columnVisibility.active{
+            padding-right: 3px;
+            font-weight: normal;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+@endpush
 
-
-    <div class="card border-primary">
-        <div class="card-header bg-primary">
-            <h4 class="mb-0 text-white">Manage User</h4>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="table_data" class="table table-hover table-bordered display no-wrap" style="width:100%">
-                    <thead class="bg-primary text-white">
-                    <tr>
-                        <th>No</th>
-                        <th>Role</th>
-                        <th>Nama</th>
-                        <th>Photo</th>
-                        <th>Email</th>
-                        <th>Kontak</th>
-                        <th>Dibuat</th>
-                        <th>Edit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    @forelse ($datas as $user)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->role_desc }}</td>
-                            <td>
-                                <div class="chat-img d-inline-block">
-                                    <img src="{{asset($user->photo)}}"  class="rounded-circle" width="45" height="45">
-                                </div>
-                            </td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->contact }}</td>
-                            <td>{{ $user->created_at }}</td>
-                            <td>
-                                <div class="d-flex">
-                                    <button id="{{ $user->id }}" type="button"
-                                            class="btn btn-danger btn-delete mr-2">Hapus User
-                                    </button>
-                                    <a href="{{url('/user'.'/'.$user->id.'/edit')}}">
-                                        <button type="button" class="btn btn-primary">Edit</button>
-                                    </a>
-
-                                </div>
-                            </td>
-                        </tr>
-
-                    @empty
-
-                    @endforelse
-
-                    </tbody>
-                    <tfoot>
-
-                    </tfoot>
-                </table>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- Destroy Modal -->
-    <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Apakah Anda Yakin Menghapus User Ini ?</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <a class="btn-destroy" href="">
-                        <button type="button" class="btn btn-danger">Hapus</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Destroy Modal -->
-
-
-@endsection
-
-
-@section('app-script')
+@push('script')
+    <!-- Datatable -->
     <script type="text/javascript"
-            src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
-    </script>
+            src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.js"></script>
+
+    <script src="{{ asset('/168_js') }}/168_datatable.js"></script>
 
 
+    <script src="{{ asset('/168_res') }}/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+@endpush
 
+@section("page_content")
+    <div class="content-body" style="min-height: 798px;">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Pengguna</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">List</a></li>
+                </ol>
+            </div>
 
-    <script type="text/javascript">
-        $(function () {
-            var table = $('#table_data').DataTable({
-                processing: true,
-                serverSide: false,
-                columnDefs: [{
-                    orderable: true,
-                    targets: 0
-                }],
-                dom: 'T<"clear">lfrtip<"bottom"B>',
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                buttons: [
-                    'copyHtml5',
-                    {
-                        extend: 'excelHtml5',
-                        title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
-                    },
-                    'csvHtml5',
-                ],
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">List Pengguna</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive" style='font-family: Nunito, sans-serif '>
+                                <table id="168dt" class="display" style="min-width: 845px">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Email</th>
+                                        <th>Contact</th>
+                                        <th>Image</th>
+                                        <th>Didaftarkan Pada</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse ($datas as $user)
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->role_desc }}</td>
+                                            <td>
+                                                <div class="chat-img d-inline-block">
+                                                    <img src="{{asset($user->photo)}}" class="rounded-circle" width="45"
+                                                         height="45">
+                                                </div>
+                                            </td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->contact }}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                            <td>
+                                                <div class="dropdown ms-auto text-end">
+                                                    <div class="btn-link" data-bs-toggle="dropdown"
+                                                         aria-expanded="false">
+                                                        <svg width="24px" height="24px" viewBox="0 0 24 24"
+                                                             version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                               fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                                <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                                <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="dropdown-menu dropdown-menu-end" style="">
+                                                        <a class="dropdown-item" href="#">Accept Patient</a>
+                                                        <a class="dropdown-item" href="#">Reject Order</a>
+                                                        <a class="dropdown-item" href="{{url("user/$user->id/edit")}}">View
+                                                            Details</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-            });
+                                    @empty
 
-            $('body').on("click", ".btn-delete", function () {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("href", window.location.origin + "/user/" + id + "/delete")
-                $("#destroy-modal").modal("show")
-            });
+                                    @endforelse
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Age</th>
+                                        <th>Start date</th>
+                                        <th>Salary</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            $('body').on("click", ".btn-add-new", function () {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
-                $("#insert-modal").modal("show")
-            });
+            </div>
 
-        });
-    </script>
-
-
-
-
+        </div>
+    </div>
 @endsection

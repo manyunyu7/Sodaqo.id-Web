@@ -1,266 +1,311 @@
-@extends('main.app')
+@extends('168_template')
 
-@section('page-breadcrumb')
-    <div class="row">
-        <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">User</h4>
-            <div class="d-flex align-items-center">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Edit Data</li>
-                    </ol>
-                </nav>
+
+@section("header_name")
+    Tambah User Baru
+@endsection
+
+@section("page_content")
+    <div class="content-body" style="min-height: 798px;">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Pengguna</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah Baru</a></li>
+                </ol>
             </div>
-        </div>
-        <div class="col-5 align-self-center">
-            <div class="customize-input float-right">
 
+            <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="profile card card-body px-3 pt-3 pb-0">
+                        <div class="profile-head">
+                            <div class="photo-content">
+                                <div class="cover-photo rounded"></div>
+                            </div>
+                            <div class="profile-info">
+                                <div class="profile-photo">
+                                    <img style="width: 108px!important; height: 108px !important;"
+                                         src="{{asset($data->photo)}}" class="rounded-circle" alt="">
+                                </div>
+                                <div class="profile-details">
+                                    <div class="profile-name px-3 pt-2">
+                                        <h4 class="text-primary mb-0">{{$data->name}}</h4>
+                                        <p>{{$data->role_desc}}</p>
+                                    </div>
+                                    <div class="profile-email px-2 pt-2">
+                                        <h4 class="text-muted mb-0">{{$data->email}} | {{$data->contact}}</h4>
+                                        <p>Email</p>
+                                    </div>
+                                    <div class="dropdown ms-auto">
+                                        <a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown"
+                                           aria-expanded="true">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px"
+                                                 viewbox="0 0 24 24" version="1.1">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <rect x="0" y="0" width="24" height="24"></rect>
+                                                    <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                    <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                    <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li class="dropdown-item"><i
+                                                    class="fa fa-user-circle text-primary me-2"></i> View profile
+                                            </li>
+                                            <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add
+                                                to btn-close friends
+                                            </li>
+                                            <li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add
+                                                to group
+                                            </li>
+                                            <li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @include('168_component.alert_message.message')
+            </div>
+            <div class="row">
+                <div class="col-xl-4 d-none">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="profile-interest">
+                                        <h5 class="text-primary d-inline">Program</h5>
+                                        <div class="row mt-4 sp4" id="lightgallery">
+                                            <a href="images/profile/2.jpg" data-exthumbimage="images/profile/2.jpg"
+                                               data-src="images/profile/2.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/2.jpg" alt="" class="img-fluid">
+                                            </a>
+                                            <a href="images/profile/3.jpg" data-exthumbimage="images/profile/3.jpg"
+                                               data-src="images/profile/3.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/3.jpg" alt="" class="img-fluid">
+                                            </a>
+                                            <a href="images/profile/4.jpg" data-exthumbimage="images/profile/4.jpg"
+                                               data-src="images/profile/4.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/4.jpg" alt="" class="img-fluid">
+                                            </a>
+                                            <a href="images/profile/3.jpg" data-exthumbimage="images/profile/3.jpg"
+                                               data-src="images/profile/3.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/3.jpg" alt="" class="img-fluid">
+                                            </a>
+                                            <a href="images/profile/4.jpg" data-exthumbimage="images/profile/4.jpg"
+                                               data-src="images/profile/4.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/4.jpg" alt="" class="img-fluid">
+                                            </a>
+                                            <a href="images/profile/2.jpg" data-exthumbimage="images/profile/2.jpg"
+                                               data-src="images/profile/2.jpg"
+                                               class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                                <img src="images/profile/2.jpg" alt="" class="img-fluid">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="profile-news">
+                                        <h5 class="text-primary d-inline">Our Latest News</h5>
+                                        <div class="media pt-3 pb-3">
+                                            <img src="images/profile/5.jpg" alt="image" class="me-3 rounded" width="75">
+                                            <div class="media-body">
+                                                <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection
+                                                        of textile samples</a></h5>
+                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
+                                                    thought.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media pt-3 pb-3">
+                                            <img src="images/profile/6.jpg" alt="image" class="me-3 rounded" width="75">
+                                            <div class="media-body">
+                                                <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection
+                                                        of textile samples</a></h5>
+                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
+                                                    thought.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media pt-3 pb-3">
+                                            <img src="images/profile/7.jpg" alt="image" class="me-3 rounded" width="75">
+                                            <div class="media-body">
+                                                <h5 class="m-b-5"><a href="post-details.html" class="text-black">Collection
+                                                        of textile samples</a></h5>
+                                                <p class="mb-0">I shared this on my fb wall a few months back, and I
+                                                    thought.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="profile-tab">
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item active"><a href="#profile-settings" data-bs-toggle="tab"
+                                                                       class="nav-link active">Setting</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#change-password" data-bs-toggle="tab"
+                                                                class="nav-link">Password</a>
+                                        </li>
+                                        <li class="nav-item"><a href="#change-photo" data-bs-toggle="tab"
+                                                                class="nav-link">Foto</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="profile-settings" class="tab-pane fade active show">
+                                            <form action="{{ url('user/update') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$data->id}}">
+                                                <div class="pt-3">
+                                                    <div class="settings-form">
+                                                        <h4 class="text-primary">Account Setting</h4>
+                                                        <div class="row">
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Email</label>
+                                                                <input name="user_email" type="email"
+                                                                       placeholder="Email"
+                                                                       class="form-control"
+                                                                       value="{{$data->email}}">
+                                                            </div>
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Contact</label>
+                                                                <input name="user_contact" type="number"
+                                                                       placeholder="Kontak"
+                                                                       class="form-control"
+                                                                       value="{{$data->contact}}">
+                                                            </div>
+
+                                                            <div class="mb-3 col-md-6">
+                                                                <label>Role Pengguna</label>
+                                                                <select name="user_role" class="default-select form-control wide mb-3"
+                                                                        style="display: none;">
+                                                                    <option>Pilih User Role</option>
+                                                                    <option {{($data->role==1) ? 'selected' : ''}}  value="1">Admin</option>
+                                                                    <option {{($data->role==2) ? 'selected' : ''}} value="2">Volunteer</option>
+                                                                    <option {{($data->role==3) ? 'selected' : ''}} value="3">User</option>
+                                                                    <option {{($data->role==4) ? 'selected' : ''}} value="4">Kelurahan</option>
+                                                                    <option {{($data->role==5) ? 'selected' : ''}} value="5">Kecamatan</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Nama</label>
+                                                                <input name="user_name" type="text" placeholder="Name"
+                                                                       class="form-control" value="{{$data->name}}">
+                                                            </div>
+
+                                                        </div>
+
+                                                        <button class="btn btn-primary" type="submit">
+                                                            Simpan Perubahan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div id="change-password" class="tab-pane fade">
+                                            <form action="{{ url('user/change-password') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="redirectTo" value="">
+                                                <input type="hidden" name="id" value="{{$data->id}}">
+                                                <div class="pt-3">
+                                                    <div class="settings-form">
+                                                        <h4 class="text-primary">Change Password</h4>
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label">Password Lama</label>
+                                                                    <input name="old_password" type="password"
+                                                                           placeholder="Password Lama"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label">Contact</label>
+                                                                    <input name="new_password" type="password"
+                                                                           placeholder="Password Baru"
+                                                                           class="form-control" value="">
+                                                                </div>
+                                                            </div>
+
+                                                            <button class="btn btn-primary" type="submit">Ganti
+                                                                Password
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div id="change-photo" class="tab-pane fade">
+                                            <form action='{{url("/user/$data->id/change-photo")}}' method="post"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="redirectTo" value="">
+                                                <input type="hidden" name="id" value="{{$data->id}}">
+
+                                                <div class="pt-3">
+                                                    <div class="settings-form">
+                                                        <h4 class="text-primary">Change Photo</h4>
+
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <img
+                                                                    style="width: 108px!important; height: 108px !important;"
+                                                                    src="{{asset($data->photo)}}"
+                                                                    class="rounded-circle" alt="">
+                                                            </div>
+
+                                                            <div class="mb-3 col-md-6">
+                                                                <label class="form-label">Foto</label>
+                                                                <div class="input-group">
+                                                                    <div class="form-file">
+                                                                        <input type="file" accept="image/*" name="photo"
+                                                                               class="form-file-input form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <button class="btn btn-primary" type="submit">
+                                                            Simpan Perubahan
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('page-wrapper')
-    @include('main.components.message')
-
-    <div class="row">
-{{--        <div class="col-12 mt-4">--}}
-{{--            <h4 class="mb-0">Size Using grid markup</h4>--}}
-{{--            <p class="text-muted mt-0 font-12">Using the grid, wrap cards in columns and rows as--}}
-{{--                needed.<code>.col-1 to .col-12</code></p>--}}
-{{--        </div>--}}
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ url('user/update') }}" method="post">
-                        @csrf
-                        <h3 class="card-title">Hallo {{$data->name}}</h3>
-                        <p class="card-text">Gunakan Menu Ini Untuk Mengubah Data Diri Kamu</p>
-                        <div class="form-group">
-                            <label for="basicInput">Nama User</label>
-                            <input type="text" name="user_name" required class="form-control"
-                                   value="{{ old('user_name', $data->name) }}" required id="basicInput"
-                                   placeholder="Nama Lengkap User">
-                            <small class="form-text text-muted">Nama Pengguna</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="basicInput">Email</label>
-                            <input type="email" name="user_email" required class="form-control"
-                                   value="{{ old('user_email', $data->email) }}" id=" basicInput"
-                                   placeholder="Email User">
-                            <small class="form-text text-muted">Email Yang Digunakan Untuk Login</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="basicInput">Kontak User</label>
-                            <input type="text" name="user_contact" class="form-control"
-                                   value="{{ old('user_contact', $data->contact) }}" placeholder="Kontak User">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="">Role User</label>
-                            <select class="form-control form-select" required name="user_role" id="">
-                                <option>Pilih User Role</option>
-                                <option {{($data->role==1) ? 'selected' : ''}}  value="1">Admin</option>
-                                <option {{($data->role==2) ? 'selected' : ''}} value="2">Volunteer</option>
-                                <option {{($data->role==3) ? 'selected' : ''}} value="3">User</option>
-                                <option {{($data->role==4) ? 'selected' : ''}} value="4">Kelurahan</option>
-                                <option {{($data->role==5) ? 'selected' : ''}} value="5">Kecamatan</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Ganti Foto Profil</h3>
-
-                    <form action='{{url("/user/$data->id/change-photo")}}' method="post"
-                          enctype="multipart/form-data">
-                        @csrf
-                        <input type="hidden" id="redirect_dest" value='{{"admin/user/$data->id/edit"}}'>
-                        <img src="{{asset($data->photo)}}" class="rounded-circle" width="145" height="145">
-                        <div class="form-group mt-3">
-                            <input type="file" class="form-control-file" name="photo"
-                                   aria-describedby="fileHelpId">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ganti Foto</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ url('user/change-password') }}" method="post">
-                        @csrf
-                        <input type="hidden" name="redirectTo" value="">
-                        <input type="hidden" name="id" value="{{$data->id}}">
-
-                        <h3 class="card-title">Ganti Password</h3>
-                        <p class="card-text">Gunakan Menu Ini Untuk Mengubah Data Diri Kamu</p>
-                        <div class="form-group">
-                            <label for="basicInput">Password Lama</label>
-                            <input type="password" name="old_password" class="form-control" id="basicInput"
-                                   placeholder="Password">
-                            <small class="form-text text-muted">Password Lama</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="basicInput">Password Baru</label>
-                            <input type="password" name="new_password" class="form-control" id="basicInput"
-                                   placeholder="Password">
-                            <small class="form-text text-muted">Password Baru</small>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
-
-@endsection
-
-
-@section('app-script')
-    <script type="text/javascript"
-            src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
-    </script>
-
-
-
-
-    <script type="text/javascript">
-        $(function () {
-            var table = $('#table_santri').DataTable({
-                processing: true,
-                serverSide: true,
-                columnDefs: [{
-                    orderable: true,
-                    targets: 0
-                }],
-                dom: 'T<"clear">lfrtip<"bottom"B>',
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                buttons: [
-                    'copyHtml5',
-                    {
-                        extend: 'excelHtml5',
-                        title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
-                    },
-                    'csvHtml5',
-                ],
-                ajax: {
-                    type: "get",
-                    url: "{{ url('admin/data/santri/manage') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    async: true,
-                    error: function (xhr, error, code) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        console.log(err);
-                    }
-                },
-                columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'id'
-                },
-                    {
-                        data: 'nis',
-                        name: 'nis'
-                    },
-                    {
-                        data: 'nama',
-                        name: 'nama'
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas'
-                    },
-                    {
-                        data: 'asrama',
-                        name: 'asrama'
-                    },
-                    {
-                        data: 'jenjang',
-                        name: 'jenjang'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
-
-                ]
-            });
-
-
-            $('body').on("click", ".btn-add-new", function () {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
-                $("#insert-modal").modal("show")
-            });
-
-
-            // Edit & Update
-            $('body').on("click", ".btn-edit", function () {
-                var id = $(this).attr("id")
-                $.ajax({
-                    url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
-                    method: "GET",
-                    success: function (response) {
-                        $("#edit-modal").modal("show")
-                        console.log(response)
-                        $("#id").val(response.id)
-                        $("#name").val(response.judul)
-                        $("#edit_date").val(response.tanggal)
-                        $("#role").val(response.role)
-                    }
-                })
-            });
-
-            // Reset Password
-            $('body').on("click", ".btn-res-pass", function () {
-                var id = $(this).attr("id")
-                $(".btn-reset").attr("id", id)
-                $("#reset-password-modal").modal("show")
-            });
-
-        });
-    </script>
-
-
-
-
 @endsection

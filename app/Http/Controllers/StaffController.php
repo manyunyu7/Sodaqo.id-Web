@@ -165,7 +165,6 @@ class StaffController extends Controller
 
     function update(Request $request)
     {
-        //        return $request;
         $validateComponent = [
             "user_name" => "required",
             "user_email" => "required",
@@ -220,63 +219,48 @@ class StaffController extends Controller
     function updateProfilePhoto(Request $request)
     {
         $response = array();
-        $user = Auth::user();
+        $user = User::findOrFail($request->id);
         $id = $user->id;
 
 
         if ($request->hasFile('photo')) {
-
-            $file_path = public_path() . $user->photo;
-            RazkyFeb::removeFile($file_path);
-
+            RazkyFeb::removeFile($user->photo_path);
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); // you can also use file name
-            $fileName = $user->id . '.' . $extension;
+            $fileName = time() . '.' . $extension;
 
-            $savePath = " / web_files / user_profile / $id / ";
+            $savePath = "/web_files/user_profile/";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
-            $upload = $file->move($path, $fileName);
+            $file->move($path, $fileName);
 
             $user->photo = $savePathDB;
+        }
 
-            if ($user->save()) {
-                if ($request->is('api/*'))
-                    return RazkyFeb::responseSuccessWithData(
-                        200,
-                        1,
-                        200,
-                        "Berhasil Mengupdate Foto Profil",
-                        "Success",
-                        Auth::user(),
-                    );
+        if ($user->save()) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200,
+                    1,
+                    200,
+                    "Berhasil Mengupdate Foto Profil",
+                    "Success",
+                    Auth::user(),
+                );
 
-                return back()->with(["success" => "Berhasil Mengupdate Profil"]);
-//                return http_redirect("admin")->with(["success" => "Berhasil Mengupdate Profil"]);
-            } else {
-                if ($request->is('api/*'))
-                    return RazkyFeb::responseErrorWithData(
-                        400,
-                        3,
-                        400,
-                        "Gagal Mengupdate Foto Profil",
-                        "Error",
-                        ""
-                    );
-
-                return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
-            }
+            return back()->with(["success" => "Berhasil Mengupdate Profil"]);
         } else {
             if ($request->is('api/*'))
                 return RazkyFeb::responseErrorWithData(
                     400,
                     3,
                     400,
-                    "Gagal Mengupdate Foto Profil, Silakan Lengkapi Foto",
+                    "Gagal Mengupdate Foto Profil",
                     "Error",
-                    $request->all()
+                    ""
                 );
-            return back()->with(["errors" => "Gagal Mengupdate Profil,Silakan Lengkapi Foto"]);
+
+            return back()->with(["errors" => "Gagal Mengupdate Foto Profil"]);
         }
     }
 
