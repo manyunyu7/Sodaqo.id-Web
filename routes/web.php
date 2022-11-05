@@ -75,6 +75,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('manage', "$cr@viewManage");
     });
 
+    Route::prefix('donation-account')->group(function () {
+        [App\Http\Controllers\DonationAccountController::class, 'destroy'];
+        $cr = "DonationAccountController";
+        Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@edit");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
 
 });
 

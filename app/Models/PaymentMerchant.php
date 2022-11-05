@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMerchant extends Model
 {
     use HasFactory;
+
+    protected $appends = ['photo_path'];
+    function getPhotoPathAttribute()
+    {
+        return asset($this->photo);
+    }
+
 }

@@ -2,7 +2,7 @@
 
 
 @section("header_name")
-    Pengguna
+    Rekening
 @endsection
 
 @push('css')
@@ -46,7 +46,7 @@
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Payment Merchant</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Rekening</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">List</a></li>
                 </ol>
             </div>
@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">List Bank/Wallet/Payment Merchant</h4>
+                            <h4 class="card-title">List Rekening</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style='font-family: Nunito, sans-serif '>
@@ -63,8 +63,10 @@
                                     <thead>
                                     <tr>
                                         <th data-sortable="">No</th>
-                                        <th data-sortable="">Logo</th>
+                                        <th data-sortable="">Img</th>
                                         <th data-sortable="">Nama</th>
+                                        <th data-sortable="">Payment Merchant</th>
+                                        <th data-sortable="">Alamat Pembayaran</th>
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
@@ -77,21 +79,23 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain"
-                                                     src='{{asset("$data->photo")}}' alt="">
+                                                     src='{{asset("$data->merchant_photo")}}' alt="">
                                             </td>
                                             <td>{{ $data->name }}</td>
+                                            <td>{{ $data->getMerchantNames() }}</td>
+                                            <td>{{ $data->account_number }}</td>
                                             <td>
                                                 @if($data->status==1)
                                                     <a href="javascript:void(0)" class="btn btn-success btn-rounded light">Aktif</a>
                                                 @endif
 
                                                 @if($data->status==0)
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                        <a href="javascript:void(0)" class="btn btn-danger btn-rounded light">Non Aktif</a>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
                                             <td>
-                                                <a href="{{url('/payment-merchant'.'/'.$data->id.'/edit')}}">
+                                                <a href="{{url('/donation-account'.'/'.$data->id.'/edit')}}">
                                                     <button type="button" class="btn btn-primary">Edit</button>
                                                 </a>
                                             </td>
@@ -106,6 +110,7 @@
                                     @endforelse
                                     </tbody>
                                     <tfoot>
+
                                     </tfoot>
                                 </table>
                             </div>

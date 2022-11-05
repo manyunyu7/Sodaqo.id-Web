@@ -9,11 +9,15 @@ class DonationAccount extends Model
 {
     use HasFactory;
 
-    protected $appends = ['merchantNames','merchant_detail'];
+    protected $appends = ['merchantNames','merchant_detail','merchant_photo'];
 
     public function getMerchantNamesAttribute()
     {
         return $this->getMerchantNames();
+    }
+
+    public function getMerchantPhotoAttribute(){
+        return $this->getMerchantDetailAttribute()->photo_path;
     }
 
     public function getMerchantDetailAttribute()

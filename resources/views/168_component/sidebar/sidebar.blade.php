@@ -44,9 +44,8 @@
 
                     <li class=""><a class="has-arrow" href="javascript:void(0)" aria-expanded="false">Payment Account</a>
                         <ul aria-expanded="false" class="left mm-collapse" style="">
-                            <li><a href="email-compose.html">Compose</a></li>
-                            <li><a href="email-inbox.html">Inbox</a></li>
-                            <li><a href="email-read.html">Read</a></li>
+                            <li><a href="{{url("donation-account/tambah")}}">Tambah Baru</a></li>
+                            <li><a href="{{url("donation-account/manage")}}">Manage</a></li>
                         </ul>
                     </li>
                 </ul>
