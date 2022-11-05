@@ -11,23 +11,28 @@ class NewsController extends Controller
 {
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function viewCreate()
     {
-        return view('news.create_new');
+        return view('news.create_cc');
     }
 
     /**
      * Show the form for managing existing resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function viewManage()
     {
         $datas = News::all();
-        return view('news.manage_new')->with(compact('datas'));
+        return view('news.manage')->with(compact('datas'));
+    }
+
+    /**
+     * See News on The Web
+     */
+    public function viewSeeWeb(Request $request)
+    {
+        $data = News::findOrFail($request->id);
+        return view('news.see')->with(compact('data'));
     }
 
     /**
@@ -38,7 +43,7 @@ class NewsController extends Controller
     public function viewUpdate($id)
     {
         $data = News::findOrFail($id);
-        return view('news.edit_new')->with(compact('data'));
+        return view('news.edit')->with(compact('data'));
     }
 
     /**
@@ -53,6 +58,7 @@ class NewsController extends Controller
         $data->title = $request->title;
         $data->author = $request->author;
         $data->type = $request->type;
+        $data->reff = $request->reff;
         $data->content = $request->news_content;
         if ($request->hasFile('photo')) {
 
@@ -86,6 +92,7 @@ class NewsController extends Controller
         $data->author = $request->author;
         $data->content = $request->news_content;
         $data->type = $request->type;
+        $data->reff = $request->reff;
         if ($request->hasFile('photo')) {
 
             $file_path = public_path() . $data->photo;

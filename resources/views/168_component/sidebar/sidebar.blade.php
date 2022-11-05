@@ -31,8 +31,18 @@
             </li>
 
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
-                    <i class="flaticon-025-dashboard"></i>
-                    <span class="nav-text">Payment Method</span>
+                    <i class="flaticon-381-user-9"></i>
+                    <span class="nav-text">Pengguna</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ url("/admin/user/create")}}">Tambah Pengguna</a></li>
+                    <li><a href="{{ url("/admin/user/manage") }}">Manage Pengguna</a></li>
+                </ul>
+            </li>
+
+            <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-008-credit-card"></i>
+                    <span class="nav-text">Payment</span>
                 </a>
                 <ul aria-expanded="false">
                     <li class=""><a class="has-arrow" href="javascript:void(0)" aria-expanded="false">Bank/Wallet</a>
@@ -53,14 +63,17 @@
 
 
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
-                    <i class="flaticon-025-dashboard"></i>
-                    <span class="nav-text">User</span>
+                    <i class="flaticon-381-file-1"></i>
+                    <span class="nav-text">Content</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ url("/admin/user/create")}}">Add User</a></li>
-                    <li><a href="{{ url("/admin/user/manage") }}">Manage User</a></li>
+                    <li><a href="{{ url("/news/create")}}">Tambah Konten</a></li>
+                    <li><a href="{{ url("/news/manage") }}">Manage Konten</a></li>
                 </ul>
             </li>
+
+
+
 
 
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
