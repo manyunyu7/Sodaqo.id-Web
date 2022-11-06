@@ -14,7 +14,7 @@ class NewsController extends Controller
      */
     public function viewCreate()
     {
-        return view('news.create_cc');
+        return view('news.create_new');
     }
 
     /**
@@ -23,7 +23,7 @@ class NewsController extends Controller
     public function viewManage()
     {
         $datas = News::all();
-        return view('news.manage')->with(compact('datas'));
+        return view('news.manage_new')->with(compact('datas'));
     }
 
     /**

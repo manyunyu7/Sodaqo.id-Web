@@ -49,9 +49,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user', [App\Http\Controllers\HomeController::class, 'user']);
     Route::get('/staff', [App\Http\Controllers\HomeController::class, 'index']);
 
+    Route::prefix('news')->group(function () {
+        $cr = "NewsController";
+        Route::get('create', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('manage', "$cr@viewManage");
+    });
+
     Route::get('/admin/user/manage', [App\Http\Controllers\StaffController::class, 'viewAdminManage']);
     Route::get('/admin/user/create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
-
     Route::prefix('user')->group(function () {
         Route::get('create', [App\Http\Controllers\StaffController::class, 'viewAdminCreate']);
         Route::get('{id}/edit', [App\Http\Controllers\StaffController::class, 'viewAdminEdit']);
@@ -63,44 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/delete', [App\Http\Controllers\StaffController::class, 'destroy']);
     });
 
-    Route::prefix('payment-merchant')->group(function () {
-        [App\Http\Controllers\PaymentMerchantController::class, 'destroy'];
-        $cr = "PaymentMerchantController";
-        Route::get('tambah', "$cr@viewCreate");
-        Route::post('store', "$cr@store");
-        Route::get('{id}/edit', "$cr@viewUpdate");
-        Route::post('{id}/update', "$cr@update");
-        Route::get('{id}/delete', "$cr@delete");
-        Route::get('{id}/destroy', "$cr@destroy");
-        Route::get('manage', "$cr@viewManage");
-    });
-
-    Route::prefix('donation-account')->group(function () {
-        [App\Http\Controllers\DonationAccountController::class, 'destroy'];
-        $cr = "DonationAccountController";
-        Route::get('tambah', "$cr@viewCreate");
-        Route::post('store', "$cr@store");
-        Route::get('{id}/edit', "$cr@edit");
-        Route::post('{id}/update', "$cr@update");
-        Route::get('{id}/delete', "$cr@delete");
-        Route::get('{id}/destroy', "$cr@destroy");
-        Route::get('manage', "$cr@viewManage");
-    });
-
-    Route::prefix('news')->group(function () {
-        [App\Http\Controllers\NewsController::class, 'destroy'];
-        $cr = "NewsController";
-        Route::get('{id}', "$cr@viewSeeWeb");
-        Route::get('create', "$cr@viewCreate");
-        Route::post('store', "$cr@store");
-        Route::get('{id}/edit', "$cr@viewUpdate");
-        Route::post('{id}/update', "$cr@update");
-        Route::get('{id}/delete', "$cr@delete");
-        Route::get('manage', "$cr@viewManage");
-    });
-
-
-
 });
 
 Route::get('logout', function () {
@@ -110,5 +81,3 @@ Route::get('logout', function () {
     return Redirect::to('/');
 })->name('logout');
 
-Route::post('summernote-image', [SummerNoteController::class, 'store']);
-Route::post('summernote-image-delete', [SummerNoteController::class, 'destroyImage']);
