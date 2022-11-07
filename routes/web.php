@@ -71,6 +71,46 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update', [App\Http\Controllers\StaffController::class, 'update']);
         Route::get('{id}/delete', [App\Http\Controllers\StaffController::class, 'destroy']);
     });
+    Route::prefix('payment-merchant')->group(function () {
+        $cr = "PaymentMerchantController";
+        Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@viewUpdate");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
+    Route::prefix('donation-account')->group(function () {
+        $cr = "DonationAccountController";
+        Route::get('tambah', "$cr@viewCreate");
+        Route::post('store', "$cr@store");
+        Route::get('{id}/edit', "$cr@edit");
+        Route::post('{id}/update', "$cr@update");
+        Route::get('{id}/delete', "$cr@delete");
+        Route::get('{id}/destroy', "$cr@destroy");
+        Route::get('manage', "$cr@viewManage");
+    });
+
+    Route::prefix('sodaqo')->group(function () {
+        Route::get('create', [App\Http\Controllers\SodaqoCreationController::class, 'viewCreate']);
+        Route::post('store', [App\Http\Controllers\SodaqoCreationController::class, 'store']);
+        Route::get('{id}/edit',  [App\Http\Controllers\SodaqoCreationController::class, 'viewUpdate']);
+        Route::post('{id}/update', [App\Http\Controllers\SodaqoCreationController::class, 'update']);
+        Route::get('{id}/delete', [App\Http\Controllers\SodaqoCreationController::class, 'delete']);
+        Route::get('manage', [App\Http\Controllers\SodaqoCreationController::class, 'viewManage']);
+    });
+
+
+    Route::prefix('sodaqo-category')->group(function () {
+        Route::get('create', [App\Http\Controllers\SodaqoCategoryController::class, 'viewCreate']);
+        Route::post('store', [App\Http\Controllers\SodaqoCategoryController::class, 'store']);
+        Route::get('{id}/edit',  [App\Http\Controllers\SodaqoCategoryController::class, 'viewUpdate']);
+        Route::post('{id}/update', [App\Http\Controllers\SodaqoCategoryController::class, 'update']);
+        Route::get('{id}/delete', [App\Http\Controllers\SodaqoCategoryController::class, 'delete']);
+        Route::get('manage', [App\Http\Controllers\SodaqoCategoryController::class, 'viewManage']);
+    });
 
 });
 
@@ -80,4 +120,9 @@ Route::get('logout', function () {
 
     return Redirect::to('/');
 })->name('logout');
+
+
+
+Route::post('summernote-image', [SummerNoteController::class, 'store']);
+Route::post('summernote-image-delete', [SummerNoteController::class, 'destroyImage']);
 

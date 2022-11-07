@@ -72,9 +72,15 @@
                 </ul>
             </li>
 
-
-
-
+            <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
+                    <i class="flaticon-381-file-1"></i>
+                    <span class="nav-text">Sodaqo</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ url("/sodaqo-category/manage")}}">Kategori</a></li>
+                    <li><a href="{{ url("/sodaqo/me") }}">Program Saya</a></li>
+                </ul>
+            </li>
 
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
                     <i class="flaticon-025-dashboard"></i>
