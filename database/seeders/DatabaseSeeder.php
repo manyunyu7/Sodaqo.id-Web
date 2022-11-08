@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PaymentMerchantSeeder::class);
         $this->call(DonationAccountSeeder::class);
+        $this->call(SodaqoCategorySeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

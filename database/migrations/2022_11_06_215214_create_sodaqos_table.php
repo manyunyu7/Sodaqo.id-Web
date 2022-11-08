@@ -18,10 +18,11 @@ class CreateSodaqosTable extends Migration
             $table->unsignedBigInteger("owner_id")->nullable();
             $table->unsignedBigInteger("category_id")->nullable();
             $table->bigInteger("fundraising_target")->nullable();
+            $table->text("name")->nullable();
             $table->text("time_limit")->nullable();
             $table->longText("story")->nullable();
             $table->string('status')->nullable();
-            $table->string('photo_path')->nullable();
+            $table->string('photo')->nullable();
             $table->foreign("owner_id")->references("id")->on("users")->nullOnDelete();
             $table->foreign("category_id")->references("id")->on("sodaqo_categories")->nullOnDelete();
             $table->timestamps();

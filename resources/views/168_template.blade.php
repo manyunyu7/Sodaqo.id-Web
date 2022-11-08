@@ -26,6 +26,8 @@
     <!-- Style css -->
     <link href="{{ asset('/168_res') }}/css/style.css" rel="stylesheet">
 
+    <link href="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
     @stack('css')
 
     <style>
@@ -123,6 +125,10 @@
 <script src="{{ asset('/168_res') }}/js/dlabnav-init.js"></script>
 <script src="{{ asset('/168_res') }}/js/demo.js"></script>
 <script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>
+
+
+<script src="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="{{ asset('/168_res') }}/js/plugins-init/sweetalert.init.js"></script>
 
 @stack('script')
 

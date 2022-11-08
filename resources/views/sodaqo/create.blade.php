@@ -3,7 +3,7 @@
 
 
 @section("header_name")
-    Tambah Konten Baru
+    Tambah Program Baru
 @endsection
 
 @push("css")
@@ -13,6 +13,10 @@
 
 @push("script")
     <script src="{{asset("/168_res")}}/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js"></script>
+    <script src="{{asset("/168_res")}}/vendor/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="{{asset("/168_res")}}/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="{{asset("/168_res")}}/js/plugins-init/jquery.validate-init.js"></script>
 
     <script>
 
@@ -26,6 +30,75 @@
             };
         }
     </script>
+
+    <script>
+        $(document).ready(function () {
+
+            function activaTab(tab) {
+                $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+            };
+
+            $("#next1").click(function () {
+                var isError = false;
+                if ($.trim($('#inputName').val()) == '') {
+                    isError = true
+                    swal("Perhatian!", "Lengkapi nama program terlebih dahulu", "warning");
+                }
+
+                if (isError) {
+                } else {
+                    activaTab("home2")
+                }
+            });
+            $("#next2").click(function () {
+                activaTab("home3")
+            });
+            $("#next3").click(function () {
+                var isError = false;
+                if ($.trim($("#formFile168").val()).length == 0) {
+                    isError = true
+                    swal("Perhatian!", "Lengkapi foto terlebih dahulu", "warning");
+                }
+
+                if (isError) {
+                    swal("Perhatian!", "Lengkapi foto program", "warning");
+                } else {
+                    activaTab("home4")
+                }
+            });
+
+            $.myfunction = function () {
+                $("#reviewName").text($("#inputName").val());
+                $("#reviewFundraisingTarget").text($("#inputTarget").val());
+                $("#reviewTimeLimit").text($("#inputDate").val());
+
+                var start = new Date().toLocaleDateString()
+                var end = $("#inputDateDate").datepicker("getDate");
+                days = (end - start) / (1000 * 60 * 60 * 24);
+
+                $("#reviewDurasi").text(Math.round(days));
+
+
+            };
+
+            $("#inputDate").change(function () {
+                $.myfunction();
+            });
+            $("#inputTarget").keyup(function () {
+                $.myfunction();
+            })
+            $("#inputName").keyup(function () {
+                $.myfunction();
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // SmartWizard initialize
+            $('#smartwizard').smartWizard();
+        });
+    </script>
 @endpush
 
 @section("page_content")
@@ -33,237 +106,180 @@
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="{{url("sodaqo-category")}}">Kategori Program</a></li>
+                    <li class="breadcrumb-item active"><a href="{{url("sodaqo/me")}}">Program</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah Baru</a></li>
                 </ol>
             </div>
             <!-- row -->
-            <form action="{{ url('sodaqo-category/store') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ url('sodaqo/store') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col-xl-12 col-xxl-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Form step</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="smartwizard" class="form-wizard order-create sw sw-theme-default sw-justified">
-                                    <ul class="nav nav-wizard">
-                                        <li><a class="nav-link inactive active" href="#wizard_Service">
-                                                <span>1</span>
-                                            </a></li>
-                                        <li><a class="nav-link inactive done" href="#wizard_Time">
-                                                <span>2</span>
-                                            </a></li>
-                                        <li><a class="nav-link inactive done" href="#wizard_Details">
-                                                <span>3</span>
-                                            </a></li>
-                                        <li><a class="nav-link inactive" href="#wizard_Payment">
-                                                <span>4</span>
-                                            </a></li>
-                                    </ul>
-                                    <div class="tab-content" style="height: 287px;">
-                                        <div id="wizard_Service" class="tab-pane" role="tabpanel" style="display: block;">
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">First Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Parsley" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Last Name*</label>
-                                                        <input type="text" name="lastName" class="form-control" placeholder="Montana" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Email Address*</label>
-                                                        <input type="email" class="form-control" id="inputGroupPrepend2" aria-describedby="inputGroupPrepend2" placeholder="example@example.com.com" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Phone Number*</label>
-                                                        <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12 mb-3">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Where are you from*</label>
-                                                        <input type="text" name="place" class="form-control" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="wizard_Time" class="tab-pane" role="tabpanel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Company Name*</label>
-                                                        <input type="text" name="firstName" class="form-control" placeholder="Cellophane Square" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Company Email Address*</label>
-                                                        <input type="email" class="form-control" id="emial1" placeholder="example@example.com.com" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Company Phone Number*</label>
-                                                        <input type="text" name="phoneNumber" class="form-control" placeholder="(+1)408-657-9007" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 mb-2">
-                                                    <div class="mb-3">
-                                                        <label class="text-label form-label">Your position in Company*</label>
-                                                        <input type="text" name="place" class="form-control" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="wizard_Details" class="tab-pane" role="tabpanel" style="display: none;">
-                                            <div class="row">
-                                                <div class="col-sm-4 mb-2">
-                                                    <h4>Monday *</h4>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="9.00" type="number" name="input1" id="input1">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="6.00" type="number" name="input2" id="input2">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4 mb-2">
-                                                    <h4>Tuesday *</h4>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="9.00" type="number" name="input3" id="input3">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="6.00" type="number" name="input4" id="input4">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4 mb-2">
-                                                    <h4>Wednesday *</h4>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="9.00" type="number" name="input5" id="input5">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="6.00" type="number" name="input6" id="input6">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4 mb-2">
-                                                    <h4>Thrusday *</h4>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="9.00" type="number" name="input7" id="input7">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="6.00" type="number" name="input8" id="input8">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4 mb-2">
-                                                    <h4>Friday *</h4>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="9.00" type="number" name="input9" id="input9">
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-sm-4 mb-2">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" value="6.00" type="number" name="input10" id="input10">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="wizard_Payment" class="tab-pane" role="tabpanel" style="display: none;">
-                                            <div class="row emial-setup">
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="mb-3">
-                                                        <label for="mailclient11" class="mailclinet mailclinet-gmail">
-                                                            <input type="radio" name="emailclient" id="mailclient11">
-                                                            <span class="mail-icon">
-																<i class="mdi mdi-google-plus" aria-hidden="true"></i>
-															</span>
-                                                            <span class="mail-text">I'm using Gmail</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="mb-3">
-                                                        <label for="mailclient12" class="mailclinet mailclinet-office">
-                                                            <input type="radio" name="emailclient" id="mailclient12">
-                                                            <span class="mail-icon">
-																<i class="mdi mdi-office" aria-hidden="true"></i>
-															</span>
-                                                            <span class="mail-text">I'm using Office</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="mb-3">
-                                                        <label for="mailclient13" class="mailclinet mailclinet-drive">
-                                                            <input type="radio" name="emailclient" id="mailclient13">
-                                                            <span class="mail-icon">
-																<i class="mdi mdi-google-drive" aria-hidden="true"></i>
-															</span>
-                                                            <span class="mail-text">I'm using Drive</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6 col-6">
-                                                    <div class="mb-3">
-                                                        <label for="mailclient14" class="mailclinet mailclinet-another">
-                                                            <input type="radio" name="emailclient" id="mailclient14">
-                                                            <span class="mail-icon">
-																<i class="fas fa-question-circle" aria-hidden="true"></i>
-															</span>
-                                                            <span class="mail-text">Another Service</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                    <div class="col-12">
+                        @include("168_component.alert_message.message")
+                    </div>
 
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="skip-email text-center">
-                                                        <p>Or if want skip this step entirely and setup it later</p>
-                                                        <a href="javascript:void(0)">Skip step</a>
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Nav tabs -->
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-bs-toggle="tab" href="#home1">
+                                                <i class="las la-info-circle me-2"></i></i>Judul</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#home2">
+                                                <i class="las la-money-bill"></i> Target</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#home3">
+                                                <i class="las la-photo-video me-2"></i></i> Foto</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#home4">
+                                                <i class="las la-tasks me-2"></i></i> Konfirmasi</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active show" id="home1" role="tabpanel">
+                                            <div class="pt-4">
+                                                <div class="basic-form row">
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label" for="basicInput">Kategori
+                                                            Program</label>
+                                                        <select
+                                                            class="form-control default-select form-control wide mb-3"
+                                                            name="merchant_id" id="" required>
+                                                            @forelse($categories as $data)
+                                                                <option value="{{$data->id}}">
+
+                                                                    {{$data->name}}</option>
+                                                            @empty
+
+                                                            @endforelse
+                                                        </select>
+                                                        <div class="form-text">Pilih salah satu kategori program</div>
                                                     </div>
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="form-label" for="basicInput">Nama Program</label>
+                                                        <input id="inputName" type="text" name="name" required
+                                                               class="form-control"
+                                                               value="{{ old('name') }}"
+                                                               placeholder="Judul/Nama Program">
+                                                        <div class="form-text">Silakan isi nama program sesuai dengan
+                                                            data
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label" for="">Deskripsi/Narasi
+                                                            Program</label>
+                                                        <textarea class="form-control" name="m_description"
+                                                                  id="summernote" rows="10"
+                                                                  placeholder="Deskripsi">{{old('m_description')}}</textarea>
+                                                    </div>
+
+                                                    <button id="next1" type="button"
+                                                            class="btn btn-outline-primary mt-5">Selanjutnya
+                                                    </button>
+
                                                 </div>
                                             </div>
                                         </div>
-                                    </div><div class="toolbar toolbar-bottom" role="toolbar" style="text-align: right;"><button class="btn btn-primary sw-btn-prev disabled" type="button">Previous</button><button class="btn btn-primary sw-btn-next" type="button">Next</button></div>
+                                        <div class="tab-pane fade" id="home2">
+                                            <div class="pt-4">
+                                                <div class="basic-form row">
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="form-label" for="basicInput">Batas Waktu
+                                                            Program</label>
+                                                        <input id="inputDate" type="date" name="time_limit"
+                                                               class="form-control"
+                                                               value="{{ old('time_limit') }}"
+                                                               placeholder="Batas Waktu">
+                                                        <div class="form-text">Kosongkan jika tidak ada batas waktu.
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="form-label" for="basicInput">Target Nominal
+                                                            Dana</label>
+                                                        <input id="inputTarget" type="number" min="0.00"
+                                                               name="fundraising_target"
+                                                                class="form-control"
+                                                               value="{{ old('fundraising_target') }}"
+                                                               placeholder="Target Donasi">
+                                                        <div class="form-text">Kosongkan jika tidak ada target</div>
+                                                    </div>
+
+
+                                                    <button id="next2" type="button"
+                                                            class="btn btn-outline-primary mt-5">Selanjutnya
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="home3">
+                                            <div class="pt-4">
+                                                <div class="basic-form row">
+
+                                                    <div class="mb-3 row">
+
+                                                        <div class="col-12 d-flex justify-content-center">
+                                                            <img
+                                                                id="imgPreview"
+                                                                src="https://i.stack.imgur.com/y9DpT.jpg" alt="image"
+                                                                class="me-3 rounded"
+                                                                width="275">
+                                                        </div>
+
+                                                        <label class="col-form-label mt-4">Foto Baru</label>
+                                                        <div class="col-12">
+                                                            <div class="input-group">
+                                                                <div class="form-file">
+                                                                    <input id="formFile168" type="file" name="photo"
+                                                                           class="form-file-input form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <button id="next3" type="button"
+                                                            class="btn btn-outline-primary mt-5 col-md-6 col-12">
+                                                        Selanjutnya
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="home4">
+                                            <div class="pt-4">
+                                                <h4>Konfirmasi Program</h4>
+                                                <p>Pastikan data berikut sudah sesuai
+                                                </p>
+                                                <br>
+                                                <p><span class="text-black"> Program</span> : <span
+                                                        id="reviewName">-</span></p>
+                                                <p><span class="text-black"> Target Donasi</span> : <span
+                                                        id="reviewFundraisingTarget">Rp. -</span></p>
+                                                <p><span class="text-black"> Batas Akhir Donasi</span> : <span
+                                                        id="reviewTimeLimit">-</span></p>
+                                                <p><span class="text-black"> Durasi</span> : <span
+                                                        id="reviewDurasi">-</span></p>
+
+                                                <button type="submit" class="btn btn-primary mt-5">Tambah Program
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </form>
         </div>

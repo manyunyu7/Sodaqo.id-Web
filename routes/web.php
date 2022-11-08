@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('{id}/update', [App\Http\Controllers\SodaqoCreationController::class, 'update']);
         Route::get('{id}/delete', [App\Http\Controllers\SodaqoCreationController::class, 'delete']);
         Route::get('manage', [App\Http\Controllers\SodaqoCreationController::class, 'viewManage']);
+        Route::get('me', [App\Http\Controllers\SodaqoCreationController::class, 'viewManage']);
     });
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
+use App\Models\PaymentMerchant;
 use App\Models\Sodaqo;
+use App\Models\SodaqoCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,8 @@ class SodaqoCreationController extends Controller
      */
     public function viewCreate()
     {
-        return view('sodaqo.create');
+        $categories = SodaqoCategory::all();
+        return view('sodaqo.create')->with(compact('categories'));
     }
 
     /**
@@ -53,17 +56,21 @@ class SodaqoCreationController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $data = new Sodaqo();
-        $data->name = $request->title;
-        $data->description = $request->news_content;
+        $data->owner_id = Auth::id();
+        $data->category_id = $request->merchant_id;
+        $data->name = $request->name;
+        $data->fundraising_target = $request->fundraising_target;
+        $data->story = $request->m_description;
+        $data->time_limit = $request->time_limit;
+        $data->status = 1;
         if ($request->hasFile('photo')) {
 
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension(); // you can also use file name
             $fileName = time() . '.' . $extension;
 
-            $savePath = "/web_files/news/";
+            $savePath = "/web_files/sodaqo/";
             $savePathDB = "$savePath$fileName";
             $path = public_path() . "$savePath";
             $file->move($path, $fileName);
