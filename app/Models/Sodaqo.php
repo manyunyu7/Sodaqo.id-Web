@@ -10,7 +10,8 @@ class Sodaqo extends Model
 {
     use HasFactory;
 
-    protected $appends = ['photo_path','creator'];
+    protected $appends = ['photo_path','creator',"isHaveTarget",
+        "fundraising_target_formatted"];
 
     function getPhotoPathAttribute()
     {
@@ -25,5 +26,22 @@ class Sodaqo extends Model
             return $user;
         }
     }
+
+
+    function getFundraisingTargetFormattedAttribute()
+    {
+        return number_format($this->fundraising_target, 0, ".", ",");
+
+    }
+
+    function getIsHaveTargetAttribute()
+    {
+        $isHaveTarget = false;
+        if (isset($this->fundraising_target) && !empty($this->fundraising_target)) {
+            $isHaveTarget = true;
+        }
+        return $isHaveTarget;
+    }
+
 
 }

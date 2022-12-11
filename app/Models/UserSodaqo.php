@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSodaqo extends Model
 {
-    protected $appends = ['photo_path','user_detail','donation_account',"merchant"];
     use HasFactory;
 
 
@@ -19,8 +18,12 @@ class UserSodaqo extends Model
         return DonationAccount::find($this->payment_id);
     }
 
-    function getPhotoPathAttribute()
+    public function getPhotoPathAttribute()
     {
+        if (preg_match('/^https?:\/\//', $this->photo)) {
+            return $this->photo;
+        }
+
         return asset($this->photo);
     }
 

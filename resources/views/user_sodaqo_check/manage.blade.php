@@ -2,7 +2,7 @@
 
 
 @section("header_name")
-    Daftar Transaksi {{$programName}}
+    Daftar Transaksi
 @endsection
 
 @push('css')
@@ -61,6 +61,78 @@
             </div>
 
             <div class="row">
+                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+                    <div class="widget-stat card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Transaksi Terverifikasi</h4>
+                            <h3>{{$summary->verifiedCount}}</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-primary"
+                                     style="width: {{$summary->verifiedPercent}}%"></div>
+                            </div>
+                            <small>{{$summary->verifiedPercent}} % dari Total Transaksi</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+                    <div class="widget-stat card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Menunggu Verifikasi</h4>
+                            <h3>{{$summary->waitingCount}}</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-warning"
+                                     style="width: {{$summary->waitingPercent}}%"></div>
+                            </div>
+                            <small>{{$summary->waitingPercent}} % dari Total Transaksi</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
+                    <div class="widget-stat card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Tidak Valid</h4>
+                            <h3>{{$summary->invalidCount}}</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-danger"
+                                     style="width: {{$summary->invalidPercent}}%"></div>
+                            </div>
+                            <small>{{$summary->invalidPercent}} % dari Total Transaksi</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
+                    <div class="widget-stat card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Total Dana Terkumpul</h4>
+                            <h3>Rp. {{$summary->sumOfNominalNet}}  ({{round($percentageFundraising,2)}}%)</h3>
+                            <div class="progress mb-2">
+                                <div class="progress-bar progress-animated bg-success" style="width: {{$percentageFundraising}}%"></div>
+                            </div>
+
+                            <small>
+
+                                @if($program->isHaveTarget)
+                                    Terkumpul dana sejumlah <span class="text-dark"> Rp. {{$summary->sumOfNominalNet}} </span> dari total
+                                    Kebutuhan <span class="text-dark"> Rp. {{$program->fundraising_target_formatted}} </span> <br>
+                                    Masih dibutuhkan dana sejumlah {{$needed}}
+
+                                @else
+                                    Terkumpul dana sejumlah Rp. {{$summary->sumOfNominalNet}} dari total Kebutuhan
+                                @endif
+
+                            </small>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -68,7 +140,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive" style='font-family: Nunito, sans-serif '>
-                                <table id="168dt" class="display" style="min-width: 845px">
+                                <table id="168trs" class="display" style="min-width: 845px">
                                     <thead>
                                     <tr>
                                         <th data-sortable="">No</th>
@@ -76,7 +148,6 @@
                                         <th data-sortable="">Nama</th>
                                         <th data-sortable="">Nominal Donasi</th>
                                         <th data-sortable="">Account</th>
-                                        <th data-sortable=""></th>
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
@@ -95,19 +166,21 @@
                                             <td>{{ number_format($data->nominal, 2) }}</td>
                                             <td>{{ $data->donation_account->account_number." (".$data->donation_account->name." - ".$data->donation_account->merchantNames .")"}}</td>
                                             <td>
-                                                <img height="100px"
-                                                     style="border-radius: 20px; max-width: 100px; object-fit: contain"
-                                                     src='{{asset("$data->merchant->photo_path")}}' alt="">
-                                            </td>
-                                            <td>
                                                 @if($data->status==1)
                                                     <a href="javascript:void(0)"
-                                                       class="btn btn-success btn-rounded light">Terverifikasi</a>
+                                                       class="btn btn-outline-success btn-rounded light">Terverifikasi</a>
                                                 @endif
 
                                                 @if($data->status==0)
                                                     <a href="javascript:void(0)"
-                                                       class="btn btn-danger btn-rounded light">Belum Diverifikasi</a>
+                                                       class="btn btn-outline-danger btn-rounded light">Belum
+                                                        Diverifikasi</a>
+                                                @endif
+
+                                                @if($data->status==2)
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-warning btn-rounded light">Tidak
+                                                        Sesuai</a>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
@@ -126,6 +199,7 @@
                                                         data-razky='{{ $data->user_detail->photo_path }}'
                                                         data-nomnet='{{ $data->nominal_net }}'
                                                         data-donm='{{ $data->doa }}'
+                                                        data-vvv='{{ $data->notes_admin }}'
                                                         data-valid='{{ $data->status }}'>
                                                     Edit
                                                 </button>
@@ -146,176 +220,188 @@
 
             </div>
 
+
         </div>
-    </div>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <form action='{{ url("transaction/update") }}' enctype="multipart/form-data" method="post">
-                @csrf
-                <input hidden class="aidi" name="id">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Data Donasi <span class="title-aidi"></span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <img style="border-radius: 20px" class="col-6"
-                                 src="" alt="User image">
 
-                            <div class="col-6 text-black">
-                                <div class="media pt-3 pb-3"
-                                     style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
-                                    <div class="media-body">
-                                        <h5 class="m-b-5"><a class="text-black">Nama Donatur : <span
-                                                    class="user-name"></span></a></h5>
-                                        <p class="mb-0">Nominal : Rp.<small class="text-end font-w400"> <span
-                                                    class="nominal"></span></small></p>
-                                        <p class="mb-0"><span class="modal-doa"></span></p>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <form onsubmit="showLoadingIndicator()" action='{{ url("transaction/update") }}'
+                      enctype="multipart/form-data" method="post">
+                    @csrf
+                    <input hidden class="aidiz" name="id">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Data Donasi <span class="title-aidi"></span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <img style="border-radius: 20px" class="col-6"
+                                     src="" alt="User image">
+
+                                <div class="col-6 text-black">
+                                    <div class="media pt-3 pb-3"
+                                         style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
+                                        <div class="media-body">
+                                            <h5 class="m-b-5"><a class="text-black">Nama Donatur : <span
+                                                        class="user-name"></span></a></h5>
+                                            <p class="mb-0">Nominal : Rp.<small class="text-end font-w400"> <span
+                                                        class="nominal"></span></small></p>
+                                            <p class="mb-0"><span class="modal-doa"></span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3"
+                                         style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
+                                        <h6 class="">Donasi </h6>
+                                        <p>E-Wallet/Rekening: <span class="mod-donation-merch"></span></p>
+                                        <p>Rekening/Nomer : <span class="mod-donation-account"></span></p>
+                                        <p>Tanggal Transfer : <span class="mod-date"></span></p>
+                                        <p><span class="mod-timer"></span></p>
                                     </div>
                                 </div>
 
-                                <div class="mt-3"
+
+                                <div class="col-12 mt-4"
                                      style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
-                                    <h6 class="">Donasi </h6>
-                                    <p>E-Wallet/Rekening: <span class="mod-donation-merch"></span></p>
-                                    <p>Rekening/Nomer : <span class="mod-donation-account"></span></p>
-                                    <p>Tanggal Transfer : <span class="mod-date"></span></p>
-                                    <p><span class="mod-timer"></span></p>
+                                    <!-- Dropdown for verification status -->
+                                    <div class="form-group">
+                                        <label for="verification-status">Ubah Status</label>
+                                        <select name="status" class="form-control default-select wide"
+                                                id="verification-status">
+                                            <option value="">Pilih Status</option>
+                                            <option value="1">Diterima</option>
+                                            <option value="2">Tidak Sesuai</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Nominal Terverifikasi</label>
+                                        <input type="text" class="nominal_net form-control" name="nominal_net"
+                                               placeholder="Jumlah Donasi Terverifikasi">
+                                    </div>
+
+                                    <!-- Textarea for rejection reason -->
+                                    <div class="form-group" id="rejection-reason-group">
+                                        <label for="rejection-reason">Catatan:</label>
+                                        <textarea name="notes" class="notez form-control"
+                                                  id="rejection-reason"></textarea>
+                                    </div>
+
+
                                 </div>
                             </div>
 
-
-                            <div class="col-12 mt-4"
-                                 style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
-                                <!-- Dropdown for verification status -->
-                                <div class="form-group">
-                                    <label for="verification-status">Ubah Status</label>
-                                    <select name="status" class="form-control default-select wide"
-                                            id="verification-status">
-                                        <option value="1">Diterima</option>
-                                        <option value="2">Tidak Sesuai</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Nominal Terverifikasi</label>
-                                    <input type="text" class="nominal_net form-control" name="nominal_net"
-                                           placeholder="Jumlah Donasi Terverifikasi">
-                                </div>
-
-                                <!-- Textarea for rejection reason -->
-                                <div class="form-group" id="rejection-reason-group">
-                                    <label for="rejection-reason">Catatan:</label>
-                                    <textarea name="notes" class="form-control" id="rejection-reason"></textarea>
-                                </div>
-
-
-                            </div>
                         </div>
-
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary mitmit">Save changes</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
 
-    @push('script')
-        <script>
-            function getTimeDifference(donCreatedx) {
-                // Get the current date and time
-                var currentDate = new Date();
+        @push('script')
+            <script>
+                function showLoadingIndicator() {
+                    var loadingIndicator = document.querySelector('.loading-indicator');
+                    loadingIndicator.style.display = 'block';
 
-                // Parse the donCreated date and time from the string
-                var donCreated = new Date(donCreatedx);
+                    var element = document.querySelector('.mitmit');
+                    element.style.display = 'none';
+                }
 
-                // Calculate the difference between the two dates in milliseconds
-                var timeDifference = currentDate - donCreated;
+                document.querySelector('.bd-example-modal-lg').addEventListener('show.bs.modal', function (e) {
+                    var imgSrc = e.relatedTarget.dataset.imgSrc;
+                    var userName = e.relatedTarget.dataset.userName;
+                    var nominal = e.relatedTarget.dataset.nominal;
+                    var donAccount = e.relatedTarget.dataset.qw;
+                    var donAccountName = e.relatedTarget.dataset.er;
+                    var donMerchant = e.relatedTarget.dataset.ty;
+                    var picUser = e.relatedTarget.dataset.razky;
+                    var doa = e.relatedTarget.dataset.donm;
+                    var nomNet = e.relatedTarget.dataset.nomnet;
+                    var aidi = e.relatedTarget.dataset.aidi;
+                    var notes = e.relatedTarget.dataset.vvv;
 
-                // Convert the time difference to minutes
-                var timeDifferenceInMinutes = timeDifference / (60 * 1000);
+                    this.querySelector('.modal-body .mod-timer').textContent = getTimeDifference(e.relatedTarget.dataset.xss);
+                    this.querySelector('.modal-body .mod-date').textContent = e.relatedTarget.dataset.xss;
 
-                // Check if the time difference is less than 2 hours
-                if (timeDifferenceInMinutes < 120) {
-                    // If it is, check if the time difference is less than 15 minutes
-                    if (timeDifferenceInMinutes < 15) {
-                        // If it is, convert the time difference to seconds
-                        var timeDifferenceInSeconds = timeDifference / 1000;
-                        // Return the time difference in seconds
-                        return "Ditransfer " + timeDifferenceInSeconds + " detik yang lalu";
+
+                    document.getElementById('rejection-reason').value = notes;
+
+                    this.querySelector('.modal-body img').src = imgSrc;
+                    // this.querySelector('.modal-body .profx').src = picUser;
+                    this.querySelector('.modal-body .user-name').textContent = userName;
+                    this.querySelector('.modal-body .nominal').textContent = nominal;
+                    this.querySelector('.modal-body .modal-doa').textContent = doa;
+                    this.querySelector('.modal-body .mod-donation-account').textContent = donAccount;
+                    this.querySelector('.modal-body .nominal_net').value = nomNet;
+                    this.querySelector('.aidiz').setAttribute('value', aidi);
+                    this.querySelector('.modal-body .title-aidi').textContent = aidi;
+                    this.querySelector('.modal-body .mod-donation-merch').textContent = donMerchant;
+                    this.querySelector('.modal-body .mod-donation-name').textContent = donAccountName;
+                    this.querySelector('.modal-body img').onerror = "this.onerror=null;this.src='https://avatarsb.s3.amazonaws.com/others/panda-black-toy1-31-min.png'"
+                });
+
+                function getTimeDifference(donCreatedx) {
+                    // Get the current date and time
+                    var currentDate = new Date();
+
+                    // Parse the donCreated date and time from the string
+                    var donCreated = new Date(donCreatedx);
+
+                    // Calculate the difference between the two dates in milliseconds
+                    var timeDifference = currentDate - donCreated;
+
+                    // Convert the time difference to minutes
+                    var timeDifferenceInMinutes = timeDifference / (60 * 1000);
+
+                    // Check if the time difference is less than 2 hours
+                    if (timeDifferenceInMinutes < 120) {
+                        // If it is, check if the time difference is less than 15 minutes
+                        if (timeDifferenceInMinutes < 15) {
+                            // If it is, convert the time difference to seconds
+                            var timeDifferenceInSeconds = timeDifference / 1000;
+                            // Return the time difference in seconds
+                            return "Ditransfer " + timeDifferenceInSeconds + " detik yang lalu";
+                        } else {
+                            // If the time difference is more than 15 minutes but less than 2 hours, return the time difference in minutes
+                            return "Ditransfer " + timeDifferenceInMinutes + " menit yang lalu";
+                        }
                     } else {
-                        // If the time difference is more than 15 minutes but less than 2 hours, return the time difference in minutes
-                        return "Ditransfer " + timeDifferenceInMinutes + " menit yang lalu";
-                    }
-                } else {
-                    // If the time difference is more than 2 hours, convert the time difference to hours
-                    var timeDifferenceInHours = timeDifference / (60 * 60 * 1000);
+                        // If the time difference is more than 2 hours, convert the time difference to hours
+                        var timeDifferenceInHours = timeDifference / (60 * 60 * 1000);
 
-                    // Check if the time difference is less than 24 hours
-                    if (timeDifferenceInHours < 24) {
-                        // If it is, round the number of hours down to the nearest integer
-                        var hours = Math.floor(timeDifferenceInHours);
+                        // Check if the time difference is less than 24 hours
+                        if (timeDifferenceInHours < 24) {
+                            // If it is, round the number of hours down to the nearest integer
+                            var hours = Math.floor(timeDifferenceInHours);
 
-                        // Calculate the number of minutes
-                        var minutes = (timeDifferenceInHours - hours) * 60;
+                            // Calculate the number of minutes
+                            var minutes = (timeDifferenceInHours - hours) * 60;
 
-                        // Return the time difference in hours and minutes
-                        return "Ditransfer " + hours + " jam " + minutes + " menit yang lalu";
-                    } else {
-                        // If the time difference is more than 24 hours, convert the time difference to days
-                        var timeDifferenceInDays = timeDifference / (24 * 60 * 60 * 1000);
-                        // Round the number of days down to the nearest integer
-                        var days = Math.floor(timeDifferenceInDays);
+                            // Return the time difference in hours and minutes
+                            return "Ditransfer " + hours + " jam " + minutes + " menit yang lalu";
+                        } else {
+                            // If the time difference is more than 24 hours, convert the time difference to days
+                            var timeDifferenceInDays = timeDifference / (24 * 60 * 60 * 1000);
+                            // Round the number of days down to the nearest integer
+                            var days = Math.floor(timeDifferenceInDays);
 
-                        // Calculate the number of hours
-                        var hours = Math.floor((timeDifferenceInDays - days) * 24)
+                            // Calculate the number of hours
+                            var hours = Math.floor((timeDifferenceInDays - days) * 24)
 
-                        // Return the time difference in days and hours
-                        return "Ditransfer " + days + " hari " + hours + " jam yang lalu";
+                            // Return the time difference in days and hours
+                            return "Ditransfer " + days + " hari " + hours + " jam yang lalu";
+                        }
                     }
                 }
-            }
 
-
-            document.querySelector('.bd-example-modal-lg').addEventListener('show.bs.modal', function (e) {
-                var imgSrc = e.relatedTarget.dataset.imgSrc;
-                var userName = e.relatedTarget.dataset.userName;
-                var nominal = e.relatedTarget.dataset.nominal;
-                var donAccount = e.relatedTarget.dataset.qw;
-                var donAccountName = e.relatedTarget.dataset.er;
-                var donMerchant = e.relatedTarget.dataset.ty;
-                var picUser = e.relatedTarget.dataset.razky;
-                var doa = e.relatedTarget.dataset.donm;
-                var nomNet = e.relatedTarget.dataset.nomnet;
-                var aidi = e.relatedTarget.dataset.aidi;
-
-                this.querySelector('.modal-body .mod-timer').textContent = getTimeDifference(e.relatedTarget.dataset.xss);
-                this.querySelector('.modal-body .mod-date').textContent = e.relatedTarget.dataset.xss;
-
-
-                this.querySelector('.modal-body img').src = imgSrc;
-                // this.querySelector('.modal-body .profx').src = picUser;
-                this.querySelector('.modal-body .user-name').textContent = userName;
-                this.querySelector('.modal-body .nominal').textContent = nominal;
-                this.querySelector('.modal-body .modal-doa').textContent = doa;
-                this.querySelector('.modal-body .mod-donation-account').textContent = donAccount;
-                this.querySelector('.modal-body .nominal_net').value = nomNet;
-                this.querySelector('.modal-body .aidi').value = aidi;
-                this.querySelector('.modal-body .title-aidi').textContent = aidi;
-                this.querySelector('.modal-body .mod-donation-merch').textContent = donMerchant;
-                this.querySelector('.modal-body .mod-donation-name').textContent = donAccountName;
-
-                this.querySelector('.modal-body img').onerror = "this.onerror=null;this.src='https://avatarsb.s3.amazonaws.com/others/panda-black-toy1-31-min.png'"
-            });
-
-
-        </script>
+            </script>
 
     @endpush
 

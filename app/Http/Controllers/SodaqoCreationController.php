@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
+use App\Models\DonationAccount;
 use App\Models\PaymentMerchant;
 use App\Models\Sodaqo;
 use App\Models\SodaqoCategory;
@@ -60,7 +61,7 @@ class SodaqoCreationController extends Controller
     public function viewSeeWeb(Request $request)
     {
         $data = Sodaqo::findOrFail($request->id);
-        return view('sodaqo.see')->with(compact('data'));
+        return view('sodaqo.see')->with(compact('data',));
     }
 
     /**

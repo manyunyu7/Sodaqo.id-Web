@@ -124,6 +124,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::post("transaction/update");
+    Route::post("transaction/update", [App\Http\Controllers\TransactionController::class, 'update']);
+
 
     Route::prefix('sodaqo-category')->group(function () {
         Route::get('create', [App\Http\Controllers\SodaqoCategoryController::class, 'viewCreate']);

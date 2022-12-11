@@ -14,10 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(PaymentMerchantSeeder::class);
-        $this->call(DonationAccountSeeder::class);
-        $this->call(SodaqoCategorySeeder::class);
+        $this->call(UserSodaqoSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

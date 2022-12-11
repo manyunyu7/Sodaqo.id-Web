@@ -74,4 +74,39 @@ let dataSet = [
     });
 
 
+    $('#168trs').DataTable({
+        processing: true,
+        serverSide: false,
+        columnDefs: [{
+            orderable: true,
+            targets: 0
+        }],
+        dom: 'B<"clear">Tlfrtip<"bottom">',
+        "lengthMenu": [
+            [10, 25, 50, -1],
+            [10, 25, 50, "All"]
+        ],
+        language: {
+            paginate: {
+                next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>',
+                previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
+            }
+        },
+        buttons: [
+            {extend: 'colvis', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+            {extend: 'copy', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+            {extend: 'csv', className: 'btn btn-primary glyphicon glyphicon-save-file'},
+            {
+                extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
+                exportOptions: {
+                    stripHtml: true
+                }
+            },
+            {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
+            {extend: 'print', className: 'btn btn-primary glyphicon glyphicon-print'}
+        ],
+
+    });
+
+
 })(jQuery);
