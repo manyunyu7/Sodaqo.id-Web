@@ -87,8 +87,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
-
-
                                     <div class="col-12">
                                         <img
                                             id="imgPreview"

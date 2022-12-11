@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StaffController extends Controller
 {
@@ -219,7 +220,7 @@ class StaffController extends Controller
     function updateProfilePhoto(Request $request)
     {
         $response = array();
-        $user = User::findOrFail($request->id);
+        $user = Auth::user();
         $id = $user->id;
 
 
@@ -370,8 +371,8 @@ class StaffController extends Controller
     function registerNumber(Request $request)
     {
         $validateComponent = [
-            "user_contact" => "required",
-            "user_password" => "required",
+            // "user_contact" => "required",
+            // "user_password" => "required",
         ];
 
         $this->validate($request, $validateComponent);
@@ -383,8 +384,8 @@ class StaffController extends Controller
         }
 
         $user = new User();
-        $user->contact = $request->user_contact;
-        $user->password = bcrypt($request->user_password);
+        $user->contact = $request->contact;
+        $user->password = bcrypt($request->password);
         $user->role = $role;
 
         if ($user->save()) {
@@ -393,7 +394,7 @@ class StaffController extends Controller
                 "id" => $user->id,
                 "number" => $user->contact
             );
-            if (RazkyFeb::isAPI()) {
+            if (RazkyFeb::isAPI($request)) {
 
                 RazkyFeb::insertNotification(
                     $user->id,
@@ -403,17 +404,50 @@ class StaffController extends Controller
                     1
                 );
 
+                $credentials = request(['contact', 'password']);
+
+                if (!$token = JWTAuth::attempt($credentials)) {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }
+
+
+                $token =  $this->respondWithToken($token, "");
+                $data = array(
+                    "id" => $user->id,
+                    "number" => $user->contact,
+                    "token" => $token,
+                    "user" => Auth::user()
+                );
 
                 return RazkyFeb::responseSuccessWithData(200, 1, 1, "Success", "Success", $data);
             } else {
                 return back()->with(["success" => "Berhasil Mendaftar, Silakan Login Menggunakan Akun Anda  <a href='$url'> Disini</a > "]);
             }
         } else {
-            if (RazkyFeb::isAPI()) {
+            if (RazkyFeb::isAPI($request)) {
                 return RazkyFeb::error(400, "Gagal Menambahkan User");
             } else {
                 return back()->with(["failed" => "Gagal Menambahkan User Baru"]);
             }
         }
+    }
+
+
+    protected function respondWithToken($token, $message)
+    {
+        /*
+        FOR CUSTOM JWT
+        $user = Auth::user();
+        $payload = JWTFactory::sub($user->id)
+            ->user('Foo Bar')
+            ->message(['Apples', 'Oranges'])
+            ->myCustomObject($user)
+            ->make();
+
+        $token = JWTAuth::encode($payload);
+
+        return $token;
+        */
+        return $token;
     }
 }

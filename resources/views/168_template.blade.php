@@ -132,5 +132,18 @@
 
 @stack('script')
 
+<script>
+    function onErrorImg(e) {
+        e.onerror = null;
+        e.src = 'https://avatarsb.s3.amazonaws.com/others/panda-black-toy1-31-min.png';
+    }
+</script>
+<script>
+    window.addEventListener('beforeunload', function() {
+        // Show the loading indicator when the page is about to be unloaded
+        document.querySelector('#preloader').style.display = 'block';
+    });
+</script>
+
 </body>
 </html>

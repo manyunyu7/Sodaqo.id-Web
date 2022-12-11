@@ -1,7 +1,7 @@
 <div id="preloader">
     <div class="waviy" style="--text-color: brown ">
         <span style="--i:1">
-            <img height="28" src="{{asset("img/loading/_l1.png")}}" alt="">
+           Loading
         </span>
         <span style="--i:2; ">
             <img height="34" style="margin-top: 7px !important;

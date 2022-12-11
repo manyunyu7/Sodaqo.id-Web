@@ -128,6 +128,16 @@
                                     <button type="submit" class="btn btn-primary mt-5">Simpan Konten</button>
 
                                 </div>
+
+                                <div class="basic-form">
+                                    <div class="mb-3 col-md-12">
+                                        <label for="">Deskripsi</label>
+                                        <textarea class="form-control" name="news_content" id="summernote" rows="10"
+                                                  placeholder="Deskripsi">{!! old("news_content",$data->content) !!}</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-5">Simpan Konten</button>
+
+                                </div>
                             </div>
                         </div>
                     </div>

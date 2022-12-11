@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('update', [App\Http\Controllers\StaffController::class, 'update']);
         Route::get('{id}/delete', [App\Http\Controllers\StaffController::class, 'destroy']);
     });
+
     Route::prefix('payment-merchant')->group(function () {
         $cr = "PaymentMerchantController";
         Route::get('tambah', "$cr@viewCreate");
@@ -101,6 +102,26 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/delete', [App\Http\Controllers\SodaqoCreationController::class, 'delete']);
         Route::get('manage', [App\Http\Controllers\SodaqoCreationController::class, 'viewManage']);
         Route::get('me', [App\Http\Controllers\SodaqoCreationController::class, 'viewManage']);
+
+        Route::prefix("creation")->group(function (){
+
+            Route::post("/story/edit",[App\Http\Controllers\SodaqoTimelineController::class, 'editStory']);
+            Route::post("/photo/edit",[App\Http\Controllers\SodaqoCreationController::class, 'editPhoto']);
+
+
+            Route::post("/timeline/store",[App\Http\Controllers\SodaqoTimelineController::class, 'store']);
+            Route::get("/timeline/update",[App\Http\Controllers\SodaqoCreationController::class, 'storeStory']);
+            Route::get("/timeline/delete",[App\Http\Controllers\SodaqoCreationController::class, 'storeStory']);
+
+            Route::get("/expense/add",[App\Http\Controllers\SodaqoCreationController::class, 'storeStory']);
+            Route::post("/expense/store",[App\Http\Controllers\SodaqoCreationController::class, 'storeStory']);
+            Route::get("/expense/update",[App\Http\Controllers\SodaqoCreationController::class, 'storeStory']);
+        });
+
+        Route::prefix("{id}/transaction")->group(function (){
+            Route::get("/manage",[App\Http\Controllers\TransactionController::class, 'viewManage']);
+        });
+
     });
 
 

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class RazkyFeb
 {
@@ -26,15 +27,15 @@ class RazkyFeb
         return "hello";
     }
 
-    public static function isAPI()
+    public static function isAPI(Request $request)
     {
-        $url = url()->current();
-        if (str_contains($url, 'api/')) {
+        if ($request->is('api/*')) {
             return true;
         } else {
             return false;
         }
     }
+
 
     public static function responseSuccessWithData(
         $http_code, $status_code, $api_code, $message_id, $message_en, $res_data

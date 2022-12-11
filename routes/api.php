@@ -25,7 +25,7 @@ Route::group([
     Route::post('/login', 'CustomAuthController@login');
     Route::post('/logout', 'CustomAuthController@logout');
     Route::post('/refresh', 'CustomAuthController@refresh');
-    Route::get('/user-profile', 'CustomAuthController@me');
+    Route::any('/user-profile', 'CustomAuthController@me');
 });
 
 Route::post('auth/register', 'CustomAuthController@register');
@@ -34,6 +34,29 @@ Route::get('auth/check-number', 'StaffController@checkIfNumberRegistered');
 Route::prefix("user")->group(function(){
     Route::get('{id}', 'StaffController@profile');
 });
+
+Route::get('sodaqo-category', 'MobileCategoryController@getAll');
+
+Route::prefix("sodaqo")->group(function(){
+    Route::get('recent', 'MobileSodaqoAllController@recent');
+    Route::get('all', 'MobileSodaqoAllController@getAll');
+    Route::get('{id}', 'MobileSodaqoAllController@getDetailSodaqo');
+    Route::get('{id}/detail', 'MobileSodaqoAllController@getDetailSodaqo');
+
+
+    Route::prefix("category")->group(function(){
+        Route::get('', 'MobileSodaqoCategory@getAll');
+    });    
+});
+
+
+Route::any('donation-account', 'MobileSodaqoAllController@getPaymentAccount');
+
+
+Route::prefix("sodaqo-user")->group(function(){
+    Route::post('store', 'MobileSodaqoUserController@store');
+});   
+
 
 Route::prefix('mnotification')->group(function () {
     Route::get('get', 'MNotificationController@getByUser');

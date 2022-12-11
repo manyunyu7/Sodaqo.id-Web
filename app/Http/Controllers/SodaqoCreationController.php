@@ -6,6 +6,7 @@ use App\Helper\RazkyFeb;
 use App\Models\PaymentMerchant;
 use App\Models\Sodaqo;
 use App\Models\SodaqoCategory;
+use App\Models\SodaqoTimeline;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,30 @@ class SodaqoCreationController extends Controller
     {
         $categories = SodaqoCategory::all();
         return view('sodaqo.create')->with(compact('categories'));
+    }
+
+        /**
+     */
+    public function editPhoto(Request $request)
+    {
+        $data = Sodaqo::findOrFail($request->id);
+        if ($request->hasFile('photo')) {
+            $file_path = public_path() . $data->photo;
+            RazkyFeb::removeFile($file_path);
+
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = time() . '.' . $extension;
+
+            $savePath = "/web_files/payment_merchant/";
+            $savePathDB = "$savePath$fileName";
+            $path = public_path() . "$savePath";
+            $file->move($path, $fileName);
+
+            $photoPath = $savePathDB;
+            $data->photo = $photoPath;
+        }
+        return $this->SaveData($data, $request);
     }
 
     /**
@@ -46,7 +71,8 @@ class SodaqoCreationController extends Controller
     public function viewUpdate($id)
     {
         $data = Sodaqo::findOrFail($id);
-        return view('sodaqo.edit')->with(compact('data'));
+        $timelines = SodaqoTimeline::where("sodaqo_id","=",$id)->get();
+        return view('sodaqo.edit')->with(compact('data','timelines'));
     }
 
     /**
