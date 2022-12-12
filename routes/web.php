@@ -126,7 +126,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post("transaction/update");
     Route::post("transaction/update", [App\Http\Controllers\TransactionController::class, 'update']);
+    Route::any("aaofom", [App\Http\Controllers\TransactionController::class, 'getDonationsData'])->name(
+        "donations-data-ajax"
+    );
 
+    Route::any("rexs", [App\Http\Controllers\TransactionController::class, 'ddd']);
+
+    Route::any("transaction/summary", [App\Http\Controllers\TransactionController::class, 'summaryAjax'])->name(
+        "transaction_summary_ajax"
+    );
+    Route::any("transaction/summaryx", [App\Http\Controllers\TransactionController::class, 'summaryAjax'])->name(
+        "transaction_summary_ajax"
+    );
+    Route::any("adaofom", [App\Http\Controllers\TransactionController::class, 'update'])->name(
+        "verif_transaction_ajax"
+    );
 
     Route::prefix('sodaqo-category')->group(function () {
         Route::get('create', [App\Http\Controllers\SodaqoCategoryController::class, 'viewCreate']);

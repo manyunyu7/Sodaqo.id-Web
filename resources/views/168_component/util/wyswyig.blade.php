@@ -13,7 +13,7 @@
 
     $('#summernote').summernote({
         tabsize: 2,
-        height: 120,
+        height: 300,
         callbacks: {
             onImageUpload: function (files, editor, welEditable) {
                 sendFile(files[0], editor, welEditable);

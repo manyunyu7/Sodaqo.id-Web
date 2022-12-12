@@ -3,7 +3,7 @@
 
 
 @section("header_name")
-    Edit Konten
+    Edit Timeline
 @endsection
 
 @push("script")
@@ -25,7 +25,7 @@
             <div class="row page-titles">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Konten</a></li>
-                    <li class="breadcrumb-item active"><a href="{{url("/news/$data->id")}}">{{$data->title}}</a></li>
+                    <li class="breadcrumb-item active"><a href="{{url("/timeline/$data->id")}}">{{$data->title}}</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Edit</a></li>
                 </ol>
             </div>

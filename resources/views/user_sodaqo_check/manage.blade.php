@@ -8,6 +8,17 @@
 @push('css')
     <!-- Datatable -->
     <link href="{{asset('/168_res')}}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- Daterange picker -->
+    <link href="{{asset('/168_res')}}/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Clockpicker -->
+    <link href="{{asset('/168_res')}}/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+    <!-- asColorpicker -->
+    <link href="{{asset('/168_res')}}/vendor/jquery-asColorPicker/css/asColorPicker.min.css" rel="stylesheet">
+    <!-- Material color picker -->
+    <link href="{{asset('/168_res')}}/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
+    <!-- Pick date -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @endpush
 
 @push('css_content')
@@ -43,10 +54,50 @@
     <script type="text/javascript"
             src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/cr-1.5.6/date-1.1.2/fc-4.1.0/fh-3.2.4/kt-2.7.0/r-2.3.0/rg-1.2.0/rr-1.2.8/sc-2.0.7/sb-1.3.4/sp-2.0.2/sl-1.4.0/sr-1.1.1/datatables.min.js"></script>
 
-    <script src="{{ asset('/168_js') }}/168_datatable.js"></script>
+    <!-- Chart ChartJS plugin files -->
+    <script src="{{ asset('/168_res') }}/vendor/chart.js/Chart.bundle.min.js"></script>
 
+
+
+    <!-- Daterangepicker -->
+    <script src="{{ asset('/168_res') }}/js/plugins-init/bs-daterange-picker-init.js"></script>
 
     <script src="{{ asset('/168_res') }}/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script>
+
+        function showSuccessP(title,message){
+            Swal.fire(
+                title,
+                message,
+                'success'
+            )
+        }
+        function hideLoadingP() {
+            Swal.close()
+        }
+
+        function showErrorP(title,message){
+            Swal.fire({
+                icon: 'error',
+                title: title,
+                text: message,
+                // footer: '<a href="">Why do I have this issue?</a>'
+            })
+        }
+
+
+        function showLoadingP() {
+            Swal.fire({
+                title: 'Tunggu sebentar ya !',
+                html: 'Sodaqo.id sedang menyiapkan data untukmu',// add html attribute if you want or remove
+                allowOutsideClick: true,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+        }
+    </script>
 @endpush
 
 @section("page_content")
@@ -61,16 +112,47 @@
             </div>
 
             <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Filter Tanggal</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="mb-3  col-xl-6 col-md-12">
+                                    <label class="form-label">Tanggal Awal</label>
+                                    <input type="datetime-local" name="start_date" class="form-control"
+                                           placeholder="" value="2000-01-01T00:00">
+                                </div>
+
+
+                                <div class="col-xl-6 col-md-12">
+                                    <label class="form-label">Tanggal Akhir</label>
+                                    <input type="datetime-local" name="end_date" class="form-control"
+                                           placeholder="" >
+                                </div>
+
+
+
+                                <button  type="button" class="btn btn-xs btn-outline-dark btn-block filter-date">Tampilkan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="col-xl-4 col-xxl-4 col-lg-6 col-sm-6">
                     <div class="widget-stat card">
                         <div class="card-body p-4">
                             <h4 class="card-title">Transaksi Terverifikasi</h4>
-                            <h3>{{$summary->verifiedCount}}</h3>
+                            <h3 class="tv-verified-count"></h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-primary"
-                                     style="width: {{$summary->verifiedPercent}}%"></div>
+                                <div class="pg-verified-percent progress-bar progress-animated bg-primary"
+                                     ></div>
                             </div>
-                            <small>{{$summary->verifiedPercent}} % dari Total Transaksi</small>
+                            <small><span class="tv-verified-percent"> </span> % dari Total Transaksi</small>
+                            <button  type="button" class="btn btn-xs btn-outline-dark filter-verified">Terverifikasi</button>
+                            <button  type="button" class="btn btn-xs btn-outline-dark mr-2 filter-verified-w">Dengan Catatan</button>
                         </div>
                     </div>
                 </div>
@@ -79,12 +161,12 @@
                     <div class="widget-stat card">
                         <div class="card-body p-4">
                             <h4 class="card-title">Menunggu Verifikasi</h4>
-                            <h3>{{$summary->waitingCount}}</h3>
+                            <h3 class="tv-waiting-count"></h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-warning"
-                                     style="width: {{$summary->waitingPercent}}%"></div>
+                                <div class="pg-waiting-percent progress-bar progress-animated bg-warning"></div>
                             </div>
-                            <small>{{$summary->waitingPercent}} % dari Total Transaksi</small>
+                            <small><span class="tv-waiting-percent"></span> % dari Total Transaksi</small>
+                            <button type="button" class="btn btn-xs btn-outline-dark filter-waiting">Tampilkan</button>
                         </div>
                     </div>
                 </div>
@@ -93,34 +175,52 @@
                     <div class="widget-stat card">
                         <div class="card-body p-4">
                             <h4 class="card-title">Tidak Valid</h4>
-                            <h3>{{$summary->invalidCount}}</h3>
+                            <h3 class="tv-invalid-count"></h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-danger"
-                                     style="width: {{$summary->invalidPercent}}%"></div>
+                                <div class="pg-invalid-percent progress-bar progress-animated bg-danger"></div>
                             </div>
-                            <small>{{$summary->invalidPercent}} % dari Total Transaksi</small>
+                            <small><span class="tv-invalid-percent"></span> % dari Total Transaksi</small>
+                            <button type="button" class="btn btn-xs btn-outline-dark filter-invalid">Tampilkan</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-xl-12 col-xxl-12 col-lg-12 col-sm-12">
+                <div class="col-xl-4 col-md-4 col-12">
+                    <div class="widget-stat card bg-primary">
+                        <div class="card-body  p-4">
+                            <div class="media">
+									<span class="me-3">
+										<i class="la la-users"></i>
+									</span>
+                                <div class="media-body text-white">
+                                    <p class="mb-1">Jumlah Transaksi</p>
+                                    <h3 class="text-white tv-all-count"></h3>
+                                    <small class="mb-2"></small>
+                                    <button  type="button" class="btn btn-xs btn-outline-dark mr-2 filter-all">Tampilkan Semua</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-md-4 col-12">
                     <div class="widget-stat card">
                         <div class="card-body p-4">
                             <h4 class="card-title">Total Dana Terkumpul</h4>
-                            <h3>Rp. {{$summary->sumOfNominalNet}}  ({{round($percentageFundraising,2)}}%)</h3>
+                            <h3 class="tv-terkumpul"></h3>
                             <div class="progress mb-2">
-                                <div class="progress-bar progress-animated bg-success" style="width: {{$percentageFundraising}}%"></div>
+                                <div class="pg-utama progress-bar progress-animated bg-primary"></div>
                             </div>
 
                             <small>
 
-                                @if($program->isHaveTarget)
-                                    Terkumpul dana sejumlah <span class="text-dark"> Rp. {{$summary->sumOfNominalNet}} </span> dari total
-                                    Kebutuhan <span class="text-dark"> Rp. {{$program->fundraising_target_formatted}} </span> <br>
-                                    Masih dibutuhkan dana sejumlah {{$needed}}
-
+                                @if($program->fundraising_target!="")
+                                    Terkumpul dana sejumlah <span
+                                        class="text-dark tv-terkumpul">  </span> dari total
+                                    Kebutuhan <span class="text-dark tv-target"> (Tidak Ada)  </span> <br>
+                                    Masih dibutuhkan dana sejumlah <span class="tv-needed"> {{$needed}}</span>
                                 @else
-                                    Terkumpul dana sejumlah Rp. {{$summary->sumOfNominalNet}} dari total Kebutuhan
+                                    Terkumpul dana sejumlah <span class="tv-terkumpul">
                                 @endif
 
                             </small>
@@ -129,8 +229,42 @@
                     </div>
                 </div>
 
-            </div>
+                <div class="col-xl-4 col-md-4 col-12">
+                    <div class="widget-stat card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">Donasi Bersih</h4>
+                            <h3 class="tv-terkumpul"></h3>
 
+                            <small>
+                               Donasi Bersih dipotong dengan persentase biaya admin
+                            </small>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah Sedekah</h4>
+                        </div>
+                        <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="myChart"  style="display: block; width: 513px; height: 256px;" width="513" height="256" class="mychart chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Jumlah Transaksi</h4>
+                        </div>
+                        <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                            <canvas id="myChart2"  style="display: block; width: 513px; height: 256px;" width="513" height="256" class="mychart chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-12">
@@ -147,67 +281,15 @@
                                         <th data-sortable="">Img</th>
                                         <th data-sortable="">Nama</th>
                                         <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Account</th>
                                         <th data-sortable="">Status</th>
+                                        <th data-sortable=""></th>
                                         <th data-sortable="">Diinput Pada</th>
-                                        <th data-sortable="">Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse ($datas as $data)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <img height="100px"
-                                                     style="border-radius: 20px; max-width: 100px; object-fit: contain"
-                                                     src='{{asset("$data->photo_path")}}' alt="">
-                                            </td>
-                                            <td>{{ $data->user_detail->name }}</td>
-                                            <td>{{ number_format($data->nominal, 2) }}</td>
-                                            <td>{{ $data->donation_account->account_number." (".$data->donation_account->name." - ".$data->donation_account->merchantNames .")"}}</td>
-                                            <td>
-                                                @if($data->status==1)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-success btn-rounded light">Terverifikasi</a>
-                                                @endif
 
-                                                @if($data->status==0)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-danger btn-rounded light">Belum
-                                                        Diverifikasi</a>
-                                                @endif
-
-                                                @if($data->status==2)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-warning btn-rounded light">Tidak
-                                                        Sesuai</a>
-                                                @endif
-                                            </td>
-                                            <td>{{ $data->created_at }}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary mb-2"
-                                                        data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg"
-                                                        data-img-src='{{ asset($data->photo_path) }}'
-                                                        data-aidi='{{ ($data->id) }}'
-                                                        data-user-name='{{ $data->user_detail->name }}'
-                                                        data-nominal='{{ number_format($data->nominal, 2) }}'
-                                                        data-qw='{{$data->donation_account->account_number }}'
-                                                        data-er='{{$data->donation_account->name }}'
-                                                        data-ty='{{ $data->donation_account->merchantNames }}'
-                                                        data-xss='{{ $data->created_at }}'
-                                                        data-created='{{ $data->created_at }}'
-                                                        data-razky='{{ $data->user_detail->photo_path }}'
-                                                        data-nomnet='{{ $data->nominal_net }}'
-                                                        data-donm='{{ $data->doa }}'
-                                                        data-vvv='{{ $data->notes_admin }}'
-                                                        data-valid='{{ $data->status }}'>
-                                                    Edit
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @empty
-
-                                    @endforelse
                                     </tbody>
                                     <tfoot>
 
@@ -226,7 +308,7 @@
 
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                <form onsubmit="showLoadingIndicator()" action='{{ url("transaction/update") }}'
+                <form id="myForm" action='{{ url("transaction/update") }}'
                       enctype="multipart/form-data" method="post">
                     @csrf
                     <input hidden class="aidiz" name="id">
@@ -272,6 +354,7 @@
                                                 id="verification-status">
                                             <option value="">Pilih Status</option>
                                             <option value="1">Diterima</option>
+                                            <option value="3">Diterima Dengan Catatan</option>
                                             <option value="2">Tidak Sesuai</option>
                                         </select>
                                     </div>
@@ -296,116 +379,19 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary mitmit">Save changes</button>
+                            <button type="submit" class="btn btn-primary mitmit "  data-bs-dismiss="modal">Save changes</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-
-        @push('script')
-            <script>
-                function showLoadingIndicator() {
-                    var loadingIndicator = document.querySelector('.loading-indicator');
-                    loadingIndicator.style.display = 'block';
-
-                    var element = document.querySelector('.mitmit');
-                    element.style.display = 'none';
-                }
-
-                document.querySelector('.bd-example-modal-lg').addEventListener('show.bs.modal', function (e) {
-                    var imgSrc = e.relatedTarget.dataset.imgSrc;
-                    var userName = e.relatedTarget.dataset.userName;
-                    var nominal = e.relatedTarget.dataset.nominal;
-                    var donAccount = e.relatedTarget.dataset.qw;
-                    var donAccountName = e.relatedTarget.dataset.er;
-                    var donMerchant = e.relatedTarget.dataset.ty;
-                    var picUser = e.relatedTarget.dataset.razky;
-                    var doa = e.relatedTarget.dataset.donm;
-                    var nomNet = e.relatedTarget.dataset.nomnet;
-                    var aidi = e.relatedTarget.dataset.aidi;
-                    var notes = e.relatedTarget.dataset.vvv;
-
-                    this.querySelector('.modal-body .mod-timer').textContent = getTimeDifference(e.relatedTarget.dataset.xss);
-                    this.querySelector('.modal-body .mod-date').textContent = e.relatedTarget.dataset.xss;
-
-
-                    document.getElementById('rejection-reason').value = notes;
-
-                    this.querySelector('.modal-body img').src = imgSrc;
-                    // this.querySelector('.modal-body .profx').src = picUser;
-                    this.querySelector('.modal-body .user-name').textContent = userName;
-                    this.querySelector('.modal-body .nominal').textContent = nominal;
-                    this.querySelector('.modal-body .modal-doa').textContent = doa;
-                    this.querySelector('.modal-body .mod-donation-account').textContent = donAccount;
-                    this.querySelector('.modal-body .nominal_net').value = nomNet;
-                    this.querySelector('.aidiz').setAttribute('value', aidi);
-                    this.querySelector('.modal-body .title-aidi').textContent = aidi;
-                    this.querySelector('.modal-body .mod-donation-merch').textContent = donMerchant;
-                    this.querySelector('.modal-body .mod-donation-name').textContent = donAccountName;
-                    this.querySelector('.modal-body img').onerror = "this.onerror=null;this.src='https://avatarsb.s3.amazonaws.com/others/panda-black-toy1-31-min.png'"
-                });
-
-                function getTimeDifference(donCreatedx) {
-                    // Get the current date and time
-                    var currentDate = new Date();
-
-                    // Parse the donCreated date and time from the string
-                    var donCreated = new Date(donCreatedx);
-
-                    // Calculate the difference between the two dates in milliseconds
-                    var timeDifference = currentDate - donCreated;
-
-                    // Convert the time difference to minutes
-                    var timeDifferenceInMinutes = timeDifference / (60 * 1000);
-
-                    // Check if the time difference is less than 2 hours
-                    if (timeDifferenceInMinutes < 120) {
-                        // If it is, check if the time difference is less than 15 minutes
-                        if (timeDifferenceInMinutes < 15) {
-                            // If it is, convert the time difference to seconds
-                            var timeDifferenceInSeconds = timeDifference / 1000;
-                            // Return the time difference in seconds
-                            return "Ditransfer " + timeDifferenceInSeconds + " detik yang lalu";
-                        } else {
-                            // If the time difference is more than 15 minutes but less than 2 hours, return the time difference in minutes
-                            return "Ditransfer " + timeDifferenceInMinutes + " menit yang lalu";
-                        }
-                    } else {
-                        // If the time difference is more than 2 hours, convert the time difference to hours
-                        var timeDifferenceInHours = timeDifference / (60 * 60 * 1000);
-
-                        // Check if the time difference is less than 24 hours
-                        if (timeDifferenceInHours < 24) {
-                            // If it is, round the number of hours down to the nearest integer
-                            var hours = Math.floor(timeDifferenceInHours);
-
-                            // Calculate the number of minutes
-                            var minutes = (timeDifferenceInHours - hours) * 60;
-
-                            // Return the time difference in hours and minutes
-                            return "Ditransfer " + hours + " jam " + minutes + " menit yang lalu";
-                        } else {
-                            // If the time difference is more than 24 hours, convert the time difference to days
-                            var timeDifferenceInDays = timeDifference / (24 * 60 * 60 * 1000);
-                            // Round the number of days down to the nearest integer
-                            var days = Math.floor(timeDifferenceInDays);
-
-                            // Calculate the number of hours
-                            var hours = Math.floor((timeDifferenceInDays - days) * 24)
-
-                            // Return the time difference in days and hours
-                            return "Ditransfer " + days + " hari " + hours + " jam yang lalu";
-                        }
-                    }
-                }
-
-            </script>
-
-    @endpush
+        @include('user_sodaqo_check.script')
 
 @endsection
+
+
+
 
 
 

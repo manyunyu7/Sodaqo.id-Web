@@ -69,7 +69,6 @@
                                         <th data-sortable="">Penulis</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Hapus</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -90,11 +89,6 @@
                                                 <a href="{{url('/news'.'/'.$data->id.'/edit')}}">
                                                     <button type="button" class="btn btn-primary">Edit</button>
                                                 </a>
-                                            </td>
-                                            <td>
-                                                <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-danger btn-delete mr-2">Hapus Konten
-                                                </button>
                                             </td>
                                         </tr>
                                     @empty

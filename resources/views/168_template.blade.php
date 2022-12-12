@@ -130,7 +130,6 @@
 <script src="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="{{ asset('/168_res') }}/js/plugins-init/sweetalert.init.js"></script>
 
-@stack('script')
 
 <script>
     function onErrorImg(e) {
@@ -139,11 +138,27 @@
     }
 </script>
 <script>
-    window.addEventListener('beforeunload', function() {
+    window.addEventListener('beforeunload', function () {
         // Show the loading indicator when the page is about to be unloaded
         document.querySelector('#preloader').style.display = 'block';
     });
 </script>
+
+
+<script>
+    // $(document).ajaxStart(function () {
+    //     // Show the loading indicator
+    //     showLoadingP()
+    // });
+    //
+    // $(document).ajaxStop(function () {
+    //     // Hide the loading indicator
+    //     hideLoadingP()
+    // });
+</script>
+
+
+@stack('script')
 
 </body>
 </html>

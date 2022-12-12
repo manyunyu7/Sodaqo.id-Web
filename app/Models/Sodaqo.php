@@ -10,21 +10,27 @@ class Sodaqo extends Model
 {
     use HasFactory;
 
-    protected $appends = ['photo_path','creator',"isHaveTarget",
-        "fundraising_target_formatted"];
+    protected $appends = ['photo_path', 'creator', "isHaveTarget",
+        "fundraising_target_formatted","category_name"];
 
     function getPhotoPathAttribute()
     {
         return asset($this->photo);
     }
 
-    function getCreatorAttribute(){
+    function getCreatorAttribute()
+    {
         $user = User::find($this->owner_id);
-        if($user->role==1){
-            return User::first();
-        }else{
-            return $user;
+        return $user;
+    }
+
+    function getCategoryNameAttribute()
+    {
+        $cat = SodaqoCategory::find($this->id);
+        if ($cat!=null){
+            return $cat->name;
         }
+        return "";
     }
 
 
