@@ -20,6 +20,7 @@ class CreatePaymentMerchantsTable extends Migration
             $table->string('m_description')->nullable();
             $table->string('photo')->nullable();
             $table->string('status')->nullable();
+            $table->integer('is_deleted')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

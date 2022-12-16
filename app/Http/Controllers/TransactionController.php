@@ -76,9 +76,12 @@ class TransactionController extends Controller
         $fundraisingTarget = 0;
 
         $program = Sodaqo::find($request->id);
+        $fee = 0;
 
+        $accumulatedNet = 0;
         if ($program != null) {
             $fundraisingTarget = $program->fundraising_target;
+            $fee = $program->admin_fee_percentage;
         }
 
 
@@ -109,7 +112,9 @@ class TransactionController extends Controller
 
         // Format the sum of nominal_net values as a rupiah amount with 2 decimal places
         $formattedRupiah = "Rp." . number_format($sumOfNominalNet, 2, ',', '.');
-
+        if ($fundraisingTarget>0 && $fee>0){
+            $accumulatedNet = $sumOfNominalNet * (1 - ($fee / 100));
+        }
         $verifiedPercentage = 0;
         $waitingPercentage = 0;
         $invalidPercentage = 0;
@@ -149,6 +154,9 @@ class TransactionController extends Controller
             "verifiedPercent" => $verifiedPercentage,
             "waitingPercent" => $waitingPercentage,
             "invalidPercent" => $invalidPercentage,
+            "accumulatedNet" => $accumulatedNet,
+            "formattedAccumulatedNet" => number_format($accumulatedNet, 2),
+            "feePercentage" => $fee,
         );
     }
 

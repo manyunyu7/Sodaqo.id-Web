@@ -57,8 +57,6 @@
     <!-- Chart ChartJS plugin files -->
     <script src="{{ asset('/168_res') }}/vendor/chart.js/Chart.bundle.min.js"></script>
 
-
-
     <!-- Daterangepicker -->
     <script src="{{ asset('/168_res') }}/js/plugins-init/bs-daterange-picker-init.js"></script>
 
@@ -233,10 +231,11 @@
                     <div class="widget-stat card">
                         <div class="card-body p-4">
                             <h4 class="card-title">Donasi Bersih</h4>
-                            <h3 class="tv-terkumpul"></h3>
+                            <h3 class="tv-accumulated-net"></h3>
 
                             <small>
-                               Donasi Bersih dipotong dengan persentase biaya admin
+                               Donasi Bersih dipotong dengan persentase biaya admin sebesar
+                                <span class="text-blue tv-fee"></span>
                             </small>
 
                         </div>

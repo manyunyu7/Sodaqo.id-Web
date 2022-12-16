@@ -27,6 +27,7 @@
             fileReader.readAsDataURL(document.getElementById("formFile168").files[0])
             fileReader.onload = function (oFREvent) {
                 document.getElementById("imgPreview").src = oFREvent.target.result;
+                document.getElementById("imgConf").src = oFREvent.target.result;
             };
         }
     </script>
@@ -68,9 +69,22 @@
             });
 
             $.myfunction = function () {
-                $("#reviewName").text($("#inputName").val());
-                $("#reviewFundraisingTarget").text($("#inputTarget").val());
-                $("#reviewTimeLimit").text($("#inputDate").val());
+                if($("#inputName").val()!==""){
+                    $("#reviewName").text($("#inputName").val());
+                }
+
+                if($("#inputTarget").val()!==""){
+                    $("#reviewFundraisingTarget").text($("#inputTarget").val());
+                }
+
+                if($("#inputDate").val()!==""){
+                    $("#reviewTimeLimit").text($("#inputDate").val());
+                }
+
+                if($("#inputFee").val()!==""){
+                    $("#reviewPercentage").text($("#inputFee").val() + "%");
+                }
+
 
                 var start = new Date().toLocaleDateString()
                 var end = $("#inputDateDate").datepicker("getDate");
@@ -98,6 +112,58 @@
             // SmartWizard initialize
             $('#smartwizard').smartWizard();
         });
+    </script>
+    <script>
+
+        var form = document.querySelector('form');
+
+        // Listen for the submit event on the form
+        form.addEventListener("submit", function(event) {
+            // Prevent the form from being submitted
+            event.preventDefault();
+            showConfirmationPrompt()
+        });
+
+
+
+        function showConfirmationPrompt() {
+
+            var form = document.querySelector('form');
+
+            // Check the validity of the form
+            if (form.checkValidity()) {
+                // Use the Swal.fire() method to show the confirmation prompt
+                Swal.fire({
+                    title: 'Anda Yakin ?',
+                    text: 'Periksa kembali data anda',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya'
+                }).then((result) => {
+                    if (result.value) {
+                        // If the user clicks "OK", submit the form
+                        form.submit()
+                        return true;
+                    } else {
+                        // If the user clicks "Cancel", prevent the form from being submitted
+                        return false;
+                    }
+                });
+            } else {
+                // If the form is invalid, don't show the confirmation prompt
+                // and let the browser handle the validation error
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Lengkapi Form terlebih dahulu',
+                    type: 'error'
+                });
+                return false;
+            }
+
+
+        }
     </script>
 @endpush
 
@@ -215,6 +281,19 @@
                                                     </div>
 
 
+                                                    <div class="mb-3 col-md-6">
+                                                        <label class="form-label" for="basicInput">Persentase bIAYA Admin
+                                                            (Jika Ada)</label>
+                                                        <input id="inputFee" type="number" min="0.00"
+                                                               name="admin_fee"
+                                                               class="form-control"
+                                                               value="{{ old('admin_fee') }}"
+                                                               placeholder="Admin Fee">
+                                                        <div class="form-text">Contoh Input : 0.5 atau 5.0 atau 2.5
+                                                        </div>
+                                                    </div>
+
+
                                                     <button id="next2" type="button"
                                                             class="btn btn-outline-primary mt-5">Selanjutnya
                                                     </button>
@@ -261,14 +340,24 @@
                                                 <p>Pastikan data berikut sudah sesuai
                                                 </p>
                                                 <br>
+                                                <div class="col-12 d-flex justify-content-center">
+                                                    <img
+                                                        id="imgConf"
+                                                        src="https://i.stack.imgur.com/y9DpT.jpg" alt="image"
+                                                        class="me-3 rounded"
+                                                        width="275">
+                                                </div>
+
                                                 <p><span class="text-black"> Program</span> : <span
                                                         id="reviewName">-</span></p>
                                                 <p><span class="text-black"> Target Donasi</span> : <span
-                                                        id="reviewFundraisingTarget">Rp. -</span></p>
+                                                        id="reviewFundraisingTarget">Tidak Ada Target</span></p>
                                                 <p><span class="text-black"> Batas Akhir Donasi</span> : <span
-                                                        id="reviewTimeLimit">-</span></p>
+                                                        id="reviewTimeLimit">Tidak Ada Batas Akhir</span></p>
+                                                <p><span class="text-black">Biaya Admin</span> : <span
+                                                        id="reviewPercentage">Tidak Ada Biaya Admin</span></p>
                                                 <p><span class="text-black"> Durasi</span> : <span
-                                                        id="reviewDurasi">-</span></p>
+                                                        id="reviewDurasi">Tidak Ada Durasi</span></p>
 
                                                 <button type="submit" class="btn btn-primary mt-5">Tambah Program
                                                 </button>

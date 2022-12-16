@@ -11,23 +11,23 @@
 @endpush
 
 @push('css_content')
-        .buttons-columnVisibility {
-            font-family: Nunito, sans-serif;
-            font-size: medium;
-            font-style: normal;
-            border-radius: 20px;
-            padding-left: 3px;
-            padding-right: 3px;
-            font-size: larger;
-            font-weight: bold;
-        }
+    .buttons-columnVisibility {
+    font-family: Nunito, sans-serif;
+    font-size: medium;
+    font-style: normal;
+    border-radius: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: larger;
+    font-weight: bold;
+    }
 
-        .buttons-columnVisibility.active{
-            padding-right: 3px;
-            font-weight: normal;
-            padding-left: 3px;
-            padding-right: 3px;
-        }
+    .buttons-columnVisibility.active{
+    padding-right: 3px;
+    font-weight: normal;
+    padding-left: 3px;
+    padding-right: 3px;
+    }
 @endpush
 
 @push('script')
@@ -52,6 +52,12 @@
             </div>
 
             <div class="row">
+
+                <div class="col-12">
+                    @include("168_component.alert_message.message")
+                </div>
+
+
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -69,6 +75,7 @@
                                         <th data-sortable="">Penulis</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
+                                        <th data-sortable="">Hapus</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -90,6 +97,16 @@
                                                     <button type="button" class="btn btn-primary">Edit</button>
                                                 </a>
                                             </td>
+                                            <td>
+                                                <button id="{{ $data->id }}" type="button"
+                                                        class="btn btn-delete btn-danger btn-delete mr-2"
+                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                    Hapus Konten
+                                                </button>
+                                            </td>
+                                            <form id="lala{{$data->id}}" action='{{ url("news/$data->id/delete") }}'
+                                                  enctype="multipart/form-data" method="get">
+                                            </form>
                                         </tr>
                                     @empty
 
@@ -108,3 +125,24 @@
         </div>
     </div>
 @endsection
+
+@push("script")
+    <script>
+        function openDeleteDialog(formId) {
+            // Use the Sweet Alert `swal` function to open a dialog
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Tindakan ini tidak dapat dibatalkan.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.value) {
+                    // Submit the form if the user confirms the action
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush

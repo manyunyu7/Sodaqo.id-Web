@@ -11,23 +11,23 @@
 @endpush
 
 @push('css_content')
-        .buttons-columnVisibility {
-            font-family: Nunito, sans-serif;
-            font-size: medium;
-            font-style: normal;
-            border-radius: 20px;
-            padding-left: 3px;
-            padding-right: 3px;
-            font-size: larger;
-            font-weight: bold;
-        }
+    .buttons-columnVisibility {
+    font-family: Nunito, sans-serif;
+    font-size: medium;
+    font-style: normal;
+    border-radius: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: larger;
+    font-weight: bold;
+    }
 
-        .buttons-columnVisibility.active{
-            padding-right: 3px;
-            font-weight: normal;
-            padding-left: 3px;
-            padding-right: 3px;
-        }
+    .buttons-columnVisibility.active{
+    padding-right: 3px;
+    font-weight: normal;
+    padding-left: 3px;
+    padding-right: 3px;
+    }
 @endpush
 
 @push('script')
@@ -52,6 +52,12 @@
             </div>
 
             <div class="row">
+
+                <div class="col-12">
+                    @include("168_component.alert_message.message")
+                </div>
+
+
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -68,7 +74,7 @@
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Hapus</th>
+                                        <th data-sortable="">Hapust</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -76,17 +82,25 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain"
+                                                <img height="100px"
+                                                     style="border-radius: 20px; max-width: 100px; object-fit: contain"
                                                      src='{{asset("$data->photo")}}' alt="">
                                             </td>
                                             <td>{{ $data->name }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)" class="btn btn-success btn-rounded light">Aktif</a>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-success btn-rounded light">Aktif</a>
                                                 @endif
 
                                                 @if($data->status==0)
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                @endif
+
+                                                @if($data->status==-99)
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-outline-secondary btn-rounded light">Dihapus</a>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
@@ -97,9 +111,15 @@
                                             </td>
                                             <td>
                                                 <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-danger btn-delete mr-2">Hapus
+                                                        class="btn btn-delete btn-danger btn-delete mr-2"
+                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                    Hapus Konten
                                                 </button>
                                             </td>
+                                            <form id="lala{{$data->id}}"
+                                                  action='{{ url("payment-merchant/$data->id/delete") }}'
+                                                  enctype="multipart/form-data" method="get">
+                                            </form>
                                         </tr>
                                     @empty
 
@@ -118,3 +138,26 @@
         </div>
     </div>
 @endsection
+
+
+
+@push("script")
+    <script>
+        function openDeleteDialog(formId) {
+            // Use the Sweet Alert `swal` function to open a dialog
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Tindakan ini tidak dapat dibatalkan.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.value) {
+                    // Submit the form if the user confirms the action
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush

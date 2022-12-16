@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class SodaqoTimelineController extends Controller
 {
 
+    public function viewUpdate($id){
+        $data = SodaqoTimeline::findOrFail($id);
+        $con = $data->content;
+        return view('sodaqo.edit_timeline')->with(compact("data","con"));
+    }
+
     /**
      * update created resource in storage.
      *
@@ -43,12 +49,23 @@ class SodaqoTimelineController extends Controller
         }
     }
 
-
-
     public function store(Request $request)
     {
         $data = new SodaqoTimeline();
         $data->sodaqo_id = $request->id;
+        $data->content = $request->story;
+        $data->title = $request->title;
+        $data->subtitle = $request->subtitle;
+        $data->expense = $request->expense;
+        $data->expense_admin = $request->expense_admin;
+        $data->expense_desc = $request->expense_desc;
+        return $this->SaveData($data, $request);
+    }
+
+
+    public function update(Request $request)
+    {
+        $data = SodaqoTimeline::findOrFail($request->id);
         $data->content = $request->story;
         $data->title = $request->title;
         $data->subtitle = $request->subtitle;

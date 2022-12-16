@@ -277,22 +277,27 @@
             $('.filter-verified').click(function () {
                 myFilter = "verified"
                 $('#168trs').DataTable().ajax.reload();
+                reloadSummary()
             });
             $('.filter-verified-w').click(function () {
                 myFilter = "verifiedw"
                 $('#168trs').DataTable().ajax.reload();
+                reloadSummary()
             });
             $('.filter-waiting').click(function () {
                 myFilter = "waiting"
                 $('#168trs').DataTable().ajax.reload();
+                reloadSummary()
             });
             $('.filter-all').click(function () {
                 myFilter = "all"
                 $('#168trs').DataTable().ajax.reload();
+                reloadSummary()
             });
             $('.filter-invalid').click(function () {
                 myFilter = "invalid"
                 $('#168trs').DataTable().ajax.reload();
+                reloadSummary()
             });
 
         });
@@ -320,11 +325,14 @@
                     $('.tv-invalid-percent').text(response.invalidPercent);
                     $('.pg-invalid-percent').css('width', response.invalidPercent + '%');
 
+
                     $('.pg-utama').css('width', response.fundraisingPercentage + '%');
 
                     $('.tv-terkumpul').text(response.formattedRupiah);
                     $('.tv-needed').text(response.remaining);
                     $('.tv-target').text(response.fundraisingTarget);
+                    $('.tv-accumulated-net').text(response.formattedAccumulatedNet);
+                    $('.tv-fee').text(response.feePercentage);
 
                     if(response.fundraisingTarget==null){
                         $('.tv-target').text("(Tidak Ada Target)");

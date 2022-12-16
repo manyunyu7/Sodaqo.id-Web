@@ -135,7 +135,7 @@ class SodaqoCategoryController extends Controller
      */
     public function delete(Request $request, $id)
     {
-        $data = Sodaqo::findOrFail($id);
+        $data = SodaqoCategory::findOrFail($id);
 
         if ($data->delete()) {
             if ($request->is('api/*'))

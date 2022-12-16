@@ -161,7 +161,6 @@ class NewsController extends Controller
                 );
             return back()->with(["errors" => "Gagal Menghapus Data"]);
         }
-
     }
 
 

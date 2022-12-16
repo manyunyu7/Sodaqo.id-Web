@@ -52,6 +52,11 @@
             </div>
 
             <div class="row">
+
+                <div class="col-12">
+                    @include("168_component.alert_message.message")
+                </div>
+                
                 <div class="col-12">
 
                     <div class="card">
@@ -95,9 +100,14 @@
                                             </td>
                                             <td>
                                                 <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-danger btn-delete mr-2">Hapus Konten
+                                                        class="btn btn-delete btn-danger btn-delete mr-2"
+                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                    Hapus Konten
                                                 </button>
                                             </td>
+                                            <form id="lala{{$data->id}}" action='{{ url("sodaqo-category/$data->id/delete") }}'
+                                                  enctype="multipart/form-data" method="get">
+                                            </form>
                                         </tr>
                                     @empty
 
@@ -116,3 +126,25 @@
         </div>
     </div>
 @endsection
+
+@push("script")
+    <script>
+        function openDeleteDialog(formId) {
+            // Use the Sweet Alert `swal` function to open a dialog
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Tindakan ini tidak dapat dibatalkan.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.value) {
+                    // Submit the form if the user confirms the action
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush
+

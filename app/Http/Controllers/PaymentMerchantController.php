@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helper\RazkyFeb;
+use App\Models\DonationAccount;
+use App\Models\News;
 use App\Models\PaymentMerchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +29,7 @@ class PaymentMerchantController extends Controller
      */
     public function viewManage()
     {
-        $datas = PaymentMerchant::all();
+        $datas = PaymentMerchant::isNotDeleted()->get();
         return view('payment_merchant.manage')->with(compact('datas'));
     }
 
@@ -104,6 +106,39 @@ class PaymentMerchantController extends Controller
 
         return $this->SaveData($data, $request);
     }
+
+    public function delete(Request $request, $id)
+    {
+        $data = PaymentMerchant::findOrFail($id);
+        $account = DonationAccount::where("payment_merchant_id",'=',$id)->count();
+        if ($account == 0){
+           $data->delete();
+        }else{
+            $data->is_deleted = 1;
+            $data->status = -99;
+            $data->name = $data->name." (Dihapus)";
+        }
+        if ($data->save()) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 200,
+                    "Berhasil Menghapus Data",
+                    "Success",
+                    Auth::user(),
+                );
+            return back()->with(["success" => "Berhasil Menghapus Data"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400, 3, 400,
+                    "Berhasil Mengupdate Data",
+                    "Success",
+                    ""
+                );
+            return back()->with(["errors" => "Gagal Menghapus Data"]);
+        }
+    }
+
 
 
     /**

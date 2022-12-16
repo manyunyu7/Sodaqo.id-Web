@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helper\RazkyFeb;
 use App\Models\DonationAccount;
 use App\Models\PaymentMerchant;
+use App\Models\UserSodaqo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,7 @@ class DonationAccountController extends Controller
      */
     public function viewManage()
     {
-        $datas = DonationAccount::all();
+        $datas = DonationAccount::isNotDeleted()->get();
         return view('donation_account.manage')->with(compact('datas'));
     }
 
@@ -47,7 +48,7 @@ class DonationAccountController extends Controller
     public function viewUpdate($id)
     {
         $data = DonationAccount::findOrFail($id);
-        $merchants = PaymentMerchant::where('status', '=', '1')->get();
+        $merchants = PaymentMerchant::isNotDeleted()->where('status', '=', '1')->get();
         return view('donation_account.edit')->with(compact('data', 'merchants'));
     }
 
@@ -63,6 +64,7 @@ class DonationAccountController extends Controller
         $data->name = $request->name;
         $data->m_description = $request->m_description;
         $data->status = $request->status;
+        $data->account_number = $request->account_number;
         $data->account_number = $request->account_number;
         $data->created_by = Auth::id();
         $data->payment_merchant_id = $request->merchant_id;
@@ -154,8 +156,43 @@ class DonationAccountController extends Controller
     public
     function destroy($id)
     {
-        //
+        return "";
     }
+
+    public function delete(Request $request, $id)
+    {
+        $data = DonationAccount::findOrFail($id);
+        $py = UserSodaqo::where("payment_id",'=',$id)->count();
+        if ($py == -99){
+            $data->delete();
+        }else{
+            $data->is_deleted = 1;
+            $data->status = -99;
+            $data->name = $data->name." (Dihapus)";
+            $data->save();
+        }
+        if ($data) {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseSuccessWithData(
+                    200, 1, 200,
+                    "Berhasil Menghapus Data",
+                    "Success",
+                    Auth::user(),
+                );
+            return back()->with(["success" => "Berhasil Menghapus Data"]);
+        } else {
+            if ($request->is('api/*'))
+                return RazkyFeb::responseErrorWithData(
+                    400, 3, 400,
+                    "Berhasil Mengupdate Data",
+                    "Success",
+                    ""
+                );
+            return back()->with(["errors" => "Gagal Menghapus Data"]);
+        }
+    }
+
+
 
     public
     function SaveData(DonationAccount $data, Request $request)

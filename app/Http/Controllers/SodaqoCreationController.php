@@ -51,7 +51,7 @@ class SodaqoCreationController extends Controller
      */
     public function viewManage()
     {
-        $datas = Sodaqo::all();
+        $datas = Sodaqo::isNotDeleted()->orderBy("status","desc")->get();
         return view('sodaqo.manage')->with(compact('datas'));
     }
 
@@ -73,7 +73,10 @@ class SodaqoCreationController extends Controller
     {
         $data = Sodaqo::findOrFail($id);
         $timelines = SodaqoTimeline::where("sodaqo_id","=",$id)->get();
-        return view('sodaqo.edit')->with(compact('data','timelines'));
+        $categories = SodaqoCategory::all();
+
+        $compact = compact('data','timelines','categories');
+        return view('sodaqo.edit')->with($compact);
     }
 
     /**
@@ -87,6 +90,7 @@ class SodaqoCreationController extends Controller
         $data->owner_id = Auth::id();
         $data->category_id = $request->merchant_id;
         $data->name = $request->name;
+        $data->admin_fee_percentage = $request->admin_fee;
         $data->fundraising_target = $request->fundraising_target;
         $data->story = $request->m_description;
         $data->time_limit = $request->time_limit;
@@ -117,10 +121,14 @@ class SodaqoCreationController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request->all());
-        $data = Sodaqo::findOrFail($id);
-        $data->name = $request->title;
-        $data->description = $request->m_content;
+        $data = Sodaqo::findOrFail($request->id);
+        $data->category_id = $request->merchant_id;
+        $data->name = $request->name;
+        $data->admin_fee_percentage = $request->admin_fee;
+        $data->fundraising_target = $request->fundraising_target;
+        $data->story = $request->m_description;
+        $data->time_limit = $request->time_limit;
+        $data->status = $request->status;
         if ($request->hasFile('photo')) {
 
             $file_path = public_path() . $data->photo;
@@ -169,8 +177,8 @@ class SodaqoCreationController extends Controller
     public function delete(Request $request, $id)
     {
         $data = Sodaqo::findOrFail($id);
-
-        if ($data->delete()) {
+        $data->is_deleted=1;
+        if ($data->save()) {
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,

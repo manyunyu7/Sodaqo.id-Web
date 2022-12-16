@@ -70,7 +70,7 @@
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Hapus</th>
+                                        <th data-sortable="">Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +86,11 @@
                                             <td>{{ $data->account_number }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)" class="btn btn-success btn-rounded light">Aktif</a>
+                                                    <a href="javascript:void(0)" class="btn btn-outline-success btn-rounded light">Aktif</a>
                                                 @endif
 
                                                 @if($data->status==0)
-                                                        <a href="javascript:void(0)" class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                        <a href="javascript:void(0)" class="btn btn-outline-danger btn-rounded light">Non Aktif</a>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
@@ -101,9 +101,15 @@
                                             </td>
                                             <td>
                                                 <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-danger btn-delete mr-2">Hapus
+                                                        class="btn btn-delete btn-danger btn-delete mr-2"
+                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                    Hapus Konten
                                                 </button>
                                             </td>
+                                            <form id="lala{{$data->id}}"
+                                                  action='{{ url("donation-account/$data->id/delete") }}'
+                                                  enctype="multipart/form-data" method="get">
+                                            </form>
                                         </tr>
                                     @empty
 
@@ -123,3 +129,26 @@
         </div>
     </div>
 @endsection
+
+@push("script")
+    <script>
+        function openDeleteDialog(formId) {
+            // Use the Sweet Alert `swal` function to open a dialog
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Tindakan ini tidak dapat dibatalkan.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.value) {
+                    // Submit the form if the user confirms the action
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush
+
+

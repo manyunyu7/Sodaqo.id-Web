@@ -21,6 +21,7 @@ class CreateNewsTable extends Migration
             $table->longText('content')->nullable();
             $table->string('photo')->nullable();
             $table->string('reff')->nullable();
+            $table->integer('is_deleted')->nullable();
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateSodaqoCategoriesTable extends Migration
             $table->string("name")->nullable();
             $table->string("photo")->nullable();
             $table->string("description")->nullable();
+            $table->integer('is_deleted')->nullable();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class CreateDonationAccountsTable extends Migration
             $table->text('m_description')->nullable();
             $table->string('photo')->nullable();
             $table->string('status')->nullable();
+            $table->integer('is_deleted')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('payment_merchant_id')->references('id')->on('payment_merchants')->onDelete('cascade');
             $table->timestamps();

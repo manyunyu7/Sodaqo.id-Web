@@ -52,6 +52,11 @@
             </div>
 
             <div class="row">
+
+                <div class="col-12">
+                    @include("168_component.alert_message.message")
+                </div>
+
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
@@ -71,10 +76,10 @@
                                         <th data-sortable="">Nama</th>
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Target Donasi</th>
+                                        <th data-sortable="">Donasi Terkumpul</th>
                                         <th data-sortable="">Batas Akhir</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Hapus</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -95,22 +100,42 @@
 
                                                 @if($data->status==0)
                                                     <a href="javascript:void(0)"
-                                                       class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                       class="btn btn-warning btn-rounded light">Non Aktif</a>
+                                                @endif
+
+                                                @if($data->status==3)
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-danger btn-rounded light">Dihapus</a>
                                                 @endif
                                             </td>
                                             <td>{{ number_format($data->fundraising_target, 2) ?: "Tidak Ada Batas" }}</td>
-                                            <td>{{ $data->time_limit }}</td>
-                                            <td>{{ $data->created_at }}</td>
+                                            <td>{{ number_format($data->accumulated_amount, 2) }}
+                                                <br>
+                                                @if($data->accumulated_amount != 0 && $data->fundraising_target !=0)
+                                                    (
+                                                    <span class="text-blue">
+                                                    {{ number_format((($data->accumulated_amount / $data->fundraising_target) * 100), 2) }}%)
+                                                    </span>
+
+                                                @endif
+                                            </td>
+                                            <td>{{ $data->time_limit  ?: "Tidak Ada Batas" }}</td>
+                                            <td>{{ $data->created_at   }}</td>
                                             <td>
                                                 <a href="{{url('/sodaqo'.'/'.$data->id.'/edit')}}">
-                                                    <button type="button" class="btn btn-primary">Edit</button>
+                                                    <button type="button" class="btn btn-primary">Detail</button>
                                                 </a>
                                             </td>
                                             <td>
                                                 <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-danger btn-delete mr-2">Hapus
+                                                        class="btn btn-outline-danger btn-delete mr-2"
+                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                    Hapus Program
                                                 </button>
                                             </td>
+                                            <form id="lala{{$data->id}}" action='{{ url("sodaqo/$data->id/delete") }}'
+                                                  enctype="multipart/form-data" method="get">
+                                            </form>
                                         </tr>
                                     @empty
 
@@ -129,3 +154,25 @@
         </div>
     </div>
 @endsection
+
+@push("script")
+    <script>
+        function openDeleteDialog(formId) {
+            // Use the Sweet Alert `swal` function to open a dialog
+            swal({
+                title: "Apakah Anda yakin?",
+                text: "Tindakan ini tidak dapat dibatalkan. Data-data donatur, transaksi dari program ini akan turut serta dihapus dan tidak dapat dikembalikan",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.value) {
+                    // Submit the form if the user confirms the action
+                    document.getElementById(formId).submit();
+                }
+            });
+        }
+    </script>
+@endpush
+
