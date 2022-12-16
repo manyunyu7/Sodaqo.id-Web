@@ -21,6 +21,15 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @endpush
 
+@push("script")
+
+    <script>
+        let xaxaxa = "";
+        let programNamex = `{{$programName}}`
+    </script>
+
+@endpush
+
 @push('css_content')
     .buttons-columnVisibility {
     font-family: Nunito, sans-serif;
@@ -97,6 +106,8 @@
         }
     </script>
 @endpush
+
+
 
 @section("page_content")
     <div class="content-body" style="min-height: 798px;">
@@ -336,6 +347,8 @@
                                     <div class="mt-3"
                                          style="border: 0.5px dashed lightgrey; padding: 10px; border-radius: 20px">
                                         <h6 class="">Donasi </h6>
+                                        <p>Nama Program : {{$programName}}</p>
+                                        <p>Nomor Donatur: <span class="mod-user-contact"></span></p>
                                         <p>E-Wallet/Rekening: <span class="mod-donation-merch"></span></p>
                                         <p>Rekening/Nomer : <span class="mod-donation-account"></span></p>
                                         <p>Tanggal Transfer : <span class="mod-date"></span></p>

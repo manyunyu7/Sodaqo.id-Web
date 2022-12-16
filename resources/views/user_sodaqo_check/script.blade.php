@@ -40,10 +40,12 @@
                     var myChart = new Chart(ctx, {
                         type: 'bar',
                         data: {
-                            labels: data.map(function(d) { return d.month; }), // use the "month" property as the labels
+                            labels: data.map(function (d) {
+                                return d.month;
+                            }), // use the "month" property as the labels
                             datasets: [{
                                 label: 'Jumlah Wakaf', // specify the label for the data series
-                                data: data.map(function(d) {
+                                data: data.map(function (d) {
                                     // format the "nominal_sum" value with a thousands separator
                                     return d.nominal_sum.toLocaleString();
                                 }),
@@ -65,10 +67,12 @@
                     var myChart2 = new Chart(ctx2, {
                         type: 'bar',
                         data: {
-                            labels: data.map(function(d) { return d.month; }), // use the "month" property as the labels
+                            labels: data.map(function (d) {
+                                return d.month;
+                            }), // use the "month" property as the labels
                             datasets: [{
                                 label: 'Jumlah Transaksi', // specify the label for the data series
-                                data: data.map(function(d) {
+                                data: data.map(function (d) {
                                     // format the "nominal_sum" value with a thousands separator
                                     return d.data_count;
                                 }),
@@ -110,10 +114,26 @@
                 e.preventDefault(); // prevent the form from submitting normally
 
                 showLoadingP()
-
-
                 var formData = new FormData(this); // create a FormData object from the form
-                var url = $(this).attr("action"); // get the URL to submit the form to
+
+                var message = "";
+                var jumlahSedekah = $(".nominal_net").val();
+                var donaturName = $(".user-name").text();
+                var number = $(".user-phone").text();
+                var namaProgram = "{{$programName}}"
+
+                var status = formData.get("status")
+
+                if (status == "1" || status == "3") {
+                    message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                        "Sedekahmu berhasil diproses dengan nilai terverifikasi sejumlah " + jumlahSedekah + " pada program " + namaProgram;
+                } else if (status == "2") {
+                    message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                        "pada program " + namaProgram + ".\n\nSaat ini status transaksimu ditolak karena adanya ketidaksesuaian antara bukti transfer dengan data transaksi";
+                }
+                if (status != null && status != "")
+                    var popupWindow = window.open("https://api.whatsapp.com/send?phone=" + number + "&text=" + encodeURIComponent(message), "Popup Window", "height=500,width=500");
+
 
                 // submit the form using AJAX
                 $.ajax({
@@ -125,6 +145,8 @@
                         hideLoadingP()
                         $('#168trs').DataTable().ajax.reload();
                         showSuccessP("Alhamdulillah", "Perubahan berhasil disimpan")
+
+
                     },
                     error: function (xhr, status, error) {
                         reloadSummary()
@@ -204,12 +226,12 @@
                         defaultContent: "",
                         render: function (data, type, row, meta) {
                             // Format the nominal as Indonesian rupiah
-                            if(data!=null){
-                               return data.toLocaleString('id-ID', {
+                            if (data != null) {
+                                return data.toLocaleString('id-ID', {
                                     style: 'currency',
                                     currency: 'IDR'
                                 });
-                            }else{
+                            } else {
                                 "-"
                             }
                         }
@@ -236,7 +258,8 @@
                                     data-img-src='${data.payment_photo}'
                                     data-aidi='${data.id}'
                                     data-user-name='${data.user_name}'
-                                      data-nominal='${data.nominal.toLocaleString(undefined, {minimumFractionDigits: 2})}'
+                                    data-uscon='${data.user_contact}'
+                                    data-nominal='${data.nominal.toLocaleString(undefined, {minimumFractionDigits: 2})}'
                                     data-qw='${data.payment_number}'
                                     data-er='${data.payment_name}'
                                     data-ty='${data.payment_merchant_name}'
@@ -334,7 +357,7 @@
                     $('.tv-accumulated-net').text(response.formattedAccumulatedNet);
                     $('.tv-fee').text(response.feePercentage);
 
-                    if(response.fundraisingTarget==null){
+                    if (response.fundraisingTarget == null) {
                         $('.tv-target').text("(Tidak Ada Target)");
                     }
                     $('.tv-all-count').text(response.allCount);
@@ -377,6 +400,10 @@
             var nomNet = e.relatedTarget.dataset.nomnet;
             var aidi = e.relatedTarget.dataset.aidi;
             var notes = e.relatedTarget.dataset.vvv;
+            var uscon = e.relatedTarget.dataset.uscon;
+
+            this.querySelector('.modal-body .mod-donation-merch').textContent = donMerchant;
+            this.querySelector('.modal-body .mod-user-contact').textContent = uscon;
 
             this.querySelector('.modal-body .mod-timer').textContent = getTimeDifference(e.relatedTarget.dataset.xss);
             this.querySelector('.modal-body .mod-date').textContent = e.relatedTarget.dataset.xss;
@@ -393,8 +420,7 @@
             this.querySelector('.modal-body .nominal_net').value = nomNet;
             this.querySelector('.aidiz').setAttribute('value', aidi);
             this.querySelector('.modal-body .title-aidi').textContent = aidi;
-            this.querySelector('.modal-body .mod-donation-merch').textContent = donMerchant;
-            this.querySelector('.modal-body .mod-donation-name').textContent = donAccountName;
+
             this.querySelector('.modal-body img').onerror = "this.onerror=null;this.src='https://avatarsb.s3.amazonaws.com/others/panda-black-toy1-31-min.png'"
         });
 
