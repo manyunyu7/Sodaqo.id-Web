@@ -82,7 +82,7 @@
                 }
 
                 if($("#inputFee").val()!==""){
-                    $("#reviewPercentage").text($("#inputFee").val() + "%");
+                    $("#reviewPercentage").text($("#inputFee").val());
                 }
 
 
@@ -96,6 +96,9 @@
             };
 
             $("#inputDate").change(function () {
+                $.myfunction();
+            });
+            $("#inputFee").change(function () {
                 $.myfunction();
             });
             $("#inputTarget").keyup(function () {

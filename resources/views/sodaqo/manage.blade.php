@@ -80,6 +80,7 @@
                                         <th data-sortable="">Batas Akhir</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
+                                        <th data-sortable=""></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -109,12 +110,12 @@
                                                 @endif
                                             </td>
                                             <td>{{ number_format($data->fundraising_target, 2) ?: "Tidak Ada Batas" }}</td>
-                                            <td>{{ number_format($data->accumulated_amount, 2) }}
+                                            <td>{{ $data->total_nominal_net_formatted}}
                                                 <br>
-                                                @if($data->accumulated_amount != 0 && $data->fundraising_target !=0)
+                                                @if($data->total_nominal_net != 0 && $data->fundraising_target !=0)
                                                     (
                                                     <span class="text-blue">
-                                                    {{ number_format((($data->accumulated_amount / $data->fundraising_target) * 100), 2) }}%)
+                                                    {{ number_format((($data->total_nominal_net / $data->fundraising_target) * 100), 2) }}%)
                                                     </span>
 
                                                 @endif

@@ -33,6 +33,7 @@ Route::view('/download/', 'download');
 Auth::routes();
 
 
+Route::get('/bdm', 'ColekController@bdm');
 Route::get('/registerz', 'CustomAuthController@register');
 Route::post('/proceedLogin', 'Auth\LoginController@proceedLogin');
 

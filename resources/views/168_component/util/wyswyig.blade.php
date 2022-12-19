@@ -6,7 +6,7 @@
 
     <script src="{{ asset('/168_res') }}/vendor/summernote/summernote-lite.min.js"></script>
     <script>
-        var hoste = "http://127.0.0.1:148/summernote-image";
+        var hoste = "http://127.0.0.1:2612/summernote-image";
 
         function initializeSummernote(id) {
             $('#' + id).summernote({

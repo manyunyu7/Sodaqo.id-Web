@@ -189,6 +189,7 @@ class TransactionController extends Controller
         $startDate = $request->startdate;
         $endDate = $request->enddate;
         $statRaw = $request->statfilter;
+        $id = $request->id;
         $statSended = "";
 
         if ($statRaw == "invalid"){$statSended="2";}
@@ -263,6 +264,8 @@ class TransactionController extends Controller
         $mymy->where("user_sodaqos.sodaqo_id", "=", $sodaqoId)
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%M-%Y')"))
             ->orderBy('created_at', 'asc');
+
+        $mymy->where("status","=","1");
 
         return $mymy->get();
     }

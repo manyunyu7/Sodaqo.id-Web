@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Sodaqo extends Model
 {
@@ -46,22 +47,36 @@ class Sodaqo extends Model
 
     function getAccumulatedAmountAttribute()
     {
-        $data = UserSodaqo::where([
-            ['sodaqo_id', '=', $this->id],
-            ['status', '=', 1],
-        ])->get();
+        // Set the batch size
+        $batchSize = 1000;
 
-        // Create an array of the nominal_net values
-        $nominalNetValues = [];
-        foreach ($data as $item) {
-            $nominalNetValues[] = $item->nominal_net;
-        }
+        // Initialize the accumulated amount
+        $accumulatedAmount = 0;
 
-        // Get the sum of the nominal_net values
-        $nominalNetSum = array_sum($nominalNetValues);
+        // Initialize the offset
+        $offset = 0;
 
-        // Use the sum of the nominal_net values
-        return $nominalNetSum;
+        // Loop until all rows have been processed
+//        while (true) {
+//            // Retrieve the nominal_net values in batches
+//            $data = DB::select("SELECT nominal_net FROM user_sodaqos WHERE sodaqo_id = ? AND status = 1 LIMIT ?, ?", [$this->id, $offset, $batchSize]);
+//
+//            // Break the loop if no rows were returned
+//            if (empty($data)) {
+//                break;
+//            }
+//
+//            // Increment the offset
+//            $offset += $batchSize;
+//
+//            // Add the nominal_net values to the accumulated amount
+//            foreach ($data as $item) {
+//                $accumulatedAmount += $item->nominal_net;
+//            }
+//        }
+
+        // Return the accumulated amount
+        return $accumulatedAmount;
     }
 
     function getIsHaveTargetAttribute()

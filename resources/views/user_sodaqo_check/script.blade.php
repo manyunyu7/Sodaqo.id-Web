@@ -116,23 +116,6 @@
                 showLoadingP()
                 var formData = new FormData(this); // create a FormData object from the form
 
-                var message = "";
-                var jumlahSedekah = $(".nominal_net").val();
-                var donaturName = $(".user-name").text();
-                var number = $(".user-phone").text();
-                var namaProgram = "{{$programName}}"
-
-                var status = formData.get("status")
-
-                if (status == "1" || status == "3") {
-                    message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
-                        "Sedekahmu berhasil diproses dengan nilai terverifikasi sejumlah " + jumlahSedekah + " pada program " + namaProgram;
-                } else if (status == "2") {
-                    message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
-                        "pada program " + namaProgram + ".\n\nSaat ini status transaksimu ditolak karena adanya ketidaksesuaian antara bukti transfer dengan data transaksi";
-                }
-                if (status != null && status != "")
-                    var popupWindow = window.open("https://api.whatsapp.com/send?phone=" + number + "&text=" + encodeURIComponent(message), "Popup Window", "height=500,width=500");
 
 
                 // submit the form using AJAX
@@ -145,6 +128,23 @@
                         hideLoadingP()
                         $('#168trs').DataTable().ajax.reload();
                         showSuccessP("Alhamdulillah", "Perubahan berhasil disimpan")
+                        var message = "";
+                        var jumlahSedekah = $(".nominal_net").val();
+                        var donaturName = $(".user-name").text();
+                        var number = $(".mod-user-contact").text();
+                        var namaProgram = "{{$programName}}"
+
+                        var status = formData.get("status")
+
+                        if (status == "1" || status == "3") {
+                            message = "Hallo " + donaturName  +", Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                                "Sedekahmu berhasil diproses dengan nilai terverifikasi sejumlah " + jumlahSedekah + " pada program " + namaProgram;
+                        } else if (status == "2") {
+                            message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                                "pada program " + namaProgram + ".\n\nSaat ini status transaksimu ditolak karena adanya ketidaksesuaian antara bukti transfer dengan data transaksi";
+                        }
+                        if (status != null && status != "")
+                            var popupWindow = window.open("https://api.whatsapp.com/send?phone=" + number + "&text=" + encodeURIComponent(message), "Popup Window", "height=500,width=500");
 
 
                     },
@@ -459,7 +459,7 @@
                     var hours = Math.floor(timeDifferenceInHours);
 
                     // Calculate the number of minutes
-                    var minutes = (timeDifferenceInHours - hours) * 60;
+                    var minutes = Math.floor((timeDifferenceInHours - hours) * 60);
 
                     // Return the time difference in hours and minutes
                     return "Ditransfer " + hours + " jam " + minutes + " menit yang lalu";

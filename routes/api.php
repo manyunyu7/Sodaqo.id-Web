@@ -45,9 +45,15 @@ Route::prefix("sodaqo")->group(function(){
 
 
     Route::prefix("category")->group(function(){
-        Route::get('', 'MobileSodaqoCategory@getAll');
-    });    
+        Route::get('/{id}',  [App\Http\Controllers\MobileSodaqoAllController::class, 'getByCategoryId']);
+    });
 });
+
+
+Route::prefix("history")->group(function(){
+    Route::get('user/{id}',  [App\Http\Controllers\MobileSodaqoUserController::class, 'getSodaqoByUser']);
+});
+
 
 
 Route::any('donation-account', 'MobileSodaqoAllController@getPaymentAccount');
@@ -55,7 +61,7 @@ Route::any('donation-account', 'MobileSodaqoAllController@getPaymentAccount');
 
 Route::prefix("sodaqo-user")->group(function(){
     Route::post('store', 'MobileSodaqoUserController@store');
-});   
+});
 
 
 Route::prefix('mnotification')->group(function () {
