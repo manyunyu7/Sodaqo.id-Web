@@ -123,8 +123,8 @@
 
 <script src="{{ asset('/168_res') }}/js/custom.min.js"></script>
 <script src="{{ asset('/168_res') }}/js/dlabnav-init.js"></script>
-<script src="{{ asset('/168_res') }}/js/demo.js"></script>
-<script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>
+{{--<script src="{{ asset('/168_res') }}/js/demo.js"></script>--}}
+{{--<script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>--}}
 
 
 <script src="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
