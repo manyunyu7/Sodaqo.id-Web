@@ -13,7 +13,28 @@ class ColekController extends Controller
 {
     public function fcm(Request $request)
     {
+        try{
+            $fcmTokens = "f5B88Vy_TMeIN4McMg3Cmk:APA91bGjM0Pv6DsbfTOLNHkTmiHWaIkcVzCoGgIaK_ihSuRiV5vJDR87FE7kSUJUkf37Ez3q9QU8gnfm3EJlYuldcLoN_6Vx2CRDx23m2B1hNLM1MMPse1UNHMEgyVBGA5BDZBgaGQQF";
+            return Larafirebase::withTitle('Test Title')
+                ->withBody('Test body')
+                ->withImage('https://firebase.google.com/images/social.png')
+                ->withIcon('https://seeklogo.com/images/F/firebase-logo-402F407EE0-seeklogo.com.png')
+                ->withSound('default')
+                ->withClickAction('https://www.google.com')
+                ->withPriority('high')
+                ->withAdditionalData([
+                    'color' => '#rrggbb',
+                    'badge' => 0,
+                    'agus' => 0,
+                ])
+                ->sendNotification($fcmTokens);
 
+            return 'Notification Sent Successfully!!';
+
+        }catch(\Exception $e){
+            report($e);
+            return $e;
+        }
     }
 
 

@@ -17,7 +17,7 @@ class UserSodaqoSeeder extends Seeder
             $nominalNet = null;
             $notesAdmin = null;
 
-            $userId = 48;
+            $userId = 49;
 //            $userId = rand(1, 19);
             if ($userId === 2) {
                 $userId = 47;
@@ -30,7 +30,7 @@ class UserSodaqoSeeder extends Seeder
             }
 
             UserSodaqo::create([
-                "sodaqo_id" => rand(3,5),
+                "sodaqo_id" => [1, 3, 4, 5][mt_rand(0, 3)],
                 "user_id" => $userId,
                 "payment_id" => rand(11, 15),
 //                "payment_id" => 13,
