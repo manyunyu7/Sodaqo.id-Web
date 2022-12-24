@@ -3,7 +3,7 @@
 
 var dezSettingsOptions = {};
 
-function getUrlParams(dParam) 
+function getUrlParams(dParam)
 	{
 		var dPageURL = window.location.search.substring(1),
 			dURLVariables = dPageURL.split('&'),
@@ -20,43 +20,56 @@ function getUrlParams(dParam)
 	}
 
 (function($) {
-	
+
 	"use strict"
-	
+
 	/* var direction =  getUrlParams('dir');
-	
+
 	if(direction == 'rtl')
 	{
-        direction = 'rtl'; 
+        direction = 'rtl';
     }else{
-        direction = 'ltr'; 
+        direction = 'ltr';
     } */
-	
+
+	// dezSettingsOptions = {
+	// 		typography: "cairo",
+	// 		version: "light",
+	// 		layout: "vertical",
+	// 		primary: "color_1",
+	// 		navheaderBg: "color_1",
+	// 		sidebarBg: "color_1",
+	// 		sidebarStyle: "full",
+	// 		sidebarPosition: "fixed",
+	// 		headerPosition: "fixed",
+	// 		containerLayout: "full",
+	// 	};
+
 	dezSettingsOptions = {
-			typography: "cairo",
-			version: "light",
-			layout: "vertical",
-			primary: "color_1",
-			navheaderBg: "color_1",
-			sidebarBg: "color_1",
-			sidebarStyle: "full",
-			sidebarPosition: "fixed",
-			headerPosition: "fixed",
-			containerLayout: "full",
+        typography: "cairo",
+        version: "light",
+        layout: "vertical",
+        primary: "color_7",
+        navheaderBg: "color_7",
+        sidebarBg: "color_7",
+        sidebarStyle: "full",
+        sidebarPosition: "fixed",
+        headerPosition: "fixed",
+        containerLayout: "full"
 		};
 
-	
-	
-	
-	new dezSettings(dezSettingsOptions); 
+
+
+
+	new dezSettings(dezSettingsOptions);
 
 	jQuery(window).on('resize',function(){
         /*Check container layout on resize */
 		//alert(dezSettingsOptions.primary);
         dezSettingsOptions.containerLayout = $('#container_layout').val();
         /*Check container layout on resize END */
-        
-		new dezSettings(dezSettingsOptions); 
+
+		new dezSettings(dezSettingsOptions);
 	});
-	
+
 })(jQuery);
