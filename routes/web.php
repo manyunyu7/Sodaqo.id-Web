@@ -32,6 +32,8 @@ Route::view('/download/', 'download');
 
 Auth::routes();
 
+Route::get("fcm","ColekController@fcm");
+
 
 Route::get('/bdm', 'ColekController@bdm');
 Route::get('/registerz', 'CustomAuthController@register');
@@ -163,6 +165,25 @@ Route::get('logout', function () {
     return Redirect::to('/');
 })->name('logout');
 
+Route::prefix('trade')->group(function () {
+    Route::get('/portfolio', [App\Http\Controllers\TradeController::class, 'getPortfolio']);
+    Route::get('/portfolio/trading-balance', [App\Http\Controllers\TradeController::class, 'getTradingBalance']);
+    Route::get('/check/{code}', [App\Http\Controllers\TradeController::class, 'checkEmitenOnPortfolio']);
+    Route::get('/check/{code}/checkLot', [App\Http\Controllers\TradeController::class, 'checkIfLotAvailable']);
+    Route::get('{code}/orderbook', [App\Http\Controllers\TradeController::class, 'getOrderBook']);
+
+    Route::any('buy', [App\Http\Controllers\TradeController::class, 'buy']);
+    Route::any('sell', [App\Http\Controllers\TradeController::class, 'sell']);
+    Route::any('cancel/{emiten}/{orderId}', [App\Http\Controllers\TradeController::class, 'cancel']);
+    Route::any('orders', [App\Http\Controllers\TradeController::class, 'orders']);
+
+    Route::any('{code}/automate/beautify/bid/{nominal}', [App\Http\Controllers\TradeController::class, 'beautifyBidVolumes']);
+    Route::any('{code}/automate/beautify/offer/{nominal}', [App\Http\Controllers\TradeController::class, 'beautifyOfferVolumes']);
+    Route::any('withdraw/all', [App\Http\Controllers\TradeController::class, 'cancelAllOrder']);
+    Route::any('bid88', [App\Http\Controllers\TradeController::class, 'bid88']);
+    Route::any('offer88', [App\Http\Controllers\TradeController::class, 'offer88']);
+
+});
 
 
 Route::post('summernote-image', [SummerNoteController::class, 'store']);

@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SodaqoCategory;
 use Goutte\Client as Goute;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Schema;
+use Kutia\Larafirebase\Facades\Larafirebase;
+use Illuminate\Http\Request;
 
 class ColekController extends Controller
 {
+    public function fcm(Request $request)
+    {
+
+    }
+
+
     public function colek()
     {
         $qotd = Inspiring::quote();
@@ -34,26 +43,9 @@ class ColekController extends Controller
         $client = new Goute();
 
         // Set the authorization header
-        $client->setHeader('Authorization', 'Bearer wte1h6nbz23ax04a6wxrh0in1t5kugra');
+        $website = $client->request('GET', 'https://stockbit.com/');
 
-
-        $crawler = $client->request('GET', 'https://neobdm.tech/dashboard/');
-
-        $top_akumulasi_bandarmologi_harian = [];
-
-        $crawler->filter('h3.card-title + table tr')->each(function ($tr) use (&$top_akumulasi_bandarmologi_harian) {
-            $row = [];
-            $tr->filter('td')->each(function ($td) use (&$row) {
-                $row[] = $td->text();
-            });
-
-            if (count($row) > 0) {
-                $top_akumulasi_bandarmologi_harian[] = $row;
-            }
-        });
-
-        $top_akumulasi_bandarmologi_harian = json_encode($top_akumulasi_bandarmologi_harian);
-        return $top_akumulasi_bandarmologi_harian;
+        return $website->html();
     }
 
     public function drop($schemeName)
