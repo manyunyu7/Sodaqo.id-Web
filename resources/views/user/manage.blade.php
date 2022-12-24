@@ -101,10 +101,7 @@
                                                         </svg>
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-end" style="">
-                                                        <a class="dropdown-item" href="#">Accept Patient</a>
-                                                        <a class="dropdown-item" href="#">Reject Order</a>
-                                                        <a class="dropdown-item" href="{{url("user/$user->id/edit")}}">View
-                                                            Details</a>
+                                                        <a class="dropdown-item" href="{{url("user/$user->id/edit")}}">View Details</a>
                                                     </div>
                                                 </div>
                                             </td>
