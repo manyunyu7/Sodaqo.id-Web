@@ -6,11 +6,29 @@
         let myFilter = "";
 
         function som() {
-            var currentDate = new Date();
-            // Get the current date and time in the format "YYYY-MM-DDTHH:mm"
-            var dateString = currentDate.toISOString().substr(0, 16);
+            const currentDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(currentDate.getDate() - 7);
+
+            // Format dates as strings in the format "YYYY-MM-DDTHH:mm"
+            const currentDateString = currentDate.toISOString().substr(0, 16);
+            const startDateString = startDate.toISOString().substr(0, 16);
+
+            // Set the value of the "start_date" input element to one week before the current date and time
+            const startInput = document.querySelector('input[name="start_date"]');
+            if (startInput) {
+                startInput.value = startDateString;
+            } else {
+                console.error('Could not find "start_date" input element');
+            }
+
             // Set the value of the "end_date" input element to the current date and time
-            document.querySelector('input[name="end_date"]').value = dateString;
+            const endInput = document.querySelector('input[name="end_date"]');
+            if (endInput) {
+                endInput.value = currentDateString;
+            } else {
+                console.error('Could not find "end_date" input element');
+            }
         }
 
         function getStartDate() {
@@ -117,7 +135,6 @@
                 var formData = new FormData(this); // create a FormData object from the form
 
 
-
                 // submit the form using AJAX
                 $.ajax({
                     url: '{{ route('verif_transaction_ajax') }}', // URL to fetch the data
@@ -137,7 +154,7 @@
                         var status = formData.get("status")
 
                         if (status == "1" || status == "3") {
-                            message = "Hallo " + donaturName  +", Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                            message = "Hallo " + donaturName + ", Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
                                 "Sedekahmu berhasil diproses dengan nilai terverifikasi sejumlah " + jumlahSedekah + " pada program " + namaProgram;
                         } else if (status == "2") {
                             message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
@@ -161,19 +178,11 @@
 
 
             $('#168trs').DataTable({
-                processing: true, // Show the loading indicator
-                processing: {
-                    "color": "#00c0ef" // Set the color of the loading indicator
-                },
                 ordering: true,
                 serverSide: true,
                 initComplete: function () {
                     Swal.close();
                 },
-                columnDefs: [{
-                    orderable: true,
-                    targets: 0
-                }],
                 dom: 'B<"clear">Tlfrtip<"bottom">',
                 "lengthMenu": [
                     [10, 25, 50, -1],
@@ -196,8 +205,39 @@
                         previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
                     }
                 },
+                columnDefs: [
+                    {
+                        target: 4,
+                        visible: false,
+                    },
+                    {
+                        target: 6,
+                        visible: false,
+                    },
+                    {
+                        target: 11,
+                        visible: false,
+                    },
+                ],
+                order: [
+                    [10, "desc"]
+                ],
+                buttons: [
+                    // {extend: 'colvis', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+                    {extend: 'copy', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+                    {extend: 'csv', className: 'btn btn-primary glyphicon glyphicon-save-file'},
+                    {
+                        extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
+                        exportOptions: {
+                            columns: [0, 2, 4, 6, 7, 8, 10, 11], // exclude the first and last columns
+                            stripHtml: true
+                        },
+                    },
+                    {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
+                    {extend: 'print', className: 'btn btn-primary glyphicon glyphicon-print'}
+                ],
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {data: 'id', name: 'id', orderable: true},
                     {
                         data: 'payment_photo',
                         name: 'payment_photo',
@@ -205,7 +245,7 @@
                             return `<img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain" src='${data}' alt="">`;
                         }
                     },
-                    {data: 'user_name', name: 'user_name'},
+                    {data: 'user_name', name: 'user_name', orderable: true},
                     {
                         data: 'nominal',
                         name: 'nominal',
@@ -221,8 +261,17 @@
                         }
                     },
                     {
+                        data: 'nominal',
+                        name: 'nominal_export',
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            return data;
+                        }
+                    },
+                    {
                         data: 'nominal_net',
                         name: 'nominal_net',
+                        orderable: true,
                         defaultContent: "",
                         render: function (data, type, row, meta) {
                             // Format the nominal as Indonesian rupiah
@@ -233,6 +282,20 @@
                                 });
                             } else {
                                 "-"
+                            }
+                        }
+                    },
+                    {
+                        data: 'nominal_net',
+                        name: 'nominal_netgg',
+                        orderable: true,
+                        defaultContent: "",
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            if (data != null) {
+                                return data;
+                            } else {
+                                return null;
                             }
                         }
                     },
@@ -251,6 +314,7 @@
                     {
                         data: null,
                         name: 'all_data_2',
+                        orderable: true,
                         render: function (data, type, row, meta) {
                             return `
                             <button type="button" class="btn btn-primary mb-2"
@@ -275,21 +339,15 @@
                         `;
                         }
                     },
-                    {data: 'created_at', name: 'created_at'},
-
-                ],
-                buttons: [
-                    // {extend: 'colvis', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
-                    {extend: 'copy', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
-                    {extend: 'csv', className: 'btn btn-primary glyphicon glyphicon-save-file'},
+                    {data: 'created_at', name: 'created_at', orderable: true},
                     {
-                        extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
-                        exportOptions: {
-                            stripHtml: true
+                        data: 'payment_photo',
+                        name: 'bukti_bayar',
+                        render: function (data, type, row, meta) {
+                            return data;
                         }
                     },
-                    {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
-                    {extend: 'print', className: 'btn btn-primary glyphicon glyphicon-print'}
+
                 ],
             }).on('preXhr.dt', function (e, settings, data) {
                 showLoadingP()

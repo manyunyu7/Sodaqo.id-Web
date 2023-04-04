@@ -15,10 +15,12 @@
     <!-- asColorpicker -->
     <link href="{{asset('/168_res')}}/vendor/jquery-asColorPicker/css/asColorPicker.min.css" rel="stylesheet">
     <!-- Material color picker -->
-    <link href="{{asset('/168_res')}}/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <link
+        href="{{asset('/168_res')}}/vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet">
 
     <!-- Pick date -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 @endpush
 
 @push("script")
@@ -73,18 +75,19 @@
 
     <script>
 
-        function showSuccessP(title,message){
+        function showSuccessP(title, message) {
             Swal.fire(
                 title,
                 message,
                 'success'
             )
         }
+
         function hideLoadingP() {
             Swal.close()
         }
 
-        function showErrorP(title,message){
+        function showErrorP(title, message) {
             Swal.fire({
                 icon: 'error',
                 title: title,
@@ -127,6 +130,7 @@
                             <h4 class="card-title">Filter Tanggal</h4>
                         </div>
                         <div class="card-body">
+                            <h5>Tanggal Hari Ini: {{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</h5>
                             <div class="row">
                                 <div class="mb-3  col-xl-6 col-md-12">
                                     <label class="form-label">Tanggal Awal</label>
@@ -138,12 +142,13 @@
                                 <div class="col-xl-6 col-md-12">
                                     <label class="form-label">Tanggal Akhir</label>
                                     <input type="datetime-local" name="end_date" class="form-control"
-                                           placeholder="" >
+                                           placeholder="">
                                 </div>
 
 
-
-                                <button  type="button" class="btn btn-xs btn-outline-dark btn-block filter-date">Tampilkan</button>
+                                <button type="button" class="btn btn-xs btn-outline-dark btn-block filter-date">
+                                    Tampilkan
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -157,11 +162,14 @@
                             <h3 class="tv-verified-count"></h3>
                             <div class="progress mb-2">
                                 <div class="pg-verified-percent progress-bar progress-animated bg-primary"
-                                     ></div>
+                                ></div>
                             </div>
                             <small><span class="tv-verified-percent"> </span> % dari Total Transaksi</small>
-                            <button  type="button" class="btn btn-xs btn-outline-dark filter-verified">Terverifikasi</button>
-                            <button  type="button" class="btn btn-xs btn-outline-dark mr-2 filter-verified-w">Dengan Catatan</button>
+                            <button type="button" class="btn btn-xs btn-outline-dark filter-verified">Terverifikasi
+                            </button>
+                            <button type="button" class="btn btn-xs btn-outline-dark mr-2 filter-verified-w">Dengan
+                                Catatan
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -205,7 +213,9 @@
                                     <p class="mb-1">Jumlah Transaksi</p>
                                     <h3 class="text-white tv-all-count"></h3>
                                     <small class="mb-2"></small>
-                                    <button  type="button" class="btn btn-xs btn-outline-dark mr-2 filter-all">Tampilkan Semua</button>
+                                    <button type="button" class="btn btn-xs btn-outline-dark mr-2 filter-all">Tampilkan
+                                        Semua
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +255,7 @@
                             <h3 class="tv-accumulated-net"></h3>
 
                             <small>
-                               Donasi Bersih dipotong dengan persentase biaya admin sebesar
+                                Donasi Bersih dipotong dengan persentase biaya admin sebesar
                                 <span class="text-blue tv-fee"></span>
                             </small>
 
@@ -258,8 +268,17 @@
                         <div class="card-header">
                             <h4 class="card-title">Jumlah Sedekah</h4>
                         </div>
-                        <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="myChart"  style="display: block; width: 513px; height: 256px;" width="513" height="256" class="mychart chartjs-render-monitor"></canvas>
+                        <div class="card-body">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <canvas id="myChart" style="display: block; width: 513px; height: 256px;" width="513"
+                                    height="256" class="mychart chartjs-render-monitor"></canvas>
                         </div>
                     </div>
                 </div>
@@ -269,8 +288,17 @@
                         <div class="card-header">
                             <h4 class="card-title">Jumlah Transaksi</h4>
                         </div>
-                        <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="myChart2"  style="display: block; width: 513px; height: 256px;" width="513" height="256" class="mychart chartjs-render-monitor"></canvas>
+                        <div class="card-body">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <canvas id="myChart2" style="display: block; width: 513px; height: 256px;" width="513"
+                                    height="256" class="mychart chartjs-render-monitor"></canvas>
                         </div>
                     </div>
                 </div>
@@ -291,11 +319,14 @@
                                         <th data-sortable="">Img</th>
                                         <th data-sortable="">Nama</th>
                                         <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Account</th>
                                         <th data-sortable="">Status</th>
                                         <th data-sortable=""></th>
                                         <th data-sortable="">Diinput Pada</th>
+                                        <th data-sortable="">Link Bukti Pembayaran</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -391,14 +422,15 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary mitmit "  data-bs-dismiss="modal">Save changes</button>
+                            <button type="submit" class="btn btn-primary mitmit " data-bs-dismiss="modal">Save changes
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        @include('user_sodaqo_check.script')
+    @include('user_sodaqo_check.script')
 
 @endsection
 

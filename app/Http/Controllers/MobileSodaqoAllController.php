@@ -171,10 +171,17 @@ class MobileSodaqoAllController extends Controller
                 $item->creator_photo_path = strpos($item->creator_photo, 'http') === false ? url('/') . $item->creator_photo : $item->creator_photo;
 
 
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
+                $item->remaining_time = Carbon::parse($item->time_limit)->diffInHours(Carbon::now());
+
                 Carbon::setLocale('id');
                 $item->remaining_time_desc =
                 $diff = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,);
+
+                $isPastDay = Carbon::parse($item->time_limit)->isPast() && $item->remaining_time < 24;
+                if ($isPastDay) {
+                    $item->remaining_time = 0;
+                }
+
                 return $item;
             });
 
@@ -209,10 +216,17 @@ class MobileSodaqoAllController extends Controller
                 $item->fundraising_target_formatted = 'Rp ' . number_format($item->fundraising_target, 2, ',', '.');
                 $item->photo_path = url('/') . $item->photo;
                 $item->creator_photo_path = url('/') . $item->creator_photo;
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
+                $item->remaining_time = Carbon::parse($item->time_limit)->diffInHours(Carbon::now());
+
                 Carbon::setLocale('id');
                 $item->remaining_time_desc =
                 $diff = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,);
+
+                $isPastDay = Carbon::parse($item->time_limit)->isPast() && $item->remaining_time < 24;
+                if ($isPastDay) {
+                    $item->remaining_time = 0;
+                }
+
                 return $item;
             })->first();
 
@@ -248,12 +262,17 @@ class MobileSodaqoAllController extends Controller
                 $item->photo_path = url('/') . $item->photo;
                 $item->creator_photo_path = url('/') . $item->creator_photo;
                 Carbon::setLocale('id');
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
+                $item->remaining_time = Carbon::parse($item->time_limit)->diffInHours(Carbon::now());
 
                 if ($item->time_limit != 0) {
                     $item->remaining_time_desc = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,) . " lagi";
                 } else {
                     $item->remaining_time_desc = "";
+                }
+
+                $isPastDay = Carbon::parse($item->time_limit)->isPast() && $item->remaining_time < 24;
+                if ($isPastDay) {
+                    $item->remaining_time = 0;
                 }
 
                 return $item;

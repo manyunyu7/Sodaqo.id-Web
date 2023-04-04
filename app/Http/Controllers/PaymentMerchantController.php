@@ -111,14 +111,16 @@ class PaymentMerchantController extends Controller
     {
         $data = PaymentMerchant::findOrFail($id);
         $account = DonationAccount::where("payment_merchant_id",'=',$id)->count();
+        $stat = 0;
         if ($account == 0){
-           $data->delete();
+            $stat =  $data->delete();
         }else{
             $data->is_deleted = 1;
             $data->status = -99;
             $data->name = $data->name." (Dihapus)";
+            $stat = $data->save();
         }
-        if ($data->save()) {
+        if ($stat==1) {
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,

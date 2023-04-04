@@ -241,7 +241,6 @@ class TransactionController extends Controller
         if ($statSended!=""){
                 $mymy->where("user_sodaqos.status", '=', $statSended);
         }
-
         return $mymy->get();
     }
 

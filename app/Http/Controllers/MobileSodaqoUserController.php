@@ -157,7 +157,7 @@ class MobileSodaqoUserController extends Controller
 
     public function store(Request $request)
     {
-
+        sleep(8);
         $data = new UserSodaqo();
         $data->sodaqo_id = $request->sodaqo_id;
         $data->user_id = $request->user_id;
