@@ -110,13 +110,29 @@ class PaymentMerchantController extends Controller
     public function delete(Request $request, $id)
     {
         $data = PaymentMerchant::findOrFail($id);
-        $account = DonationAccount::where("payment_merchant_id",'=',$id)->count();
-        if ($account == 0){
-           $data->delete();
-        }else{
-            $data->is_deleted = 1;
-            $data->status = -99;
-            $data->name = $data->name." (Dihapus)";
+        $account = DonationAccount::where("payment_merchant_id", '=', $id)->count();
+        if ($account == 0) {
+            if ($data->delete()) {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseSuccessWithData(
+                        200, 1, 200,
+                        "Berhasil Menghapus Data",
+                        "Success",
+                        Auth::user(),
+                    );
+                return back()->with(["success" => "Berhasil Menghapus Data"]);
+            } else {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseErrorWithData(
+                        400, 3, 400,
+                        "Berhasil Menghapus Data",
+                        "Success",
+                        ""
+                    );
+                return back()->with(["errors" => "Gagal Menghapus Data"]);
+            }
+        } else {
+            $data->status = 0;
         }
         if ($data->save()) {
             if ($request->is('api/*'))

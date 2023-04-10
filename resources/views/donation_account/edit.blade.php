@@ -29,7 +29,7 @@
             <div class="row page-titles">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Rekening</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Edit</a></li>
                 </ol>
             </div>
             <!-- row -->
@@ -57,15 +57,6 @@
                                                     width="275">
                                             </div>
 
-                                            <label class="col-form-label mt-4">Foto Baru</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group">
-                                                    <div class="form-file">
-                                                        <input id="formFile168" type="file" name="photo"
-                                                               class="form-file-input form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="mb-3 col-md-12">
@@ -77,7 +68,7 @@
 
                                         <div class="col-md-12">
                                             <label for="">Status</label>
-                                            <select class="form-control" name="status" required id="">
+                                            <select class="default-select form-control wide mb-3" name="status" required id="">
                                                 <option>Pilih Status</option>
                                                 <option @if($data->status==1) selected @endif value="1">Aktif</option>
                                                 <option @if($data->status==2) selected @endif value="2">Non-Aktif / Dihapus
@@ -102,7 +93,7 @@
 
                                     <div class="mb-3 col-md-12">
                                         <label class="form-label" for="basicInput">Jenis Merchant</label>
-                                        <select class="form-control default-select form-control wide mb-3" name="merchant_id" required>
+                                        <select class="form-control default-select form-control wide mb-3" name="merchant_id">
                                             <option value="">Pilih Merchant</option>
                                             @forelse($merchants as $item)
                                                 <option
@@ -135,9 +126,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </form>
         </div>
