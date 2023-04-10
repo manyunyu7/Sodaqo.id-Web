@@ -91,16 +91,14 @@
                                                 @if($data->status==1)
                                                     <a href="javascript:void(0)"
                                                        class="btn btn-success btn-rounded light">Aktif</a>
-                                                @endif
-
-                                                @if($data->status==0)
+                                                @elseif($data->status==0)
                                                     <a href="javascript:void(0)"
                                                        class="btn btn-danger btn-rounded light">Non Aktif</a>
-                                                @endif
-
-                                                @if($data->status==-99)
+                                                @elseif($data->status==-99)
                                                     <a href="javascript:void(0)"
                                                        class="btn btn-outline-secondary btn-rounded light">Dihapus</a>
+                                                @else
+                                                    {{$data->status}}
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>

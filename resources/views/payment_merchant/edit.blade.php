@@ -90,7 +90,7 @@
                                                                         @endif value="1">Aktif
                                                                 </option>
                                                                 <option @if($data->status==2) selected
-                                                                        @endif value="2">Non-Aktif / Dihapus
+                                                                        @endif value="0">Non-Aktif / Dihapus
                                                                 </option>
                                                             </select>
                                                         </div>
