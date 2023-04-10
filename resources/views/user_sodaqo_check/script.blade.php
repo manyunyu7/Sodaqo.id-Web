@@ -5,14 +5,6 @@
     <script>
         let myFilter = "";
 
-        function som() {
-            var currentDate = new Date();
-            // Get the current date and time in the format "YYYY-MM-DDTHH:mm"
-            var dateString = currentDate.toISOString().substr(0, 16);
-            // Set the value of the "end_date" input element to the current date and time
-            document.querySelector('input[name="end_date"]').value = dateString;
-        }
-
         function getStartDate() {
             let date = document.querySelector('input[name="start_date"]').value;
             return date
@@ -106,7 +98,7 @@
         $(document).ready(function () {
             // Initialize DataTables
             reloadSummary()
-            som();
+            setDateTimeInputs()
             renderTransactionCountChart()
 
 
@@ -380,6 +372,37 @@
 
 
     <script>
+
+        function setDateTimeInputs() {
+            try {
+                const currentDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(currentDate.getDate() - 7);
+
+                // Format dates as strings in the format "YYYY-MM-DDTHH:mm"
+                const currentDateString = currentDate.toISOString().substr(0, 16);
+                const startDateString = startDate.toISOString().substr(0, 16);
+
+                // Set the value of the "start_date" input element to one week before the current date and time
+                const startInput = document.querySelector('input[name="start_date"]');
+                if (startInput) {
+                    startInput.value = startDateString;
+                } else {
+                    console.error('Could not find "start_date" input element');
+                }
+
+                // Set the value of the "end_date" input element to the current date and time
+                const endInput = document.querySelector('input[name="end_date"]');
+                if (endInput) {
+                    endInput.value = currentDateString;
+                } else {
+                    console.error('Could not find "end_date" input element');
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
+
         function showLoadingIndicator() {
             var loadingIndicator = document.querySelector('.loading-indicator');
             loadingIndicator.style.display = 'block';

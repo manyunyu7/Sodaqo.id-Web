@@ -128,6 +128,9 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-xl-12">
+                                    <h5>Tanggal Hari Ini: {{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</h5>
+                                </div>
                                 <div class="mb-3  col-xl-6 col-md-12">
                                     <label class="form-label">Tanggal Awal</label>
                                     <input type="datetime-local" name="start_date" class="form-control"
