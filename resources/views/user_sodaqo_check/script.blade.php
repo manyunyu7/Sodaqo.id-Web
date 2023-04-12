@@ -109,7 +109,6 @@
                 var formData = new FormData(this); // create a FormData object from the form
 
 
-
                 // submit the form using AJAX
                 $.ajax({
                     url: '{{ route('verif_transaction_ajax') }}', // URL to fetch the data
@@ -129,7 +128,7 @@
                         var status = formData.get("status")
 
                         if (status == "1" || status == "3") {
-                            message = "Hallo " + donaturName  +", Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
+                            message = "Hallo " + donaturName + ", Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
                                 "Sedekahmu berhasil diproses dengan nilai terverifikasi sejumlah " + jumlahSedekah + " pada program " + namaProgram;
                         } else if (status == "2") {
                             message = "Hallo " + donaturName + " " + number + " Jazakallahu Khairan, Terima Kasih sudah bersedekah di Sodaqo.id, " +
@@ -162,14 +161,14 @@
                 initComplete: function () {
                     Swal.close();
                 },
-                columnDefs: [{
-                    orderable: true,
-                    targets: 0
-                }],
+                "columnDefs": [
+                    {"targets": [5, 7,11], "visible": false},
+                    // {"targets": [3], "searchable": false}
+                ],
                 dom: 'B<"clear">Tlfrtip<"bottom">',
                 "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
+                    [3,5,8,10, 25, 50, -1],
+                    [3,5,8,10, 25, 50, "All"]
                 ],
                 ajax: {
                     url: '{{ route('donations-data-ajax') }}', // URL to fetch the data
@@ -189,6 +188,33 @@
                     }
                 },
                 columns: [
+                    {
+                        data: null,
+                        name: 'all_data_2',
+                        render: function (data, type, row, meta) {
+                            return `
+                            <button type="button" class="btn btn-primary mb-2"
+                                    data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg"
+                                    data-img-src='${data.payment_photo}'
+                                    data-aidi='${data.id}'
+                                    data-user-name='${data.user_name}'
+                                    data-uscon='${data.user_contact}'
+                                    data-nominal='${data.nominal.toLocaleString(undefined, {minimumFractionDigits: 2})}'
+                                    data-qw='${data.payment_number}'
+                                    data-er='${data.payment_name}'
+                                    data-ty='${data.payment_merchant_name}'
+                                    data-xss='${data.created_at}'
+                                    data-created='${data.created_at}'
+                                    data-razky='${data.user_photo}'
+                                   data-nomnet='${data.nominal_net ? data.nominal_net : ''}'
+                                    data-donm='${data.doa}'
+                                    data-vvv='${data.notes_admin ? data.notes_admin : ''}'
+                                    data-valid='${data.status}'>
+                                Lihat Detail
+                            </button>
+                        `;
+                        }
+                    },
                     {data: 'id', name: 'id'},
                     {
                         data: 'payment_photo',
@@ -213,6 +239,18 @@
                         }
                     },
                     {
+                        data: 'nominal',
+                        name: 'nominal_raw',
+                        render: function (data, type, row, meta) {
+                            if (data != null) {
+                                return data;
+                            } else {
+                                0
+                            }
+                        }
+                    },
+                    {
+                        orderable: true,
                         data: 'nominal_net',
                         name: 'nominal_net',
                         defaultContent: "",
@@ -225,6 +263,20 @@
                                 });
                             } else {
                                 "-"
+                            }
+                        }
+                    },
+                    {
+                        orderable: true,
+                        data: 'nominal_net',
+                        name: 'nominal_net_raw',
+                        defaultContent: "",
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            if (data != null) {
+                                return data;
+                            } else {
+                                0
                             }
                         }
                     },
@@ -241,33 +293,17 @@
                         }
                     },
                     {
-                        data: null,
-                        name: 'all_data_2',
+                        orderable: true,
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'payment_photo',
+                        name: 'payment_photo_raw',
                         render: function (data, type, row, meta) {
-                            return `
-                            <button type="button" class="btn btn-primary mb-2"
-                                    data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg"
-                                    data-img-src='${data.payment_photo}'
-                                    data-aidi='${data.id}'
-                                    data-user-name='${data.user_name}'
-                                    data-uscon='${data.user_contact}'
-                                    data-nominal='${data.nominal.toLocaleString(undefined, {minimumFractionDigits: 2})}'
-                                    data-qw='${data.payment_number}'
-                                    data-er='${data.payment_name}'
-                                    data-ty='${data.payment_merchant_name}'
-                                    data-xss='${data.created_at}'
-                                    data-created='${data.created_at}'
-                                    data-razky='${data.user_photo}'
-                                   data-nomnet='${data.nominal_net ? data.nominal_net : ''}'
-                                    data-donm='${data.doa}'
-                                    data-vvv='${data.notes_admin ? data.notes_admin : ''}'
-                                    data-valid='${data.status}'>
-                                Edit
-                            </button>
-                        `;
+                            return `${data}`;
                         }
                     },
-                    {data: 'created_at', name: 'created_at'},
 
                 ],
                 buttons: [
@@ -277,7 +313,8 @@
                     {
                         extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
                         exportOptions: {
-                            stripHtml: true
+                            stripHtml: true,
+                            columns: [1,3,5,7,8,9,10,11] // include only the first and third columns
                         }
                     },
                     {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
@@ -377,7 +414,7 @@
             try {
                 const currentDate = new Date();
                 const startDate = new Date();
-                startDate.setDate(currentDate.getDate() - 7);
+                startDate.setDate(currentDate.getDate() - 900);
 
                 // Format dates as strings in the format "YYYY-MM-DDTHH:mm"
                 const currentDateString = currentDate.toISOString().substr(0, 16);

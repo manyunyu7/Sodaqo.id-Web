@@ -290,15 +290,18 @@
                                 <table id="168trs" class="display" style="min-width: 845px">
                                     <thead>
                                     <tr>
+                                        <th data-sortable="">Lihat Detail</th>
                                         <th data-sortable="">No</th>
                                         <th data-sortable="">Img</th>
-                                        <th data-sortable="">Nama</th>
+                                        <th data-sortable="">Nama Donatur</th>
                                         <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Account</th>
                                         <th data-sortable="">Status</th>
-                                        <th data-sortable=""></th>
                                         <th data-sortable="">Diinput Pada</th>
+                                        <th data-sortable="">Link Bukti Pembayaran</th>
                                     </tr>
                                     </thead>
                                     <tbody>
