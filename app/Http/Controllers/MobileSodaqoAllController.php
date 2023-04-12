@@ -213,6 +213,7 @@ class MobileSodaqoAllController extends Controller
             ->whereNull('s.is_deleted')
             ->groupBy('s.id')
             ->limit(5)
+            ->orderBy("s.created_at","DESC")
             ->get()
             ->map(function ($item) {
                 return $this->appendSodaqo($item);
