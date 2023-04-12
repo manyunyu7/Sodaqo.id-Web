@@ -244,7 +244,6 @@ class MobileSodaqoAllController extends Controller
             $item->remaining_time = -$diffDays;
         }
 
-        $item->story = "";
         if ($item->time_limit != 0) {
             $item->remaining_time_desc = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,) . " lagi";
         } else {
