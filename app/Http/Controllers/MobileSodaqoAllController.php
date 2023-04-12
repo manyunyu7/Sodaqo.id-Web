@@ -16,7 +16,7 @@ class MobileSodaqoAllController extends Controller
 
     public function getPaymentAccount()
     {
-        return DonationAccount::where("status", "=", 1)->get();
+        return DonationAccount::where("status", "=", 1)->isNotDeleted()->get();
     }
 
     public function getPeople(Request $request, $id)
@@ -161,21 +161,7 @@ class MobileSodaqoAllController extends Controller
         $results = $results->groupBy('s.id')
             ->paginate(20, ['*'], 'page', $page)
             ->map(function ($item) {
-                $item->total_nominal = (double)$item->total_nominal;
-                $item->total_nominal_net = (double)$item->total_nominal_net;
-                $item->total_nominal_formatted = 'Rp ' . number_format($item->total_nominal, 2, ',', '.');
-                $item->total_nominal_net_formatted = 'Rp ' . number_format($item->total_nominal_net, 2, ',', '.');
-                $item->fundraising_target_formatted = 'Rp ' . number_format($item->fundraising_target, 2, ',', '.');
-
-                $item->photo_path = strpos($item->photo, 'http') === false ? url('/') . $item->photo : $item->photo;
-                $item->creator_photo_path = strpos($item->creator_photo, 'http') === false ? url('/') . $item->creator_photo : $item->creator_photo;
-
-
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
-                Carbon::setLocale('id');
-                $item->remaining_time_desc =
-                $diff = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,);
-                return $item;
+                return $this->appendSodaqo($item);
             });
 
         return $results;
@@ -202,18 +188,7 @@ class MobileSodaqoAllController extends Controller
             ->groupBy('s.id')
             ->get()
             ->map(function ($item) {
-                $item->total_nominal = (double)$item->total_nominal;
-                $item->total_nominal_net = (double)$item->total_nominal_net;
-                $item->total_nominal_formatted = 'Rp ' . number_format($item->total_nominal, 2, ',', '.');
-                $item->total_nominal_net_formatted = 'Rp ' . number_format($item->total_nominal_net, 2, ',', '.');
-                $item->fundraising_target_formatted = 'Rp ' . number_format($item->fundraising_target, 2, ',', '.');
-                $item->photo_path = url('/') . $item->photo;
-                $item->creator_photo_path = url('/') . $item->creator_photo;
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
-                Carbon::setLocale('id');
-                $item->remaining_time_desc =
-                $diff = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,);
-                return $item;
+                return $this->appendSodaqo($item);
             })->first();
 
         $timeline = SodaqoTimeline::where("sodaqo_id", "=", $id)->get();
@@ -240,27 +215,43 @@ class MobileSodaqoAllController extends Controller
             ->limit(5)
             ->get()
             ->map(function ($item) {
-                $item->total_nominal = (double)$item->total_nominal;
-                $item->total_nominal_net = (double)$item->total_nominal_net;
-                $item->total_nominal_formatted = 'Rp ' . number_format($item->total_nominal, 2, ',', '.');
-                $item->total_nominal_net_formatted = 'Rp ' . number_format($item->total_nominal_net, 2, ',', '.');
-                $item->fundraising_target_formatted = 'Rp ' . number_format($item->fundraising_target, 2, ',', '.');
-                $item->photo_path = url('/') . $item->photo;
-                $item->creator_photo_path = url('/') . $item->creator_photo;
-                Carbon::setLocale('id');
-                $item->remaining_time = Carbon::parse($item->time_limit)->diffInDays(Carbon::now());
-
-                if ($item->time_limit != 0) {
-                    $item->remaining_time_desc = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,) . " lagi";
-                } else {
-                    $item->remaining_time_desc = "";
-                }
-
-                return $item;
+                return $this->appendSodaqo($item);
             });
 
 
         return $results;
+    }
+
+    private function appendSodaqo($item)
+    {
+        $item->total_nominal = (double)$item->total_nominal;
+        $item->total_nominal_net = (double)$item->total_nominal_net;
+        $item->total_nominal_formatted = 'Rp ' . number_format($item->total_nominal, 2, ',', '.');
+        $item->total_nominal_net_formatted = 'Rp ' . number_format($item->total_nominal_net, 2, ',', '.');
+        $item->fundraising_target_formatted = 'Rp ' . number_format($item->fundraising_target, 2, ',', '.');
+        $item->photo_path = url('/') . $item->photo;
+        $item->creator_photo_path = url('/') . $item->creator_photo;
+        Carbon::setLocale('id');
+        $item->current_date = Carbon::now();
+
+
+        $isInPast = $item->current_date > Carbon::parse($item->time_limit);
+        $item->is_in_past = $isInPast;
+        $diffDays = Carbon::parse($item->time_limit)->diffInDays($item->current_date);
+        $item->remaining_time = $diffDays;
+
+        if ($isInPast){
+            $item->remaining_time = -$diffDays;
+        }
+
+        $item->story = "";
+        if ($item->time_limit != 0) {
+            $item->remaining_time_desc = Carbon::now()->diffForHumans(Carbon::parse($item->time_limit), true,) . " lagi";
+        } else {
+            $item->remaining_time_desc = "";
+        }
+
+        return $item;
     }
 
 }
