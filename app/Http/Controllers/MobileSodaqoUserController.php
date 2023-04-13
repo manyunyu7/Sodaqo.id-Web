@@ -22,7 +22,7 @@ class MobileSodaqoUserController extends Controller
                 's.photo as sodaqo_photo',
                 'a.account_number as payment_account_number',
                 'm.name as payment_merchant_name',
-                'm.m_description as how_to_pay',
+                'a.m_description as how_to_pay',
                 'm.photo as payment_merchant_photo'
             )
             ->leftJoin('sodaqos as s', 's.id', '=', 't.sodaqo_id')
