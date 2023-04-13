@@ -43,6 +43,7 @@ function getUrlParams(dParam) {
     // 		containerLayout: "full",
     // 	};
 
+    //default color_1 is white
     dezSettingsOptions = {
         typography: "cairo",
         version: "light",
