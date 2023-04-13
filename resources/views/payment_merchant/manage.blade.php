@@ -91,7 +91,7 @@
                                                 @if($data->status==1)
                                                     <span class="badge light badge-success">
 														<i class="fa fa-circle text-success me-1"></i>
-													Dihapus
+													Aktif
 													</span>
                                                 @elseif($data->status==0)
                                                     <span class="badge light badge-danger">
