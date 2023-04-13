@@ -88,26 +88,39 @@
                                             <td>{{ $data->account_number }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-success btn-rounded light">Aktif</a>
+                                                    <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Aktif
+													</span>
                                                 @endif
 
                                                 @if($data->status==0)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-danger btn-rounded light">Non Aktif</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Non-Aktif
+													</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 @if($data->merchant_status==1)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-success btn-rounded light">Aktif</a>
+                                                    @if($data->status==1)
+                                                        <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Aktif
+													</span>
+                                                    @endif
                                                 @elseif($data->merchant_status==0)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+												    	Non-Aktif
+													    </span>
                                                 @elseif($data->merchant_status==-99)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-danger btn-rounded light">Sudah
-                                                        Dihapus</a>
+                                                    @if($data->status==0)
+                                                        <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+												    	Sudah Dihapus
+													    </span>
+                                                    @endif
                                                 @else
                                                     {{$data->status}}
                                                 @endif

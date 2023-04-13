@@ -89,14 +89,20 @@
                                             <td>{{ $data->name }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-success btn-rounded light">Aktif</a>
+                                                    <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Dihapus
+													</span>
                                                 @elseif($data->status==0)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Non Aktif
+													</span>
                                                 @elseif($data->status==-99)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-secondary btn-rounded light">Dihapus</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Dihapus
+													</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
