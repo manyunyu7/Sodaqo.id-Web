@@ -29,7 +29,7 @@ class PaymentMerchantController extends Controller
      */
     public function viewManage()
     {
-        $datas = PaymentMerchant::isNotDeleted()->get();
+        $datas = PaymentMerchant::all();
         return view('payment_merchant.manage')->with(compact('datas'));
     }
 
@@ -111,7 +111,21 @@ class PaymentMerchantController extends Controller
     {
         $data = PaymentMerchant::findOrFail($id);
         $account = DonationAccount::where("payment_merchant_id", '=', $id)->count();
-        if ($account == 0) {
+        $canDeletePermanently = true;
+
+        $accounts = DonationAccount::where("payment_merchant_id", '=', $id)->get();
+
+        $transactionCount = 0;
+
+        foreach ($accounts as $index => $account) {
+            $transactionCount+=$account->countTransaction();
+            if ($account->countTransaction() > 0) {
+                $canDeletePermanently = false;
+            }
+        }
+
+
+        if ($canDeletePermanently) {
             if ($data->delete()) {
                 if ($request->is('api/*'))
                     return RazkyFeb::responseSuccessWithData(
@@ -125,24 +139,26 @@ class PaymentMerchantController extends Controller
                 if ($request->is('api/*'))
                     return RazkyFeb::responseErrorWithData(
                         400, 3, 400,
-                        "Berhasil Menghapus Data",
+                        "Berhasil Menghapus Data Secara Permanen",
                         "Success",
                         ""
                     );
                 return back()->with(["errors" => "Gagal Menghapus Data"]);
             }
-        } else {
+        }else {
             $data->status = 0;
         }
+
+        //save
         if ($data->save()) {
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,
-                    "Berhasil Menghapus Data",
+                    "Merchant dinonaktifkan karena telah memiliki $transactionCount transaksi",
                     "Success",
                     Auth::user(),
                 );
-            return back()->with(["success" => "Berhasil Menghapus Data"]);
+            return back()->with(["success" => "Merchant dinonaktifkan karena telah memiliki $transactionCount transaksi",]);
         } else {
             if ($request->is('api/*'))
                 return RazkyFeb::responseErrorWithData(

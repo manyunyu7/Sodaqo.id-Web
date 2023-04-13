@@ -2,7 +2,7 @@
 
 
 @section("header_name")
-    Pengguna
+    Payment Merchant
 @endsection
 
 @push('css')
@@ -74,7 +74,7 @@
                                         <th data-sortable="">Status</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Hapust</th>
+                                        <th data-sortable="">Hapus</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -89,16 +89,20 @@
                                             <td>{{ $data->name }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-success btn-rounded light">Aktif</a>
+                                                    <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Dihapus
+													</span>
                                                 @elseif($data->status==0)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-danger btn-rounded light">Non Aktif</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Non Aktif
+													</span>
                                                 @elseif($data->status==-99)
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-outline-secondary btn-rounded light">Dihapus</a>
-                                                @else
-                                                    {{$data->status}}
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Dihapus
+													</span>
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
@@ -108,11 +112,14 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-delete btn-danger btn-delete mr-2"
-                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
-                                                    Hapus Konten
-                                                </button>
+                                                @if($data->status!=-99 && $data->status!=0)
+                                                    <button id="{{ $data->id }}" type="button"
+                                                            class="btn btn-delete btn-danger btn-delete mr-2"
+                                                            onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                        Hapus Payment Merchant
+                                                    </button>
+                                                @endif
+
                                             </td>
                                             <form id="lala{{$data->id}}"
                                                   action='{{ url("payment-merchant/$data->id/delete") }}'
@@ -145,7 +152,7 @@
             // Use the Sweet Alert `swal` function to open a dialog
             swal({
                 title: "Apakah Anda yakin?",
-                text: "Tindakan ini tidak dapat dibatalkan.",
+                text: "Merchant ini akan dihapus jika tidak ada rekening terhubung, jika masih ada rekening terhubung atau telah digunakan dalam transaksi payment merchant akan dinonaktifkan",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Ya, hapus",

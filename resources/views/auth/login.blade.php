@@ -9,7 +9,7 @@
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Griya Sodaqo &#8211; Gerakan Sodaqo Indonesia">
-    <meta property="og:title" content="Griya Sodaqo : Gerakan Sodaqo Indonesi">
+    <meta property="og:title" content="Griya Sodaqo : Gerakan Sodaqo Indonesia">
     <meta property="og:description" content="Sodaqo.id telah memiliki banyak partner kolaborasi yang bersedia membantu orang orang yang membutuhkan bantuan. Selaijn itu, untuk saat ini SODAQO.id fokus menyantuni Anak Yatim Duafa yang tersebar di 17 Panti Asuhan yang berlokasi di Kota Bandung. Total penerima manfaat SODAQO adalah 451 Anak yatim">
     <meta property="og:image" content="http://feylabs.my.id/fm/apk/cover_sodaqo.png">
     <meta name="format-detection" content="telephone=no">
@@ -116,7 +116,7 @@
 <script src="{{ asset('/168_res') }}/vendor/global/global.min.js"></script>
 <script src="{{ asset('/168_res') }}/js/custom.min.js"></script>
 <script src="{{ asset('/168_res') }}/js/dlabnav-init.js"></script>
-<script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>
+{{--<script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>--}}
 <script src="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>
 </html>

@@ -128,6 +128,9 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-xl-12">
+                                    <h5>Tanggal Hari Ini: {{ \Carbon\Carbon::now()->format('d-m-Y H:i:s') }}</h5>
+                                </div>
                                 <div class="mb-3  col-xl-6 col-md-12">
                                     <label class="form-label">Tanggal Awal</label>
                                     <input type="datetime-local" name="start_date" class="form-control"
@@ -287,15 +290,18 @@
                                 <table id="168trs" class="display" style="min-width: 845px">
                                     <thead>
                                     <tr>
+                                        <th data-sortable="">Lihat Detail</th>
                                         <th data-sortable="">No</th>
                                         <th data-sortable="">Img</th>
-                                        <th data-sortable="">Nama</th>
+                                        <th data-sortable="">Nama Donatur</th>
                                         <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Nominal Donasi</th>
+                                        <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Terverifikasi</th>
                                         <th data-sortable="">Account</th>
                                         <th data-sortable="">Status</th>
-                                        <th data-sortable=""></th>
                                         <th data-sortable="">Diinput Pada</th>
+                                        <th data-sortable="">Link Bukti Pembayaran</th>
                                     </tr>
                                     </thead>
                                     <tbody>

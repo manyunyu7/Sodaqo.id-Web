@@ -79,7 +79,7 @@
                                             <label for="">Status</label>
                                             <select class="default-select form-control wide mb-3" name="status" id="">
                                                 <option value="1">Aktif</option>
-                                                <option value="0">Non-Aktif/Dihapus ( Tidak Ditampilkan di Pengguna)</option>
+                                                <option value="0">Non-Aktif (Tidak Ditampilkan di Pengguna)</option>
                                             </select>
                                         </div>
 
