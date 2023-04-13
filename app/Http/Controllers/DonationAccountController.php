@@ -48,7 +48,7 @@ class DonationAccountController extends Controller
     public function viewUpdate($id)
     {
         $data = DonationAccount::findOrFail($id);
-        $merchants = PaymentMerchant::isNotDeleted()->where('status', '=', '1')->get();
+        $merchants = PaymentMerchant::where('status', '=', '1')->get();
         return view('donation_account.edit')->with(compact('data', 'merchants'));
     }
 
@@ -163,7 +163,8 @@ class DonationAccountController extends Controller
     {
         $data = DonationAccount::findOrFail($id);
         $py = UserSodaqo::where("payment_id", '=', $id)->count();
-        if ($py == -99) {
+
+        if ($py <= 0) {
             if ($data->delete()) {
                 if ($request->is('api/*'))
                     return RazkyFeb::responseSuccessWithData(
@@ -188,6 +189,7 @@ class DonationAccountController extends Controller
             $data->status = 0;
             $data->name = $data->name;
         }
+
         if ($data->save()) {
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
