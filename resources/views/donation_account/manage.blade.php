@@ -103,24 +103,22 @@
                                             </td>
                                             <td>
                                                 @if($data->merchant_status==1)
-                                                    @if($data->status==1)
-                                                        <span class="badge light badge-success">
+                                                    <span class="badge light badge-success">
 														<i class="fa fa-circle text-success me-1"></i>
 													Aktif
-													</span>
                                                     @endif
-                                                @elseif($data->merchant_status==0)
-                                                    <span class="badge light badge-danger">
+                                                        @elseif($data->merchant_status==0)
+                                                            <span class="badge light badge-danger">
 														<i class="fa fa-circle text-danger me-1"></i>
 												    	Non-Aktif
 													    </span>
-                                                @elseif($data->merchant_status==-99)
-                                                    @if($data->status==0)
-                                                        <span class="badge light badge-danger">
+                                                        @elseif($data->merchant_status==-99)
+                                                            @if($data->status==0)
+                                                                <span class="badge light badge-danger">
 														<i class="fa fa-circle text-danger me-1"></i>
 												    	Sudah Dihapus
 													    </span>
-                                                    @endif
+                                                @endif
                                                 @else
                                                     {{$data->status}}
                                                 @endif
