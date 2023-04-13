@@ -9,6 +9,7 @@ class PaymentMerchant extends Model
 {
     use HasFactory;
 
+    protected  $hidden = ["m_description"];
     protected $appends = ['photo_path'];
 
     protected static function boot()

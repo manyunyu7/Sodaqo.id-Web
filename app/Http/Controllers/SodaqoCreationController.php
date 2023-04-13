@@ -200,7 +200,6 @@ class SodaqoCreationController extends Controller
                 );
             return back()->with(["errors" => "Gagal Menghapus Data"]);
         }
-
     }
 
 

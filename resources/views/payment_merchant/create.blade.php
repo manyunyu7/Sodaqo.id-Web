@@ -28,12 +28,12 @@
         <div class="container-fluid">
             <div class="row page-titles">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Rekening</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Payment Merchant</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah</a></li>
                 </ol>
             </div>
             <!-- row -->
-            <form action="{{ url('payment-merchant/store') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ url('payment-merchant/store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -42,7 +42,7 @@
                     <div class="col-lg-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Tambah Data Payment Merchant</h4>
+                                <h4 class="card-title">Tambah Payment Merchant</h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
@@ -57,11 +57,11 @@
                                                     width="275">
                                             </div>
 
-                                            <label class="col-form-label mt-4">Foto Baru</label>
+                                            <label class="col-form-label mt-4">Logo Payment Merchant</label>
                                             <div class="col-sm-9">
                                                 <div class="input-group">
                                                     <div class="form-file">
-                                                        <input id="formFile168" type="file" name="photo"
+                                                        <input accept="image/png, image/gif, image/jpeg" id="formFile168" type="file" name="photo"
                                                                class="form-file-input form-control">
                                                     </div>
                                                 </div>
@@ -69,23 +69,22 @@
                                         </div>
 
                                         <div class="mb-3 col-md-12">
-                                            <label class="form-label" for="basicInput">Nama Payment Merchant</label>
+                                            <label class="form-label" for="basicInput">Nama Bank/Wallet</label>
                                             <input type="text" name="name" required class="form-control"
                                                    value="{{ old('name') }}"
-                                                   placeholder="Nama Pemilik Akun">
+                                                   placeholder="Nama Bank/Wallet/Provider">
                                         </div>
 
                                         <div class="col-md-12">
                                             <label for="">Status</label>
                                             <select class="default-select form-control wide mb-3" name="status" id="">
                                                 <option value="1">Aktif</option>
-                                                <option value="0">Non-Aktif/Dihapus ( Tidak Ditampilkan di Pengguna)</option>
+                                                <option value="0">Non-Aktif (Tidak Ditampilkan di Pengguna)</option>
                                             </select>
                                         </div>
 
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-outline-primary">Tambahkan Merchant</button>
-                                        </div>
+                                        <button type="submit" class="btn btn-primary mt-5">Tambah Payment Merchant</button>
+
                                     </div>
 
 

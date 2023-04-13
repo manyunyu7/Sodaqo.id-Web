@@ -48,7 +48,7 @@ class DonationAccountController extends Controller
     public function viewUpdate($id)
     {
         $data = DonationAccount::findOrFail($id);
-        $merchants = PaymentMerchant::isNotDeleted()->where('status', '=', '1')->get();
+        $merchants = PaymentMerchant::where('status', '=', '1')->get();
         return view('donation_account.edit')->with(compact('data', 'merchants'));
     }
 
@@ -162,16 +162,35 @@ class DonationAccountController extends Controller
     public function delete(Request $request, $id)
     {
         $data = DonationAccount::findOrFail($id);
-        $py = UserSodaqo::where("payment_id",'=',$id)->count();
-        if ($py == -99){
-            $data->delete();
-        }else{
+        $py = UserSodaqo::where("payment_id", '=', $id)->count();
+
+        if ($py <= 0) {
+            if ($data->delete()) {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseSuccessWithData(
+                        200, 1, 200,
+                        "Berhasil Menghapus Data",
+                        "Success",
+                        Auth::user(),
+                    );
+                return back()->with(["success" => "Berhasil Menghapus Data"]);
+            } else {
+                if ($request->is('api/*'))
+                    return RazkyFeb::responseErrorWithData(
+                        400, 3, 400,
+                        "Berhasil Mengupdate Data",
+                        "Success",
+                        ""
+                    );
+                return back()->with(["errors" => "Gagal Menghapus Data"]);
+            }
+        } else {
             $data->is_deleted = 1;
-            $data->status = -99;
-            $data->name = $data->name." (Dihapus)";
-            $data->save();
+            $data->status = 0;
+            $data->name = $data->name;
         }
-        if ($data) {
+
+        if ($data->save()) {
             if ($request->is('api/*'))
                 return RazkyFeb::responseSuccessWithData(
                     200, 1, 200,
@@ -191,7 +210,6 @@ class DonationAccountController extends Controller
             return back()->with(["errors" => "Gagal Menghapus Data"]);
         }
     }
-
 
 
     public

@@ -11,7 +11,7 @@ class Sodaqo extends Model
 {
     use HasFactory;
 
-    protected $appends = ['photo_path', 'creator', "isHaveTarget",
+    protected $appends = ['photo_path', 'creator', "isHaveTarget","current_date",
         "fundraising_target_formatted","category_name","accumulated_amount"];
 
     public function scopeIsNotDeleted($query)
@@ -28,6 +28,10 @@ class Sodaqo extends Model
     {
         $user = User::find($this->owner_id);
         return $user;
+    }
+
+    function getCurrentDateAttribute(){
+        return Carbon::now();
     }
 
     function getCategoryNameAttribute()

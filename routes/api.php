@@ -93,30 +93,6 @@ Route::get('/colek-service', 'ColekController@colek');
 Route::get('/auth/colek', 'ColekController@colek');
 Route::post('/auth/registerNumber', 'StaffController@registerNumber');
 
-Route::prefix("ktp")->group(function () {
-    $cr = "KTPController";
-    Route::get('findNikMobile/{nik}', "$cr@findNikMobile");
-    Route::post('{nik}/uploadVerification', "$cr@uploadVerification");
-});
-
-Route::prefix("pengajuan")->group(function (){
-    $cr = "PengajuanSKUController";
-    $cr2 = "PengajuanTrackingController";
-    Route::any('self-check', "$cr@selfCheck");
-    Route::any('history', "$cr2@getHistory");
-    Route::any('activeEvent', "$cr@getActiveEvent");
-    Route::any('currentUser', "$cr@getCurrentUser");
-    Route::post('upload', "$cr@upload");
-});
-
-Route::prefix('chat')->group(function () {
-    Route::post('/store', 'ChatController@store');
-    Route::delete('/{id}/delete', 'RSChatController@delete');
-    Route::get('/get', 'RSChatController@getAll');
-    Route::get('topic/{id}/get', 'ChatController@getByTopic');
-    Route::get('user/{id}/get', 'ChatController@getByUser');
-});
-
 Route::prefix('user')->group(function () {
     Route::post('{id}/checkPassword', 'StaffController@checkPassword');
     Route::post('{id}/updatePasswordCompact', 'StaffController@updatePasswordCompact');

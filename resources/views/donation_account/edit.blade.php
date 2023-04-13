@@ -29,9 +29,19 @@
             <div class="row page-titles">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active"><a href="javascript:void(0)">Rekening</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Edit</a></li>
                 </ol>
             </div>
+
+            @if($data->merchant_status==0)
+                <div class="alert alert-danger alert-dismissible alert-alt fade show">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                    <strong>Perhatian!</strong> Payment Merchant dari rekening ini sedang tidak aktif atau telah
+                    dihapus, silakan edit <a href="{{url("/payment-merchant/".$data->merchant_detail->id."/edit")}}">disini</a>
+                </div>
+            @endif
+
             <!-- row -->
             <form action='{{ url("donation-account/$data->id/update") }}' enctype="multipart/form-data"
                   method="post">
@@ -43,7 +53,7 @@
                     <div class="col-lg-6 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Data Payment Merchant</h4>
+                                <h4 class="card-title">Data Rekening</h4>
                             </div>
                             <div class="card-body">
                                 <div class="basic-form">
@@ -53,19 +63,11 @@
                                             <div class="col-12">
                                                 <img
                                                     id="imgPreview"
-                                                    src="{{$data->merchant_detail->photo_path}}" alt="image" class="me-3 rounded"
+                                                    src="{{$data->merchant_detail->photo_path}}" alt="image"
+                                                    class="me-3 rounded"
                                                     width="275">
                                             </div>
 
-                                            <label class="col-form-label mt-4">Foto Baru</label>
-                                            <div class="col-sm-9">
-                                                <div class="input-group">
-                                                    <div class="form-file">
-                                                        <input id="formFile168" type="file" name="photo"
-                                                               class="form-file-input form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <div class="mb-3 col-md-12">
@@ -77,10 +79,12 @@
 
                                         <div class="col-md-12">
                                             <label for="">Status</label>
-                                            <select class="form-control" name="status" required id="">
+                                            <select class="default-select form-control wide mb-3" name="status" required
+                                                    id="">
                                                 <option>Pilih Status</option>
                                                 <option @if($data->status==1) selected @endif value="1">Aktif</option>
-                                                <option @if($data->status==2) selected @endif value="2">Non-Aktif / Dihapus
+                                                <option @if($data->status==2) selected @endif value="2">Non-Aktif /
+                                                    Dihapus
                                                 </option>
                                             </select>
                                         </div>
@@ -102,7 +106,8 @@
 
                                     <div class="mb-3 col-md-12">
                                         <label class="form-label" for="basicInput">Jenis Merchant</label>
-                                        <select class="form-control default-select form-control wide mb-3" name="merchant_id" required>
+                                        <select class="form-control default-select form-control wide mb-3"
+                                                name="merchant_id">
                                             <option value="">Pilih Merchant</option>
                                             @forelse($merchants as $item)
                                                 <option
@@ -135,9 +140,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </form>
         </div>

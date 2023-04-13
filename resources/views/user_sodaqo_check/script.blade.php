@@ -5,32 +5,6 @@
     <script>
         let myFilter = "";
 
-        function som() {
-            const currentDate = new Date();
-            const startDate = new Date();
-            startDate.setDate(currentDate.getDate() - 7);
-
-            // Format dates as strings in the format "YYYY-MM-DDTHH:mm"
-            const currentDateString = currentDate.toISOString().substr(0, 16);
-            const startDateString = startDate.toISOString().substr(0, 16);
-
-            // Set the value of the "start_date" input element to one week before the current date and time
-            const startInput = document.querySelector('input[name="start_date"]');
-            if (startInput) {
-                startInput.value = startDateString;
-            } else {
-                console.error('Could not find "start_date" input element');
-            }
-
-            // Set the value of the "end_date" input element to the current date and time
-            const endInput = document.querySelector('input[name="end_date"]');
-            if (endInput) {
-                endInput.value = currentDateString;
-            } else {
-                console.error('Could not find "end_date" input element');
-            }
-        }
-
         function getStartDate() {
             let date = document.querySelector('input[name="start_date"]').value;
             return date
@@ -124,7 +98,7 @@
         $(document).ready(function () {
             // Initialize DataTables
             reloadSummary()
-            som();
+            setDateTimeInputs()
             renderTransactionCountChart()
 
 
@@ -178,15 +152,23 @@
 
 
             $('#168trs').DataTable({
+                processing: true, // Show the loading indicator
+                processing: {
+                    "color": "#00c0ef" // Set the color of the loading indicator
+                },
                 ordering: true,
                 serverSide: true,
                 initComplete: function () {
                     Swal.close();
                 },
+                "columnDefs": [
+                    {"targets": [5, 7,11], "visible": false},
+                    // {"targets": [3], "searchable": false}
+                ],
                 dom: 'B<"clear">Tlfrtip<"bottom">',
                 "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
+                    [3,5,8,10, 25, 50, -1],
+                    [3,5,8,10, 25, 50, "All"]
                 ],
                 ajax: {
                     url: '{{ route('donations-data-ajax') }}', // URL to fetch the data
@@ -205,116 +187,10 @@
                         previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>'
                     }
                 },
-                columnDefs: [
-                    {
-                        target: 4,
-                        visible: false,
-                    },
-                    {
-                        target: 6,
-                        visible: false,
-                    },
-                    {
-                        target: 11,
-                        visible: false,
-                    },
-                ],
-                order: [
-                    [10, "desc"]
-                ],
-                buttons: [
-                    // {extend: 'colvis', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
-                    {extend: 'copy', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
-                    {extend: 'csv', className: 'btn btn-primary glyphicon glyphicon-save-file'},
-                    {
-                        extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
-                        exportOptions: {
-                            columns: [0, 2, 4, 6, 7, 8, 10, 11], // exclude the first and last columns
-                            stripHtml: true
-                        },
-                    },
-                    {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
-                    {extend: 'print', className: 'btn btn-primary glyphicon glyphicon-print'}
-                ],
                 columns: [
-                    {data: 'id', name: 'id', orderable: true},
-                    {
-                        data: 'payment_photo',
-                        name: 'payment_photo',
-                        render: function (data, type, row, meta) {
-                            return `<img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain" src='${data}' alt="">`;
-                        }
-                    },
-                    {data: 'user_name', name: 'user_name', orderable: true},
-                    {
-                        data: 'nominal',
-                        name: 'nominal',
-                        render: function (data, type, row, meta) {
-                            // Format the nominal as Indonesian rupiah
-                            var rupiah = data.toLocaleString('id-ID', {
-                                style: 'currency',
-                                currency: 'IDR'
-                            });
-
-                            // Return the formatted value
-                            return rupiah;
-                        }
-                    },
-                    {
-                        data: 'nominal',
-                        name: 'nominal_export',
-                        render: function (data, type, row, meta) {
-                            // Format the nominal as Indonesian rupiah
-                            return data;
-                        }
-                    },
-                    {
-                        data: 'nominal_net',
-                        name: 'nominal_net',
-                        orderable: true,
-                        defaultContent: "",
-                        render: function (data, type, row, meta) {
-                            // Format the nominal as Indonesian rupiah
-                            if (data != null) {
-                                return data.toLocaleString('id-ID', {
-                                    style: 'currency',
-                                    currency: 'IDR'
-                                });
-                            } else {
-                                "-"
-                            }
-                        }
-                    },
-                    {
-                        data: 'nominal_net',
-                        name: 'nominal_netgg',
-                        orderable: true,
-                        defaultContent: "",
-                        render: function (data, type, row, meta) {
-                            // Format the nominal as Indonesian rupiah
-                            if (data != null) {
-                                return data;
-                            } else {
-                                return null;
-                            }
-                        }
-                    },
-                    {data: 'payment_number', name: 'payment_number'},
-                    {
-                        data: ['status'],
-                        name: 'payment',
-                        render: function (data, type, row, meta) {
-                            return data == 1 ? '<a href="javascript:void(0)" class="btn btn-outline-success btn-rounded light">Terverifikasi</a>' :
-                                data == 0 ? '<a href="javascript:void(0)" class="btn btn-outline-danger btn-rounded light">Belum Diverifikasi</a>' :
-                                    data == 2 ? '<a href="javascript:void(0)" class="btn btn-outline-warning btn-rounded light">Tidak Sesuai</a>' :
-                                        data == 3 ? '<a href="javascript:void(0)" class="btn btn-outline-warning btn-rounded btn-xs light">Diterima Dengan Catatan</a>' :
-                                            data;
-                        }
-                    },
                     {
                         data: null,
                         name: 'all_data_2',
-                        orderable: true,
                         render: function (data, type, row, meta) {
                             return `
                             <button type="button" class="btn btn-primary mb-2"
@@ -334,20 +210,115 @@
                                     data-donm='${data.doa}'
                                     data-vvv='${data.notes_admin ? data.notes_admin : ''}'
                                     data-valid='${data.status}'>
-                                Edit
+                                Lihat Detail
                             </button>
                         `;
                         }
                     },
-                    {data: 'created_at', name: 'created_at', orderable: true},
+                    {data: 'id', name: 'id'},
                     {
                         data: 'payment_photo',
-                        name: 'bukti_bayar',
+                        name: 'payment_photo',
                         render: function (data, type, row, meta) {
-                            return data;
+                            return `<img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain" src='${data}' alt="">`;
+                        }
+                    },
+                    {data: 'user_name', name: 'user_name'},
+                    {
+                        data: 'nominal',
+                        name: 'nominal',
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            var rupiah = data.toLocaleString('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR'
+                            });
+
+                            // Return the formatted value
+                            return rupiah;
+                        }
+                    },
+                    {
+                        data: 'nominal',
+                        name: 'nominal_raw',
+                        render: function (data, type, row, meta) {
+                            if (data != null) {
+                                return data;
+                            } else {
+                                0
+                            }
+                        }
+                    },
+                    {
+                        orderable: true,
+                        data: 'nominal_net',
+                        name: 'nominal_net',
+                        defaultContent: "",
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            if (data != null) {
+                                return data.toLocaleString('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR'
+                                });
+                            } else {
+                                "-"
+                            }
+                        }
+                    },
+                    {
+                        orderable: true,
+                        data: 'nominal_net',
+                        name: 'nominal_net_raw',
+                        defaultContent: "",
+                        render: function (data, type, row, meta) {
+                            // Format the nominal as Indonesian rupiah
+                            if (data != null) {
+                                return data;
+                            } else {
+                                0
+                            }
+                        }
+                    },
+                    {data: 'payment_number', name: 'payment_number'},
+                    {
+                        data: ['status'],
+                        name: 'payment',
+                        render: function (data, type, row, meta) {
+                            return data == 1 ? '<a href="javascript:void(0)" class="btn btn-outline-success btn-rounded light">Terverifikasi</a>' :
+                                data == 0 ? '<a href="javascript:void(0)" class="btn btn-outline-danger btn-rounded light">Belum Diverifikasi</a>' :
+                                    data == 2 ? '<a href="javascript:void(0)" class="btn btn-outline-warning btn-rounded light">Tidak Sesuai</a>' :
+                                        data == 3 ? '<a href="javascript:void(0)" class="btn btn-outline-warning btn-rounded btn-xs light">Diterima Dengan Catatan</a>' :
+                                            data;
+                        }
+                    },
+                    {
+                        orderable: true,
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'payment_photo',
+                        name: 'payment_photo_raw',
+                        render: function (data, type, row, meta) {
+                            return `${data}`;
                         }
                     },
 
+                ],
+                buttons: [
+                    // {extend: 'colvis', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+                    {extend: 'copy', className: 'btn btn-primary glyphicon glyphicon-duplicate'},
+                    {extend: 'csv', className: 'btn btn-primary glyphicon glyphicon-save-file'},
+                    {
+                        extend: 'excel', className: 'btn btn-primary glyphicon glyphicon-list-alt',
+                        exportOptions: {
+                            stripHtml: true,
+                            columns: [1,3,5,7,8,9,10,11] // include only the first and third columns
+                        }
+                    },
+                    {extend: 'pdf', className: 'btn btn-primary glyphicon glyphicon-file'},
+                    {extend: 'print', className: 'btn btn-primary glyphicon glyphicon-print'}
                 ],
             }).on('preXhr.dt', function (e, settings, data) {
                 showLoadingP()
@@ -438,6 +409,37 @@
 
 
     <script>
+
+        function setDateTimeInputs() {
+            try {
+                const currentDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(currentDate.getDate() - 900);
+
+                // Format dates as strings in the format "YYYY-MM-DDTHH:mm"
+                const currentDateString = currentDate.toISOString().substr(0, 16);
+                const startDateString = startDate.toISOString().substr(0, 16);
+
+                // Set the value of the "start_date" input element to one week before the current date and time
+                const startInput = document.querySelector('input[name="start_date"]');
+                if (startInput) {
+                    startInput.value = startDateString;
+                } else {
+                    console.error('Could not find "start_date" input element');
+                }
+
+                // Set the value of the "end_date" input element to the current date and time
+                const endInput = document.querySelector('input[name="end_date"]');
+                if (endInput) {
+                    endInput.value = currentDateString;
+                } else {
+                    console.error('Could not find "end_date" input element');
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
+        }
+
         function showLoadingIndicator() {
             var loadingIndicator = document.querySelector('.loading-indicator');
             loadingIndicator.style.display = 'block';

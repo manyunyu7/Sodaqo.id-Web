@@ -11,23 +11,23 @@
 @endpush
 
 @push('css_content')
-        .buttons-columnVisibility {
-            font-family: Nunito, sans-serif;
-            font-size: medium;
-            font-style: normal;
-            border-radius: 20px;
-            padding-left: 3px;
-            padding-right: 3px;
-            font-size: larger;
-            font-weight: bold;
-        }
+    .buttons-columnVisibility {
+    font-family: Nunito, sans-serif;
+    font-size: medium;
+    font-style: normal;
+    border-radius: 20px;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: larger;
+    font-weight: bold;
+    }
 
-        .buttons-columnVisibility.active{
-            padding-right: 3px;
-            font-weight: normal;
-            padding-left: 3px;
-            padding-right: 3px;
-        }
+    .buttons-columnVisibility.active{
+    padding-right: 3px;
+    font-weight: normal;
+    padding-left: 3px;
+    padding-right: 3px;
+    }
 @endpush
 
 @push('script')
@@ -67,10 +67,11 @@
                                         <th data-sortable="">Nama</th>
                                         <th data-sortable="">Payment Merchant</th>
                                         <th data-sortable="">Alamat Pembayaran</th>
-                                        <th data-sortable="">Status</th>
+                                        <th data-sortable="">Status Rekening</th>
+                                        <th data-sortable="">Status Merchant</th>
                                         <th data-sortable="">Diinput Pada</th>
                                         <th data-sortable="">Edit</th>
-                                        <th data-sortable="">Edit</th>
+                                        <th data-sortable=""></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -78,7 +79,8 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img height="100px" style="border-radius: 20px; max-width: 100px; object-fit: contain"
+                                                <img height="100px"
+                                                     style="border-radius: 20px; max-width: 100px; object-fit: contain"
                                                      src='{{asset("$data->merchant_photo")}}' alt="">
                                             </td>
                                             <td>{{ $data->name }}</td>
@@ -86,11 +88,41 @@
                                             <td>{{ $data->account_number }}</td>
                                             <td>
                                                 @if($data->status==1)
-                                                    <a href="javascript:void(0)" class="btn btn-outline-success btn-rounded light">Aktif</a>
+                                                    <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Aktif
+													</span>
                                                 @endif
 
                                                 @if($data->status==0)
-                                                        <a href="javascript:void(0)" class="btn btn-outline-danger btn-rounded light">Non Aktif</a>
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+													Non-Aktif
+													</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($data->merchant_status==1)
+                                                    @if($data->status==1)
+                                                        <span class="badge light badge-success">
+														<i class="fa fa-circle text-success me-1"></i>
+													Aktif
+													</span>
+                                                    @endif
+                                                @elseif($data->merchant_status==0)
+                                                    <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+												    	Non-Aktif
+													    </span>
+                                                @elseif($data->merchant_status==-99)
+                                                    @if($data->status==0)
+                                                        <span class="badge light badge-danger">
+														<i class="fa fa-circle text-danger me-1"></i>
+												    	Sudah Dihapus
+													    </span>
+                                                    @endif
+                                                @else
+                                                    {{$data->status}}
                                                 @endif
                                             </td>
                                             <td>{{ $data->created_at }}</td>
@@ -100,16 +132,22 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <button id="{{ $data->id }}" type="button"
-                                                        class="btn btn-delete btn-danger btn-delete mr-2"
-                                                        onclick="openDeleteDialog('lala{{$data->id}}')">
-                                                    Hapus Konten
-                                                </button>
+                                                <div class="col">
+                                                    <div class="col-12">
+                                                        <button id="{{ $data->id }}" type="button"
+                                                                class="btn btn-delete btn-danger btn-delete mr-2"
+                                                                onclick="openDeleteDialog('lala{{$data->id}}')">
+                                                            Hapus Permanen
+                                                        </button>
+                                                    </div>
+                                                </div>
+
                                             </td>
                                             <form id="lala{{$data->id}}"
                                                   action='{{ url("donation-account/$data->id/delete") }}'
                                                   enctype="multipart/form-data" method="get">
                                             </form>
+
                                         </tr>
                                     @empty
 
@@ -136,7 +174,7 @@
             // Use the Sweet Alert `swal` function to open a dialog
             swal({
                 title: "Apakah Anda yakin?",
-                text: "Tindakan ini tidak dapat dibatalkan.",
+                text: "Tindakan ini tidak dapat dibatalkan, jika anda ingin menonaktifkan sementara silakan edit status pada halaman detail",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonText: "Ya, hapus",

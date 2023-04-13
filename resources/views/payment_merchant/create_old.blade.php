@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="formFile" class="form-label">Logo Payment Merchant</label>
-                            <input name="photo" class="form-control" type="file" id="formFile">
+                            <input name="photo" accept="image/png, image/gif, image/jpeg" class="form-control" type="file" id="formFile">
                         </div>
 
                         <div class="form-group">

@@ -36,6 +36,15 @@
             <div class="row">
                 @include('168_component.alert_message.message')
             </div>
+
+            @if($data->status==0)
+                <div class="alert alert-danger alert-dismissible alert-alt fade show">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                    <strong>Perhatian!</strong> Payment Merchant ini sedang tidak aktif dan rekening/wallet yang berasal dari merchant ini tidak ditampilkan ke pengguna, untuk mengaktifkan kembali silakan ubah status melalui menu dibawah
+                </div>
+            @endif
+
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card">
@@ -89,17 +98,17 @@
                                                                 <option @if($data->status==1) selected
                                                                         @endif value="1">Aktif
                                                                 </option>
-                                                                <option @if($data->status==2) selected
-                                                                        @endif value="2">Non-Aktif / Dihapus
+                                                                <option @if($data->status==0) selected
+                                                                        @endif value="0">Non-Aktif
                                                                 </option>
                                                             </select>
                                                         </div>
 
-                                                        <div class="mb-3 col-md-12">
-                                                            <label for="">Deskripsi</label>
-                                                            <textarea class="form-control" name="m_description" id="summernote" rows="10"
-                                                                      placeholder="Deskripsi">{!!  old('m_description',$data->m_description)!!}</textarea>
-                                                        </div>
+{{--                                                        <div class="mb-3 col-md-12 visually-hidden">--}}
+{{--                                                            <label for="">Deskripsi</label>--}}
+{{--                                                            <textarea class="form-control" name="m_description" id="summernote" rows="10"--}}
+{{--                                                                      placeholder="Deskripsi">{!!  old('m_description',$data->m_description)!!}</textarea>--}}
+{{--                                                        </div>--}}
 
                                                     </div>
 

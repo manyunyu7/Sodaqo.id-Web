@@ -16,15 +16,15 @@ class MobileSodaqoUserController extends Controller
     public function getDetailHistory(Request $request, $id)
     {
         $query = DB::table('user_sodaqos as t')
-            ->select(
-                't.*',
-                's.name as program_name',
-                's.photo as sodaqo_photo',
-                'a.account_number as payment_account_number',
-                'm.name as payment_merchant_name',
-                'm.m_description as how_to_pay',
-                'm.photo as payment_merchant_photo'
-            )
+            ->selectRaw('
+                t.*,
+                s.name as program_name,
+                s.photo as sodaqo_photo,
+                a.account_number as payment_account_number,
+                m.name as payment_merchant_name,
+                COALESCE(a.m_description, "") as how_to_pay,
+                m.photo as payment_merchant_photo
+            ')
             ->leftJoin('sodaqos as s', 's.id', '=', 't.sodaqo_id')
             ->leftJoin('donation_accounts as a', 't.payment_id', '=', 'a.id')
             ->leftJoin('payment_merchants as m', 'm.id', '=', 'a.payment_merchant_id');
