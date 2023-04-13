@@ -51,7 +51,7 @@
             </li>
 
             <li><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="false">
-                    <i class="flaticon-008-credit-card"></i>
+{{--                    <i class="flaticon-008-credit-card"></i>--}}
                     <span class="nav-text">Payment</span>
                 </a>
                 <ul aria-expanded="false">
