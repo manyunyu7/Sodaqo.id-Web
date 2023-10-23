@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\PaymentMerchant;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $this->call(DonationAccountSeeder::class);
-//        $this->call(ProgramSeeder::class);
-        $this->call(UserSodaqoSeeder::class);
+        $this->call(UserSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

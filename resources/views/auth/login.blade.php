@@ -1,122 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="admin, dashboard">
-    <meta name="author" content="DexignZone">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Griya Sodaqo &#8211; Gerakan Sodaqo Indonesia">
-    <meta property="og:title" content="Griya Sodaqo : Gerakan Sodaqo Indonesia">
-    <meta property="og:description" content="Sodaqo.id telah memiliki banyak partner kolaborasi yang bersedia membantu orang orang yang membutuhkan bantuan. Selaijn itu, untuk saat ini SODAQO.id fokus menyantuni Anak Yatim Duafa yang tersebar di 17 Panti Asuhan yang berlokasi di Kota Bandung. Total penerima manfaat SODAQO adalah 451 Anak yatim">
-    <meta property="og:image" content="http://feylabs.my.id/fm/apk/cover_sodaqo.png">
-    <meta name="format-detection" content="telephone=no">
-    <!-- PAGE TITLE HERE -->
-    <title>{{config("app.name")}}</title>
-
-    <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
-    <link href="{{ asset('/168_res') }}/css/style.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BESTARI SETIA ABADI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/frontend') }}/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('/frontend') }}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('/frontend') }}/assets/css/app.css">
+    <link rel="stylesheet" href="{{ asset('/frontend') }}/assets/css/pages/auth.css">
 </head>
 
-<body class="vh-100">
-<div class="authincation h-100">
-    <div class="container h-100">
-        <div class="row justify-content-center h-100 align-items-center">
+<body>
+    <div id="auth">
 
-            <div class="col-12">
-            </div>
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a href="#"><img src="{{ asset('/frontend') }}/assets/images/logo/logo.png"
+                                alt="Logo"></a>
 
-            <div class="col-md-6">
-
-                <div class="authincation-content">
-                    <div class="row no-gutters">
-
-
-                        <div class="col-xl-12">
-                            <div class="auth-form">
-                                <div class="text-center mb-3">
-                                    <a href="index.html"><img src="{{ asset('/web_files') }}/masduk.png" alt=""></a>
-                                </div>
-                                <h4 class="text-center mb-4">Sign in your account</h4>
-                                <form method="POST" action="{{ url('proceedLogin') }}">
-                                    @csrf
-                                    <div class="mb-3">
-                                        <label class="mb-1"><strong>Email/Phone</strong></label>
-                                        <input type="text" name="contact" class="form-control"
-                                               value={{ old('contact') }}>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="mb-1"><strong>Password</strong></label>
-                                        <input type="password" class="form-control" name="password" value="Password">
-                                    </div>
-                                    <div class="row d-flex justify-content-between mt-4 mb-2">
-                                        <div class="mb-3">
-                                            <div class="form-check custom-checkbox ms-1">
-                                                <input type="checkbox" class="form-check-input" id="basic_checkbox_1">
-                                                <label class="form-check-label" for="basic_checkbox_1">Remember my
-                                                    preference</label>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <a href="{{url("forgot-password")}}">Forgot Password?</a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button style="" type="submit" class="btn btn-primary btn-block">Sign Me In
-                                        </button>
-                                    </div>
-
-
-                                </form>
-                                <div class="new-account mt-3">
-                                    <p>Don't have an account? <a class="text-primary" href="{{url("/register")}}">Sign
-                                            up</a></p>
-                                </div>
-
-                                @if ($errors->any())
-                                    <div class="col-12">
-                                        <div class="alert alert-danger left-icon-big alert-dismissible fade show">
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                                    aria-label="btn-close"><span><i
-                                                        class="mdi mdi-btn-close"></i></span>
-                                            </button>
-                                            <div class="media">
-                                                <div class="alert-left-icon-big">
-                                                    <span><i class="mdi mdi-alert"></i></span>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5 class="mt-1 mb-2">Error</h5>
-                                                    <p class="mb-0">{!! implode('', $errors->all('<div>:message</div>')) !!}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-
+                        <h1>Sistem Informasi Stock CV Bestari Setia Abadi</h1>
+                    </div>
+                    <h1 class="auth-title">Log in.</h1>
+                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+                    @include('components.message')
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="email" class="form-control form-control-xl"
+                                placeholder="Username/email" value="{{ old('email') }}">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" name="password" class="form-control form-control-xl"
+                                placeholder="Password">
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-lg d-flex align-items-end">
+                            <input class="form-check-input me-2" type="checkbox" value="" name="remember"
+                                id="flexCheckDefault">
+                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                                Keep me logged in
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                    </form>
+                    {{-- <div class="text-center mt-5 text-lg fs-4">
+                        <p class="text-gray-600">Don't have an account? <a href="auth-register.html"
+                                class="font-bold">Sign
+                                up</a>.</p>
+                        <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
+                    </div> --}}
+                    <br>
+                    <br>
+                    <h4><a class="font-bold text-center mt-4" style="text-align: center" href="#">Crafted for BSA</a>.</h4>
+
                 </div>
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
 
-
+                </div>
             </div>
         </div>
+
     </div>
-</div>
 
+    <script src="{{ asset('/frontend') }}/assets/js/bootstrap.bundle.min.js"></script>
 
-<!--**********************************
-    Scripts
-***********************************-->
-<!-- Required vendors -->
-<script src="{{ asset('/168_res') }}/vendor/global/global.min.js"></script>
-<script src="{{ asset('/168_res') }}/js/custom.min.js"></script>
-<script src="{{ asset('/168_res') }}/js/dlabnav-init.js"></script>
-{{--<script src="{{ asset('/168_res') }}/js/styleSwitcher.js"></script>--}}
-<script src="{{ asset('/168_res') }}/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>
+
 </html>
