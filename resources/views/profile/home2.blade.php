@@ -11,58 +11,58 @@
     <meta name="keywords" content="Bestari Setia Abadi"/>
     <meta name="description" content="
 Membangun Berbagai Tipe dan Segmen Proyek Hotel  ,Mixed Use  ,Commercial ,
-Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah kunci utama yang membedakan Totalindo dengan perusahaan lain diindustri ini">
-    <meta name="author" content="totalindo.co.id">
+Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah kunci utama yang membedakan Bestari Setia Abadi dengan perusahaan lain diindustri ini">
+    <meta name="author" content="Bestari Setia Abadi.co.id">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="https://www.totalindo.co.id/img/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="https://www.totalindo.co.id/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="https://www.Bestari Setia Abadi.co.id/img/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="https://www.Bestari Setia Abadi.co.id/img/apple-touch-icon.png">
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 
+
     <!-- Web Fonts  -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light"
           rel="stylesheet" type="text/css">
-    <link href="{{url("/")."/bsb/vendor"}}/sky.css" rel="stylesheet">
+    <link href="{{url("/")."/vendor_langit"}}/assets/css/style.css" rel="stylesheet">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/animate/animate.min.css">
-    <link rel="stylesheet" href="{{url("/")."/bsb/vendor"}}/simple-line-icons.min.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/owl.carousel/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/owl.carousel/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/animate/animate.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/simple-line-icons/css/simple-line-icons.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/owl.carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/owl.carousel/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/magnific-popup/magnific-popup.min.css">
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/theme.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/theme-elements.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/theme-blog.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/theme-shop.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/flags.css">
-    <link href="https://skylab.co.id/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/theme.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/theme-elements.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/theme-blog.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/theme-shop.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/flags.css">
+    <link href="{{url("/")."/vendor_langit"}}/assets/vendor/venobox/venobox.css" rel="stylesheet">
 
     <!-- Current Page CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/rs-plugin/css/settings.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/rs-plugin/css/layers.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/rs-plugin/css/navigation.css">
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/circle-flip-slideshow/css/component.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/rs-plugin/css/settings.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/rs-plugin/css/layers.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/rs-plugin/css/navigation.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/circle-flip-slideshow/css/component.css">
 
     <!-- Demo CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/vendor/bootstrap-star-rating/css/star-rating.min.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_js"}}/bootstrap-star-rating/css/star-rating.min.css">
     <link rel="stylesheet"
-          href="https://www.totalindo.co.id/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css">
+          href="{{url("/")."/vendor_ttl_js"}}/bootstrap-star-rating/themes/krajee-fas/theme.min.css">
 
     <!-- Skin CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/skins/default.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/skins/default.css">
 
     <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="https://www.totalindo.co.id/css/custom.css">
+    <link rel="stylesheet" href="{{url("/")."/vendor_ttl_css"}}/custom.css">
 
     <!-- Head Libs -->
-    <script src="https://www.totalindo.co.id/vendor/modernizr/modernizr.min.js"></script>
+    <script src="{{url("/")."/vendor_ttl_js"}}/modernizr/modernizr.min.js"></script>
 
     <style>
         /* Enable smooth scrolling */
@@ -85,11 +85,11 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                             <div class="header-row">
                                 <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
                                     <li class="social-icons-facebook"><a
-                                            href="https://www.totalindo.co.id/setting/bahasa/eng" title="english">
+                                            href="https://www.bestarilab.com/setting/bahasa/eng" title="english">
                                             <div class="flag flag-us"></div>
                                         </a></li>
                                     <li class="social-icons-twitter active"><a
-                                            href="https://www.totalindo.co.id/setting/bahasa/ind" title="bahasa">
+                                            href="https://www.bestarilab.com/setting/bahasa/ind" title="bahasa">
                                             <div class="flag flag-id"></div>
                                         </a></li>
 
@@ -105,8 +105,8 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                     <div class="header-column">
                         <div class="header-row">
                             <div class="header-logo">
-                                <a href="https://www.totalindo.co.id/">
-                                    <img alt="Totalindo" width="180" data-sticky-width="150"
+                                <a href="https://www.bestarilab.com/">
+                                    <img alt="Bestari Lab" width="180" data-sticky-width="150"
                                          src="{{url("/")."/bsb/s_icon.png"}}">
                                 </a>
                             </div>
@@ -132,7 +132,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <a class="dropdown-item"
-                                                           href="https://www.totalindo.co.id/pages/tentang-kami#profil">Environmental
+                                                           href="https://www.bestarilab.com/pages/tentang-kami#profil">Environmental
                                                             Laboratory Equipment</a>
                                                         <!-- Submenu -->
                                                         <ul>
@@ -148,7 +148,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                                     </li>
                                                     <li>
                                                         <a class="dropdown-item"
-                                                           href="https://www.totalindo.co.id/pages/tentang-kami#struktur">Mineral
+                                                           href="https://www.bestarilab.com/pages/tentang-kami#struktur">Mineral
                                                             and Coal Laboratory Equipment</a>
                                                         <!-- Submenu -->
                                                         <ul>
@@ -433,7 +433,8 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
 
                             <ul>
 
-                                <li>Melayani berbagai segmen pasar dalam sektor alat laboratorium sehingga dapat melakukan
+                                <li>Melayani berbagai segmen pasar dalam sektor alat laboratorium sehingga dapat
+                                    melakukan
                                     diversifikasi risiko dan potensi pertumbuhan.
                                 </li>
 
@@ -444,7 +445,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
 
                             </ul>
 
-                            <a href="https://www.totalindo.co.id/pages/tentang-kami"
+                            <a href="https://www.bestarilab.com/pages/tentang-kami"
                                class="btn btn-lg btn-modern btn-light rounded-0 mb-2"><i
                                     class="fas fa-long-arrow-alt-right"></i> Selengkapnya</a>
 
@@ -635,7 +636,8 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
             </section><!-- End Portfolio Section -->
         </div>
 
-        <div id="brand" class="section-parallax sub-section-home" data-plugin-parallax data-plugin-options="{'speed': 1.5}"
+        <div id="brand" class="section-parallax sub-section-home" data-plugin-parallax
+             data-plugin-options="{'speed': 1.5}"
              data-image-src="https://www.nov.com/-/media/nov/images/products/caps/process-and-flow-technologies/environmental-services/environmental-services-flotta-lab-testing.jpg?h=1080&la=en-us&w=1920&cropregion=0,0,1920,1083&hash=7F6E1F1014F4C2118C31D0F916DDE908">
             {{--             data-image-src="https://www.gcrdindia.com/themes/frontend/gcrd/assets/mvs/img/lab-slide-3.jpg">--}}
             <div class="container">
@@ -657,7 +659,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
 
                                     <div>
 
-                                        <a href="https://www.totalindo.co.id/web_images/uploadresources/images/a3d2567ca781fabe56bbdb2e655911aa.jpg">
+                                        <a href="https://www.bestarilab.com/web_images/uploadresources/images/a3d2567ca781fabe56bbdb2e655911aa.jpg">
 
 										<span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
 
@@ -807,7 +809,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                             </div>
 
 
-                            <a href="https://www.totalindo.co.id/pages/proyek-done"
+                            <a href="https://www.bestarilab.com/pages/proyek-done"
                                class="btn btn-lg btn-modern btn-light rounded-0 mb-2"><i
                                     class="fas fa-long-arrow-alt-right"></i>Lihat Semua Produk</a>
 
@@ -821,7 +823,8 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
         </div>
 
         <!-- ======= Nilai Korporasi ======= -->
-        <div id="mengapa-kami" class="container appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
+        <div id="mengapa-kami" class="container appear-animation" data-appear-animation="fadeInUp"
+             data-appear-animation-delay="300">
 
             <div class="col-lg-12 p-0">
                 <section class="section section-default   match-height border-top-0" style="background-color: white;">
@@ -840,7 +843,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                 class="featured-boxes featured-boxes-modern-style-2 featured-boxes-modern-style-2-hover-only featured-boxes-modern-style-primary my-4">
                                 <div class="featured-box">
                                     <div class="box-content px-lg-4 px-xl-5 py-lg-5">
-                                        <img alt="Totalindo" width="88" data-sticky-width="88" class="mb-1"
+                                        <img alt="Bestari Lab" width="88" data-sticky-width="88" class="mb-1"
                                              src="{{url("/")."/bsb/original-products-interlab.png"}}">
                                         <h2 class="font-weight-normal text-5"><strong
                                                 class="font-weight-extra-bold">Original Products</strong></h2>
@@ -855,7 +858,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                 class="featured-boxes featured-boxes-modern-style-2 featured-boxes-modern-style-2-hover-only featured-boxes-modern-style-primary my-4">
                                 <div class="featured-box">
                                     <div class="box-content px-lg-4 px-xl-5 py-lg-5">
-                                        <img alt="Totalindo" width="88" data-sticky-width="88" class="mb-1"
+                                        <img alt="Bestari Lab" width="88" data-sticky-width="88" class="mb-1"
                                              src="https://bestarilab.com/wp-content/uploads/2023/05/quality-product.png">
                                         <h2 class="font-weight-normal text-5"><strong
                                                 class="font-weight-extra-bold">Quality Products</strong></h2>
@@ -870,7 +873,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                 class="featured-boxes featured-boxes-modern-style-2 featured-boxes-modern-style-2-hover-only featured-boxes-modern-style-primary my-4">
                                 <div class="featured-box">
                                     <div class="box-content px-lg-4 px-xl-5 py-lg-5">
-                                        <img alt="Totalindo" width="88" data-sticky-width="88" class="mb-1"
+                                        <img alt="Bestari Lab" width="88" data-sticky-width="88" class="mb-1"
                                              src="https://bestarilab.com/wp-content/uploads/2023/05/garansi-product.png">
                                         <h2 class="font-weight-normal text-5"><strong
                                                 class="font-weight-extra-bold">Product Warranty</strong></h2>
@@ -904,22 +907,23 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
                                 <span class="judul">Hubungi Kami</span>
 
 
-                                {{--                            <h2>Totalindo telah membangun kepercayaan dengan perusahaan diberbagai macam industri</h2>--}}
+                                <h2>Bestari Lab telah membangun kepercayaan dengan perusahaan diberbagai macam
+                                    industri</h2>
 
                                 <ul class="list list-icons list-icons-lg list-quaternary">
 
                                     <li><i class="fas fa-info-circle"></i>
-                                        <p><a href="https://www.totalindo.co.id/pages/investor">(021) 8280593
+                                        <p><a href="https://www.bestarilab.com/pages/investor">(021) 8280593
                                             </a></p></li>
 
                                     <li><i class="fas fa-newspaper"></i>
-                                        <p><a href="https://www.totalindo.co.id/pages/investor">sales@bestarilab.com</a>
+                                        <p><a href="https://www.bestarilab.com/pages/investor">sales@bestarilab.com</a>
                                         </p>
                                     </li>
 
                                 </ul>
 
-                                <a href="https://www.totalindo.co.id/pages/investor"
+                                <a href="https://www.bestarilab.com/pages/investor"
                                    class="btn btn-lg btn-modern btn-dark rounded-0 mb-2"><i
                                         class="fas fa-long-arrow-alt-right"></i> InFO Lainnya</a>
 
@@ -979,7 +983,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
 
 
             </div>
-            <div  id="klien"></div>
+            <div id="klien"></div>
         </div>
 
 
@@ -1311,37 +1315,36 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
 </div><!-- /.modal -->
 
 <!-- Vendor -->
-<script src="https://www.totalindo.co.id/vendor/jquery/jquery.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.appear/jquery.appear.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.easing/jquery.easing.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.cookie/jquery.cookie.min.js"></script>
-<!--	<script src="https://www.totalindo.co.id/vendor/popper/umd/popper.min.js"></script> -->
-<script src="https://www.totalindo.co.id/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/common/common.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.validation/jquery.validate.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.gmap/jquery.gmap.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/isotope/jquery.isotope.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/owl.carousel/owl.carousel.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/vide/jquery.vide.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/vivus/vivus.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery/jquery.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.appear/jquery.appear.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.easing/jquery.easing.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.cookie/jquery.cookie.min.js"></script>
+<!--	<script src="{{url("/")."/vendor_ttl_js"}}/popper/umd/popper.min.js"></script> -->
+<script src="{{url("/")."/vendor_ttl_js"}}/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/common/common.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.validation/jquery.validate.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.gmap/jquery.gmap.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/jquery.lazyload/jquery.lazyload.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/isotope/jquery.isotope.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/owl.carousel/owl.carousel.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/vide/jquery.vide.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/vivus/vivus.min.js"></script>
 
 <!-- Theme Base, Components and Settings -->
-<script src="https://www.totalindo.co.id/js/theme.js"></script>
+<script src="{{url("/")."/ttl_custom_js"}}/theme.js"></script>
 
 <!-- Current Page Vendor and Views -->
-<script src="https://www.totalindo.co.id/vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/circle-flip-slideshow/js/jquery.flipshow.min.js"></script>
-<script src="https://www.totalindo.co.id/js/views/view.home.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/circle-flip-slideshow/js/jquery.flipshow.min.js"></script>
 
 <!-- Theme Custom -->
-<script src="https://www.totalindo.co.id/js/custom.js"></script>
+<script src="{{url("/")."/ttl_custom_js"}}/custom.js"></script>
 
 <!-- Theme Initialization Files -->
-<script src="https://www.totalindo.co.id/js/theme.init.js"></script>
+<script src="{{url("/")."/ttl_custom_js"}}/theme.init.js"></script>
 
 
 <!-- script to show web review modal -->
@@ -1392,72 +1395,72 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
             });
         }, 180000); //180000
         $('#adCarousel').carousel({
-            interval: 40000,
+            interval: 2000,
             cycle: true
         });
 
 
-        $("#next3").click(function (e) {
-
-            e.preventDefault();
-            var review = $("#rating").val();
-
-            var subject = $("input[name='subject']:checked").val()
-            var pesan = $("#pesan").val();
-            var baseurl = $("#baseurl").val();
-
-
-            //	alert(baseurl);
-
-
-            var datapeningkatan = [];
-
-            $.each($("input[name='peningkatan']:checked"), function () {
-                datapeningkatan.push($(this).val());
-            });
-            var peningkatan = datapeningkatan.join(", ");
-            var detailpeningkatan = $("#detail-peningkatan").val();
-
-
-            if (!subject || !peningkatan) {
-                return alert("Silakan mengisi survey website untuk melanjutkan");
-            }
-
-            $.ajax({
-                type: "POST",
-                url: "https://www.totalindo.co.id/index.php/Homepage/saverating",
-                dataType: "JSON",
-                data: {
-                    rating: review,
-                    subject: subject,
-                    pesan: pesan,
-                    peningkatan: peningkatan,
-                    detailpeningkatan: detailpeningkatan
-                },
-                success: function (data) {
-                    $('#admodal').modal('hide');
-                    if (subject == "Investor") {
-                        $(location).attr('href', baseurl + "pages/idleaset");
-                    } else if (subject == "Customer") {
-                        $(location).attr('href', baseurl + "pages/proyek-ongoing");
-                    }
-
-                }
-            });
-
-            $('#admodal').modal('hide');
-        })
+        // $("#next3").click(function (e) {
+        //
+        //     e.preventDefault();
+        //     var review = $("#rating").val();
+        //
+        //     var subject = $("input[name='subject']:checked").val()
+        //     var pesan = $("#pesan").val();
+        //     var baseurl = $("#baseurl").val();
+        //
+        //
+        //     //	alert(baseurl);
+        //
+        //
+        //     var datapeningkatan = [];
+        //
+        //     $.each($("input[name='peningkatan']:checked"), function () {
+        //         datapeningkatan.push($(this).val());
+        //     });
+        //     var peningkatan = datapeningkatan.join(", ");
+        //     var detailpeningkatan = $("#detail-peningkatan").val();
+        //
+        //
+        //     if (!subject || !peningkatan) {
+        //         return alert("Silakan mengisi survey website untuk melanjutkan");
+        //     }
+        //
+        //     $.ajax({
+        //         type: "POST",
+        //         url: "https://www.totalindo.co.id/index.php/Homepage/saverating",
+        //         dataType: "JSON",
+        //         data: {
+        //             rating: review,
+        //             subject: subject,
+        //             pesan: pesan,
+        //             peningkatan: peningkatan,
+        //             detailpeningkatan: detailpeningkatan
+        //         },
+        //         success: function (data) {
+        //             $('#admodal').modal('hide');
+        //             if (subject == "Investor") {
+        //                 $(location).attr('href', baseurl + "pages/idleaset");
+        //             } else if (subject == "Customer") {
+        //                 $(location).attr('href', baseurl + "pages/proyek-ongoing");
+        //             }
+        //
+        //         }
+        //     });
+        //
+        //     $('#admodal').modal('hide');
+        // })
         sessionStorage.adModal = 1;
     }
 </script>
-<script src="https://www.totalindo.co.id/vendor/bootstrap-star-rating/js/star-rating.min.js"></script>
-<script src="https://www.totalindo.co.id/vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/bootstrap-star-rating/js/star-rating.min.js"></script>
+<script src="{{url("/")."/vendor_ttl_js"}}/bootstrap-star-rating/themes/krajee-fas/theme.min.js"></script>
 
-<script src="https://skylab.co.id/assets/vendor/counterup/counterup.min.js"></script>
-<script src="https://skylab.co.id/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-<script src="https://skylab.co.id/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="{{url("/")."/vendor_langit"}}/assets/vendor/counterup/counterup.min.js"></script>
+<script src="{{url("/")."/vendor_langit"}}/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+<script src="{{url("/")."/vendor_langit"}}/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
-<script src="https://skylab.co.id/assets/js/main.js"></script>
+<script src="{{url("/")."/vendor_langit"}}/assets/js/main.js"></script>
 
 </body>
 </html>
