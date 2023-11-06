@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReportDataMistake extends Model
+class Supplier extends Model
 {
+    protected $table = "suppliers";
     use HasFactory;
 }

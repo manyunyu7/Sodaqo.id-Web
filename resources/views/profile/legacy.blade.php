@@ -64,7 +64,6 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
     <!-- Head Libs -->
     <script src="{{url("/")."/vendor_ttl_js"}}/modernizr/modernizr.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 
     <style>
@@ -73,51 +72,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
             scroll-behavior: smooth;
         }
         .carousel-item {
-            height: 100vh;
-        }
-
-        .carousel-caption {
-            transform: translateY(-50%);
-            bottom: 0;
-            top: 50%;
-        }
-
-
-        /* Media query for smaller devices */
-        @media (max-width: 376px) {
-            .my-main-text {
-                font-size: 20px; /* Adjust the size for smaller devices */
-            }
-
-            .my-secondary-text {
-                font-size: 11px; /* Adjust the size for smaller devices */
-            }
-        }
-
-        /* Media query for smaller devices */
-        @media (max-width: 768px) {
-            .my-main-text {
-                font-size: 40px; /* Adjust the size for smaller devices */
-            }
-
-            .my-secondary-text {
-                font-size: 18px; /* Adjust the size for smaller devices */
-            }
-        }
-
-        /* Media query for larger devices */
-        @media (min-width: 1200px) {
-            .my-main-text {
-                font-size: 80px; /* Adjust the size for larger devices */
-            }
-
-            .my-secondary-text {
-                font-size: 28px; /* Adjust the size for larger devices */
-            }
-        }
-
-        .montserrat {
-            font-family: 'Montserrat', sans-serif;
+            height: 80vh;
         }
 
         .carousel-item.active,
@@ -126,13 +81,9 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
             display: block;
         }
 
-        .carousel-img.blur {
-            filter: blur(8px) brightness(50%); /* Adjust the blur intensity and brightness as needed */
-        }
-
         .carousel-img{
             width: 100%;
-            height: 100vh;
+            height: 80vh;
         }
 
         /* Optional custom styles */
@@ -162,7 +113,7 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
         }
 
         .post-slide .post-img {
-            max-height: 150px;
+            max-height: 50px;
             position: relative;
             overflow: hidden;
             border-radius: 10px;
@@ -393,7 +344,205 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
     <div role="main" class="main">
 
 
-        <div style="margin-top: 0px" id="demo" class="carousel slide" data-ride="carousel">
+        <div class="slider-container rev_slider_wrapper" style="height: 670px;">
+
+            <div id="revolutionSlider" class="slider rev_slider" data-version="5.4.8" data-plugin-revolution-slider
+                 data-plugin-options="{'delay': 9000, 'gridwidth': 1170, 'gridheight': 670, 'disableProgressBar': 'on', 'responsiveLevels': [4096,1200,992,500], 'parallax': { 'type': 'scroll', 'origo': 'enterpoint', 'speed': 1000, 'levels': [2,3,4,5,6,7,8,9,12,50], 'disable_onmobile': 'on' }, 'navigation' : {'arrows': { 'enable': true , 'style' : 'hades' }, 'bullets': {'enable': true, 'style': 'bullets-style-1', 'h_align': 'center', 'v_align': 'bottom', 'space': 7, 'v_offset': 70, 'h_offset': 0}}}">
+                <ul>
+                    <li data-transition="slidingoverlayright">
+                        <img
+                            src="https://www.thesterlinglab.com/hubfs/Webpage%20images/Services%20Page/Environmental%20laboratory%20glassware.webp"
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            class="rev-slidebg">
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['-145','-145','-145','-320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[-300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;">
+                            <img src="img/slides/slide-title-border.png" alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold  text-center negative-ls-1 slider-home-style "
+
+                             data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+
+                             data-x="center"
+
+                             data-y="center" data-voffset="['-10','-50','-50','-75']"
+
+                             data-fontsize="['40']"
+
+                             data-lineheight="['55','55','55','95']"><span
+                                class="slideshow-caption">Very High Quality<br>and<br>Guaranteed Durability</span>
+
+
+                        </div>
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['145','145','145','320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold text-color-light slider-home-style"
+                             data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['85','85','85','120']"
+                             data-fontsize="['18','18','18','40']"
+                             data-lineheight="['26','26','26','45']"></div>
+                    </li>
+
+                    <li data-transition="slidingoverlayright">
+                        <img
+                            src="https://www.thesterlinglab.com/hubfs/Assets/Images/gloves.webp"
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            class="rev-slidebg">
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['-145','-145','-145','-320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[-300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold  text-center negative-ls-1 slider-home-style "
+                             data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['-10','-50','-50','-75']"
+                             data-fontsize="['40']"
+                             data-lineheight="['55','55','55','95']"><span
+                                class="slideshow-caption">Well-known brands<br>and<br>guaranteed authenticity.</span>
+                        </div>
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['145','145','145','320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold text-color-light slider-home-style"
+                             data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['85','85','85','120']"
+                             data-fontsize="['18','18','18','40']"
+                             data-lineheight="['26','26','26','45']"></div>
+                    </li>
+                    <li data-transition="slidingoverlayright">
+                        <img
+                            src="https://www.thesterlinglab.com/hubfs/EMTSTAT_Kalungi-139%201%20%281%29.webp"
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            class="rev-slidebg">
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['-145','-145','-145','-320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[-300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold  text-center negative-ls-1 slider-home-style "
+                             data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['-10','-50','-50','-75']"
+                             data-fontsize="['40']"
+                             data-lineheight="['55','55','55','95']"><span class="slideshow-caption">Melayani Beragam Segmen Pasar <br> Dalam Sektor Alat Laboratorium</span>
+                        </div>
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['145','145','145','320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold text-color-light slider-home-style"
+                             data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['85','85','85','120']"
+                             data-fontsize="['18','18','18','40']"
+                             data-lineheight="['26','26','26','45']"></div>
+                    </li>
+                    <li data-transition="slidingoverlayright">
+                        <img
+                            src="https://www.thesterlinglab.com/hubfs/Website%20pages/Services%20Page/tools%20better.webp"
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            class="rev-slidebg">
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['-145','-145','-145','-320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[-300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold  text-center negative-ls-1 slider-home-style "
+                             data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['-10','-50','-50','-75']"
+                             data-fontsize="['40']"
+                             data-lineheight="['55','55','55','95']"><span class="slideshow-caption">Untuk Mewujudkan Masa Depan <br>  Bangsa Kita Yang Lebih Baik</span>
+                        </div>
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['145','145','145','320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold text-color-light slider-home-style"
+                             data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['85','85','85','120']"
+                             data-fontsize="['18','18','18','40']"
+                             data-lineheight="['26','26','26','45']"></div>
+                    </li>
+                    <li data-transition="slidingoverlayright">
+                        <img
+                            src="https://www.thesterlinglab.com/hubfs/Webpage%20images/Resources/EMTSTAT_Kalungi-153%201.webp"
+                            alt=""
+                            data-bgposition="center center"
+                            data-bgfit="cover"
+                            class="rev-slidebg">
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['-145','-145','-145','-320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[-300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+                        <div class="tp-caption font-weight-extra-bold  text-center negative-ls-1 slider-home-style "
+                             data-frames='[{"delay":1000,"speed":2000,"frame":"0","from":"sX:1.5;opacity:0;fb:20px;","to":"o:1;fb:0;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;fb:0;","ease":"Power3.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['-10','-50','-50','-75']"
+                             data-fontsize="['40']"
+                             data-lineheight="['55','55','55','95']"><span class="slideshow-caption">Kami Membangun dengan <br>Semangat dan Kepercayaan</span>
+                        </div>
+                        <div class="tp-caption"
+                             data-x="center" data-hoffset="['145','145','145','320']"
+                             data-y="center" data-voffset="['-80','-80','-80','-130']"
+                             data-start="1000"
+                             data-transform_in="x:[300%];opacity:0;s:500;"
+                             data-transform_idle="opacity:0.2;s:500;"><img src="img/slides/slide-title-border.png"
+                                                                           alt=""></div>
+
+                        <div class="tp-caption font-weight-extra-bold text-color-light slider-home-style"
+                             data-frames='[{"from":"opacity:0;","speed":300,"to":"o:1;","delay":2300,"split":"chars","splitdelay":0.05,"ease":"Power2.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]'
+                             data-x="center"
+                             data-y="center" data-voffset="['85','85','85','120']"
+                             data-fontsize="['18','18','18','40']"
+                             data-lineheight="['26','26','26','45']"></div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div id="demo" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ul class="carousel-indicators">
                 <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -405,39 +554,153 @@ Residential  ,Others     TOTALITAS DALAM KEUNGGULAN Kami percaya inovasi adalah 
             <div class="carousel-inner">
                 <!-- Second Slide -->
                 <div class="carousel-item active">
-                    <img class="carousel-img blur" src="http://feylabs.my.id/fm/bsb/Screenshot%202023-11-06%20at%2016.32.02.png" alt="Chicago">
-                    <div class="carousel-caption">
-                        <div class="">
-                            <h1 class="bold text-white text-center montserrat my-main-text" style="font-weight: 500;">Peralatan Environmental</h1>
-                            <p class="montserrat text-white my-secondary-text" style="text-align: center;">Menyediakan produk Environmental Sesuai dengan PP 41 Tahun 1999, PP 22 tahun 2021, PP 48 Tahun 1996, dan KepMen LH No. 49 Tahun 1996.</p>
-                        </div>
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div id="news-slider" class="owl-carousel">
-                                    @include('profile.product_card.item')
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=303&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=503" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1564979268369-42032c5ca998?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=500" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1576659531892-0f4991fca82b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1586083702768-190ae093d34d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=305&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=505" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-slide">
+                                        <div class="post-img">
+                                            <img src="https://images.unsplash.com/photo-1484656551321-a1161420a2a0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=306&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=506" alt="">
+                                            <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
+                                        </div>
+                                        <div class="post-content">
+                                            <h3 class="post-title">
+                                                <a href="#">Lorem ipsum dolor sit amet.</a>
+                                            </h3>
+                                            <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                            <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+                                            <a href="#" class="read-more">read more</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="carousel-item">
-                    <img class="carousel-img blur" src="http://feylabs.my.id/fm/bsb/Screenshot%202023-11-06%20at%2017.17.59.png" alt="Chicago">
-                    <div class="carousel-caption">
-                        <div class="">
-                            <h1 class="bold text-white text-center montserrat my-main-text" style="font-weight: 500;">Peralatan Environmental</h1>
-                            <p class="montserrat text-white my-secondary-text" style="text-align: center;">Menyediakan produk Environmental Sesuai dengan PP 41 Tahun 1999, PP 22 tahun 2021, PP 48 Tahun 1996, dan KepMen LH No. 49 Tahun 1996.</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="news-slider" class="owl-carousel">
-                                    @include('profile.product_card.item')
+                    <img class="carousel-img" src="https://www.thesterlinglab.com/hubfs/EMTSTAT_Kalungi-139%201%20%281%29.webp" alt="Chicago">
+                    <div class="centered-text">
+                        <h1 class="bold text-white text-center">Title Here</h1>
+                        <p>Subtitle Here - Jargon of the Company</p>
+                        <div class="container">
+                            <div class="row">
+                                <!-- Cards for the second slide -->
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card 4</h5>
+                                            <p class="card-text">New example text.</p>
+                                        </div>
+                                    </div>
                                 </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card 5</h5>
+                                            <p class="card-text">Fresh example text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card 6</h5>
+                                            <p class="card-text">Even more example text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End of cards for the second slide -->
                             </div>
                         </div>
+
                     </div>
                 </div>
-
+                <div class="carousel-item">
+                    <img class="carousel-img" src="https://plus.unsplash.com/premium_photo-1668024966086-bd66ba04262f?auto=format&fit=crop&q=80&w=2092&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
+                    <div class="carousel-caption">
+                        <h5>Description Title</h5>
+                        <p>Some description or details about the image or product.</p>
+                        <img alt="Bestari Lab" width="88" data-sticky-width="88" class="mb-1" src="http://127.0.0.1:3535/bsb/original-products-interlab.png">
+                        <img alt="Bestari Lab" width="88" data-sticky-width="88" class="mb-1" src="http://127.0.0.1:3535/bsb/original-products-interlab.png">
+                    </div>
+                </div>
             </div>
 
             <!-- Left and right controls -->
